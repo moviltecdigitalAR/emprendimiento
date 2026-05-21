@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TecnoHogar &mdash; Gas, Electricidad &amp; Plomer&iacute;a</title>
+<meta name="description" content="Servicios del hogar profesionales. Gas, electricidad, plomer&iacute;a, jardiner&iacute;a. Presupuesto sin cargo. Urgencias 24hs."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070C14;--surface:#0D1520;--card:#111D2C;--border:#1A2A3D;--blue:#1D6FEB;--blue2:#4D9EFF;--cyan:#00D4FF;--orange:#FF6B2B;--green:#25D366;--green2:#1aad54;--red:#EF4444;--gray:#94A3B8;--gray2:#64748B;--r:16px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:200;background:rgba(7,12,20,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 26px;gap:12px}
+.nav-logo{font-size:1.05rem;font-weight:900;letter-spacing:-.5px}
+.nav-logo span{color:var(--blue2)}
+.nav-urg{display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;padding:9px 16px;border-radius:50px;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .2s}
+.nav-urg:hover{background:rgba(239,68,68,.25)}
+.urg-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:bl 1s infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;background:linear-gradient(180deg,rgba(7,12,20,.2) 0%,rgba(7,12,20,.8) 55%,var(--bg) 100%),url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1400&auto=format&q=75') center/cover no-repeat;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 30%,rgba(29,111,235,.1) 0%,transparent 55%)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(29,111,235,.15);border:1px solid rgba(29,111,235,.3);color:var(--blue2);font-size:.77rem;font-weight:600;padding:7px 17px;border-radius:50px;margin-bottom:22px}
+.htdot{width:7px;height:7px;background:var(--blue2);border-radius:50%;animation:bl 1.5s infinite;flex-shrink:0}
+.hero h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:18px;max-width:680px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.65);max-width:480px;line-height:1.75;margin-bottom:34px}
+.hbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;text-decoration:none;padding:15px 30px;border-radius:50px;font-size:.98rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 8px 30px rgba(29,111,235,.35)}
+.btn-blue:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(29,111,235,.45)}
+.btn-urg{background:var(--red);color:#fff;text-decoration:none;padding:15px 26px;border-radius:50px;font-size:.95rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all .2s;animation:pulse-r 2s infinite}
+.btn-urg:hover{background:#dc2626;transform:translateY(-2px)}
+@keyframes pulse-r{0%,100%{box-shadow:0 4px 20px rgba(239,68,68,.4)}50%{box-shadow:0 4px 32px rgba(239,68,68,.7)}}
+.hstats{display:flex;justify-content:center;gap:44px;flex-wrap:wrap}
+.snum{font-size:1.85rem;font-weight:900;background:linear-gradient(90deg,var(--blue2),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;letter-spacing:-1px}
+.slbl{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:3px;text-align:center}
+.sec{padding:72px 24px}
+.ctr{max-width:1100px;margin:0 auto}
+.tc{text-align:center}
+.stag{display:inline-block;background:rgba(29,111,235,.12);color:var(--blue2);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:11px;text-transform:uppercase;letter-spacing:.5px}
+.stag.red{background:rgba(239,68,68,.12);color:#fca5a5}
+.stitle{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:10px}
+.ssub{color:var(--gray);font-size:.93rem;line-height:1.7;max-width:480px;margin:0 auto 44px}
+/* SERVICIOS */
+.serv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.serv-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;transition:border-color .2s,transform .2s}
+.serv-card:hover{border-color:rgba(29,111,235,.4);transform:translateY(-3px)}
+.serv-ico{font-size:2.4rem;margin-bottom:14px}
+.serv-name{font-size:1rem;font-weight:800;margin-bottom:6px}
+.serv-desc{font-size:.82rem;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.serv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.stg{background:rgba(29,111,235,.1);color:var(--blue2);font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:50px;border:1px solid rgba(29,111,235,.2)}
+.serv-price{font-size:.88rem;color:var(--cyan);font-weight:700}
+/* URGENCIAS */
+.sec-urg{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.urg-box{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.3);border-radius:24px;padding:44px 40px;text-align:center;max-width:680px;margin:0 auto}
+.urg-box .ico{font-size:3.5rem;margin-bottom:16px}
+.urg-box h3{font-size:1.9rem;font-weight:900;letter-spacing:-1px;margin-bottom:12px}
+.urg-box p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.75;max-width:440px;margin:0 auto 28px}
+.btn-llama{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;text-decoration:none;padding:16px 34px;border-radius:50px;font-size:1.05rem;font-weight:800;transition:all .2s;box-shadow:0 8px 30px rgba(239,68,68,.4)}
+.btn-llama:hover{background:#dc2626;transform:translateY(-2px)}
+/* COBERTURA */
+.cob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.cob-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;display:flex;align-items:center;gap:12px}
+.cob-ico{font-size:1.6rem;flex-shrink:0}
+.cob-info{font-size:.85rem;font-weight:700}
+.cob-sub{font-size:.73rem;color:var(--gray);margin-top:2px}
+/* TURNO */
+.sec-form{background:var(--surface);border-top:1px solid var(--border)}
+.btn-form:hover{opacity:.92;transform:translateY(-1px)}
+.form-note{text-align:center;font-size:.75rem;color:var(--gray);margin-top:10px}
+/* TESTIMONIOS */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px}
+.tc-stars{color:#FBBF24;font-size:.88rem;letter-spacing:2px;margin-bottom:12px}
+.tc-text{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:14px;font-style:italic}
+.tc-au{display:flex;align-items:center;gap:10px}
+.tc-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;font-size:.86rem;font-weight:800;flex-shrink:0}
+.tc-name{font-size:.85rem;font-weight:700}
+.tc-loc{font-size:.72rem;color:var(--gray);margin-top:2px}
+footer{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:38px 24px}
+.f-logo{font-size:1.1rem;font-weight:900;margin-bottom:8px;letter-spacing:-.5px}
+.f-logo span{color:var(--blue2)}
+footer p{font-size:.81rem;color:var(--gray);line-height:1.7;margin-bottom:14px}
+.f-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.f-links a{color:var(--gray2);text-decoration:none;font-size:.81rem;transition:color .2s}
+.f-links a:hover{color:var(--blue2)}
+.f-copy{font-size:.72rem;color:var(--gray2);border-top:1px solid var(--border);padding-top:16px}
+.wa-f{position:fixed;bottom:28px;right:22px;z-index:999;background:var(--green);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .2s;animation:pw 2.5s infinite}
+.wa-f:hover{transform:scale(1.1)}
+@keyframes pw{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
+@media(max-width:600px){.hero{min-height:80vh;padding:70px 18px 50px}.hstats{gap:22px}.form-box{padding:26px 18px}.urg-box{padding:30px 20px}nav{padding:12px 16px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Tecno<span>Hogar</span></div>
+  <a href="tel:+5492644114128" class="nav-urg"><div class="urg-dot"></div>Urgencias 24hs</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag"><div class="htdot"></div>Matriculados &mdash; Zona Norte y GBA</div>
+  <h1>Solucionamos tu hogar<br><em>con garant&iacute;a.</em></h1>
+  <p>Gas, electricidad, plomer&iacute;a y m&aacute;s. T&eacute;cnicos matriculados, presupuesto sin cargo, garant&iacute;a en todos los trabajos.</p>
+  <div class="hbtns">
+    <a href="#presupuesto" class="btn-blue">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Pedir presupuesto gratis
+    </a>
+    <a href="https://wa.me/5492644114128?text=URGENCIA!%20Necesito%20asistencia%20ahora" class="btn-urg" target="_blank">
+      &#128680; Urgencia ahora
+    </a>
+  </div>
+  <div class="hstats">
+    <div><div class="snum">+500</div><div class="slbl">Trabajos realizados</div></div>
+    <div><div class="snum">24hs</div><div class="slbl">Urgencias</div></div>
+    <div><div class="snum">100%</div><div class="slbl">Matriculados</div></div>
+    <div><div class="snum">Gratis</div><div class="slbl">Presupuesto</div></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="ctr tc">
+    <div class="stag">Servicios</div>
+    <h2 class="stitle">&iquest;Qu&eacute; necesit&aacute;s resolver?</h2>
+    <p class="ssub">Cubrimos todos los servicios del hogar con profesionales matriculados y garant&iacute;a por escrito.</p>
+    <div class="serv-grid">
+      <div class="serv-card">
+        <div class="serv-ico">&#128293;</div>
+        <div class="serv-name">Instalaciones de Gas</div>
+        <div class="serv-desc">Instalaci&oacute;n, reparaci&oacute;n y habilitaci&oacute;n de instalaciones de gas. Gasfiter matriculado con certificado de habilitaci&oacute;n.</div>
+        <div class="serv-tags"><span class="stg">Instalaci&oacute;n</span><span class="stg">Reparaci&oacute;n</span><span class="stg">Habilitaci&oacute;n</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">&#9889;</div>
+        <div class="serv-name">Electricidad</div>
+        <div class="serv-desc">Instalaciones el&eacute;ctricas, tableros, llaves, tomacorrientes, luminarias y reparaciones. Todo con materiales de primera.</div>
+        <div class="serv-tags"><span class="stg">Tableros</span><span class="stg">Iluminaci&oacute;n</span><span class="stg">Instalaci&oacute;n</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">&#128167;</div>
+        <div class="serv-name">Plomer&iacute;a</div>
+        <div class="serv-desc">Destapaciones, c&aacute;&ntilde;er&iacute;as, griferías, sanitarios, termotanques y c&aacute;lentadores. Soluci&oacute;n definitiva, no parches.</div>
+        <div class="serv-tags"><span class="stg">Destapaciones</span><span class="stg">C&aacute;&ntilde;er&iacute;as</span><span class="stg">Griferías</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">&#127795;</div>
+        <div class="serv-name">Jardiner&iacute;a</div>
+        <div class="serv-desc">Mantenimiento de jardines, c&eacute;sped, podas, riego autom&aacute;tico e iluminaci&oacute;n exterior. Tu jard&iacute;n siempre perfecto.</div>
+        <div class="serv-tags"><span class="stg">Mantenimiento</span><span class="stg">Podas</span><span class="stg">Riego</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">&#10052;</div>
+        <div class="serv-name">Aire Acondicionado</div>
+        <div class="serv-desc">Instalaci&oacute;n, mantenimiento y reparaci&oacute;n de splits y equipos de A/A. Todas las marcas, garant&iacute;a incluida.</div>
+        <div class="serv-tags"><span class="stg">Instalaci&oacute;n</span><span class="stg">Mantenimiento</span><span class="stg">Reparaci&oacute;n</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+      <div class="serv-card">
+        <div class="serv-ico">&#127968;</div>
+        <div class="serv-name">Reformas &amp; Pintura</div>
+        <div class="serv-desc">Pintura interior y exterior, reparaciones de revoques, c&eacute;ramica y reformas generales. Terminaciones de calidad.</div>
+        <div class="serv-tags"><span class="stg">Pintura</span><span class="stg">Revoques</span><span class="stg">Reformas</span></div>
+        <div class="serv-price">Presupuesto sin cargo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCIAS -->
+<section class="sec sec-urg">
+  <div class="ctr">
+    <div class="urg-box">
+      <div class="ico">&#128680;</div>
+      <h3>&iquest;Es una emergencia?</h3>
+      <p>Escape de gas, inundaci&oacute;n, corte de luz o cualquier urgencia del hogar. Estamos disponibles las 24 horas, los 7 d&iacute;as del a&ntilde;o.</p>
+      <a href="https://wa.me/5492644114128?text=URGENCIA!%20Necesito%20asistencia%20inmediata%20en%20mi%20hogar" class="btn-llama" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Llamar ahora &mdash; 24hs
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COBERTURA -->
+<section class="sec">
+  <div class="ctr tc">
+    <div class="stag">Zona de cobertura</div>
+    <h2 class="stitle">D&oacute;nde trabajamos</h2>
+    <p class="ssub">Cubrimos toda la zona norte del GBA y CABA. Tiempo de llegada m&aacute;ximo 2 horas en d&iacute;a h&aacute;bil.</p>
+    <div class="cob-grid">
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">San Isidro</div><div class="cob-sub">GBA Norte</div></div></div>
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">Vicente L&oacute;pez</div><div class="cob-sub">GBA Norte</div></div></div>
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">San Mart&iacute;n</div><div class="cob-sub">GBA Norte</div></div></div>
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">Palermo / Belgrano</div><div class="cob-sub">CABA</div></div></div>
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">Tigre / Nordelta</div><div class="cob-sub">GBA Norte</div></div></div>
+      <div class="cob-item"><div class="cob-ico"><i class="fas fa-map-marker-alt"></i></div><div><div class="cob-info">Consultar otras zonas</div><div class="cob-sub">+ info por WA</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="sec" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="ctr tc">
+    <div class="stag">Opiniones</div>
+    <h2 class="stitle">Lo que dicen nuestros clientes</h2>
+    <p class="ssub">M&aacute;s de 500 trabajos realizados. La garant&iacute;a nos respalda.</p>
+    <div class="test-grid">
+      <div class="tc-card"><div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="tc-text">"Tuve un escape de gas a las 11 de la noche. En menos de una hora ya estaban ac&aacute;. Solucionaron todo, emitieron el certificado y me dejaron tranquilo. 10 puntos."</p><div class="tc-au"><div class="tc-av">F</div><div><div class="tc-name">Federico M.</div><div class="tc-loc"><i class="fas fa-map-marker-alt"></i> San Isidro</div></div></div></div>
+      <div class="tc-card"><div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="tc-text">"Reform&eacute; el ba&ntilde;o completo con ellos. Plomer&iacute;a, c&eacute;r&aacute;mica y pintura. El resultado fue impecable y el precio muy justo. Ya los contrat&eacute; para la cocina tambi&eacute;n."</p><div class="tc-au"><div class="tc-av">C</div><div><div class="tc-name">Claudia R.</div><div class="tc-loc"><i class="fas fa-map-marker-alt"></i> Vicente L&oacute;pez</div></div></div></div>
+      <div class="tc-card"><div class="tc-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="tc-text">"Instal&eacute; 3 splits con ellos. Vinieron, midieron, presupuestaron y en 2 d&iacute;as estaba todo listo. La garant&iacute;a por escrito me dio mucha confianza. Re recomendable."</p><div class="tc-au"><div class="tc-av">P</div><div><div class="tc-name">Pablo S.</div><div class="tc-loc"><i class="fas fa-map-marker-alt"></i> Palermo, CABA</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TURNO -->
+<section class="sec sec-form" id="presupuesto">
+  <div class="ctr">
+    <div class="tc" style="margin-bottom:32px">
+      <div class="stag">Turnos online</div>
+      <h2 class="stitle">Agend&aacute; una visita</h2>
+      <p style="color:var(--gray);font-size:.93rem;max-width:440px;margin:0 auto;line-height:1.7">Eleg&iacute; d&iacute;a y horario. Un t&eacute;cnico matriculado va a tu domicilio a revisar y presupuestar sin cargo.</p>
+    </div>
+    <div id="mbw-hogar" style="--mbw-primary:#0EA5E9;--mbw-accent:#38BDF8;--mbw-card:#16161F;--mbw-surface:#0F0F1A;--mbw-border:#22222E;--mbw-gray:#94A3B8"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Tecno<span>Hogar</span></div>
+  <p>Gas &middot; Electricidad &middot; Plomer&iacute;a &middot; Jardiner&iacute;a &middot; Zona Norte GBA &amp; CABA<br>Urgencias 24hs &middot; T&eacute;cnicos matriculados &middot; Garant&iacute;a por escrito</p>
+  <div class="f-links"><a href="#servicios">Servicios</a><a href="#presupuesto">Presupuesto</a><a href="https://wa.me/5492644114128" target="_blank">WhatsApp</a></div>
+  <div class="f-copy">&copy; 2026 TecnoHogar &middot; Todos los derechos reservados</div>
+</footer>
+
+<a href="https://wa.me/5492644114128?text=Hola!%20Vi%20TecnoHogar%20y%20quiero%20consultar" class="wa-f" target="_blank">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script src="../../assets/booking.js"></script>
+<script>
+new MoviltecBooking({
+  containerId: 'mbw-hogar',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbwENjf4t3iKD-7a6J6LWIRKxtLNL6VY_AEjC4Vt5RC5wjYmhsgEEGpg9v87y45sIz9g/exec',
+  waNumber: '5492644114128',
+  servicios: [
+    'Gas — Instalación / Reparación',
+    'Electricidad',
+    'Plomería',
+    'Jardinería',
+    'Aire acondicionado',
+    'Reformas & Pintura',
+    'Más de un servicio'
+  ],
+  primaryColor: '#0EA5E9',
+  accentColor: '#38BDF8'
+});
+</script>
+</body>
+</html>

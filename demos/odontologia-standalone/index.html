@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonrisa Perfecta | Odontología en San Juan</title>
+  <meta name="description" content="Consultorio odontológico en San Juan. Odontología general, estética dental, implantes y ortodoncia. Turnos online.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <style>
+    :root {
+      --primary: #0EA5E9;
+      --primary-dark: #0284C7;
+      --secondary: #E0F2FE;
+      --accent: #06B6D4;
+      --dark: #0F172A;
+      --light: #F8FAFC;
+      --text: #334155;
+      --success: #10B981;
+      --warning: #F59E0B;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--light);
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+    
+    /* Top Bar */
+    .top-bar {
+      background: var(--dark);
+      color: white;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+    }
+    
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+    
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .logo-text strong {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+    }
+    
+    .logo-text span {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--primary); }
+    
+    .btn-turno {
+      background: var(--success);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    
+    .btn-turno:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+    
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--secondary) 0%, white 50%, var(--secondary) 100%);
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(14,165,233,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+    
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    
+    .hero-content h1 span {
+      color: var(--primary);
+    }
+    
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(14,165,233,0.3);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      padding: 16px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid var(--primary);
+      transition: all 0.3s;
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .hero-image {
+      position: relative;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+    
+    .stats-bar {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 25px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 40px;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    
+    /* Obras Sociales */
+    .obras-sociales {
+      background: white;
+      padding: 40px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .obras-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .obras-inner p {
+      color: var(--text);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
+    .obras-logos {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      opacity: 0.6;
+    }
+    
+    .obra-logo {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+    
+    /* Especialidades */
+    .especialidades {
+      padding: 100px 24px;
+      background: white;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    
+    .section-header p {
+      color: var(--text);
+      font-size: 1.1rem;
+    }
+    
+    .especialidades-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .especialidad-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 35px;
+      display: flex;
+      gap: 20px;
+      transition: all 0.3s;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .especialidad-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: var(--primary);
+    }
+    
+    .esp-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    
+    .esp-content h3 {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    
+    .esp-content p {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    
+    .esp-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    /* Por qué elegirnos */
+    .porque {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+      color: white;
+    }
+    
+    .porque-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .porque-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+    
+    .porque-content > p {
+      opacity: 0.9;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    
+    .porque-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .porque-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .porque-item h4 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .porque-item p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+    
+    .porque-image {
+      position: relative;
+    }
+    
+    .porque-image img {
+      width: 100%;
+      border-radius: 20px;
+    }
+    
+    /* Equipo */
+    .equipo {
+      padding: 100px 24px;
+      background: var(--light);
+    }
+    
+    .equipo-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .doctor-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    
+    .doctor-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .doctor-img {
+      height: 280px;
+      background: linear-gradient(135deg, var(--secondary), #e2e8f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+    
+    .doctor-info {
+      padding: 25px;
+    }
+    
+    .doctor-info h3 {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    
+    .doctor-info p {
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    
+    /* Testimonios */
+    .testimonios {
+      padding: 100px 24px;
+      background: white;
+    }
+    
+    .testimonios-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonio-card {
+      background: var(--light);
+      padding: 35px;
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .testimonio-card .stars {
+      color: var(--warning);
+      margin-bottom: 15px;
+    }
+    
+    .testimonio-card p {
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    
+    .testimonio-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .author-info h4 {
+      color: var(--dark);
+      font-size: 1rem;
+    }
+    
+    .author-info span {
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      text-align: center;
+      color: white;
+    }
+    
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn-white {
+      background: white;
+      color: var(--primary);
+      padding: 18px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+    
+    .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .btn-transparent {
+      background: transparent;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 2px solid white;
+      transition: all 0.3s;
+    }
+    
+    .btn-transparent:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 24px 30px;
+    }
+    
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-brand h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .footer-brand p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    .footer-col h4 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 30px;
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 65px;
+      height: 65px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 2rem;
+      box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+      transition: all 0.3s;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-inner,
+      .porque-inner {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-bar {
+        position: relative;
+        bottom: 0;
+        margin-top: 30px;
+        transform: none;
+        left: 0;
+      }
+      
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .nav-links { display: none; }
+    }
+    
+    @media (max-width: 640px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span>📍 Av. Libertador 1234, San Juan</span>
+    <a href="https://wa.me/5492645304372" target="_blank">
+      <span>📱</span> 264-530-4372
+    </a>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🦷</div>
+      <div class="logo-text">
+        <strong>Sonrisa Perfecta</strong>
+        <span>Odontología Integral</span>
+      </div>
+    </a>
+    
+    <nav class="nav-links">
+      <a href="#especialidades">Especialidades</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20sacar%20un%20turno" class="btn-turno" target="_blank">
+        <span>📅</span> Sacar turno
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-badge">
+        <span>✓</span> Primera consulta sin cargo
+      </span>
+      
+      <h1>Tu sonrisa, <span>nuestra especialidad</span></h1>
+      <p>Odontología de excelencia en San Juan. Tecnología de avanzada, atención personalizada y resultados que transforman sonrisas.</p>
+      
+      <div class="hero-buttons">
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20agendar%20una%20consulta" class="btn-primary" target="_blank">
+          Agendar consulta →
+        </a>
+        <a href="tel:2645304372" class="btn-outline">
+          Llamar ahora
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=500&fit=crop" alt="Consultorio odontológico">
+      
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">5.000+</span>
+          <span class="stat-label">Pacientes atendidos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Garantía en tratamientos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="obras-sociales">
+  <div class="obras-inner">
+    <p>Trabajamos con las principales obras sociales y prepagas</p>
+    <div class="obras-logos">
+      <span class="obra-logo">OSDE</span>
+      <span class="obra-logo">Swiss Medical</span>
+      <span class="obra-logo">Galeno</span>
+      <span class="obra-logo">Medifé</span>
+      <span class="obra-logo">IOMA</span>
+      <span class="obra-logo">PAMI</span>
+    </div>
+  </div>
+</section>
+
+<section class="especialidades" id="especialidades">
+  <div class="section-header">
+    <h2>Nuestras Especialidades</h2>
+    <p>Ofrecemos atención integral en todas las áreas de la odontología moderna</p>
+  </div>
+  
+  <div class="especialidades-grid">
+    <div class="especialidad-card">
+      <div class="esp-icon">🦷</div>
+      <div class="esp-content">
+        <h3>Odontología General</h3>
+        <p>Limpiezas, empastes, extracciones y tratamientos preventivos para toda la familia.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20odontologia%20general" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+    
+    <div class="especialidad-card">
+      <div class="esp-icon">✨</div>
+      <div class="esp-content">
+        <h3>Estética Dental</h3>
+        <p>Blanqueamiento, carillas de porcelana y diseño de sonrisa personalizado.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20estetica%20dental" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+    
+    <div class="especialidad-card">
+      <div class="esp-icon">🦴</div>
+      <div class="esp-content">
+        <h3>Implantes Dentales</h3>
+        <p>Reemplazo de piezas perdidas con implantes de titanio de última generación.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20implantes" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+    
+    <div class="especialidad-card">
+      <div class="esp-icon">😁</div>
+      <div class="esp-content">
+        <h3>Ortodoncia</h3>
+        <p>Brackets tradicionales, estéticos y alineadores invisibles (Invisalign).</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20ortodoncia" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+    
+    <div class="especialidad-card">
+      <div class="esp-icon">👶</div>
+      <div class="esp-content">
+        <h3>Odontopediatría</h3>
+        <p>Atención especializada para los más pequeños con un ambiente amigable.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20odontopediatria" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+    
+    <div class="especialidad-card">
+      <div class="esp-icon">🔧</div>
+      <div class="esp-content">
+        <h3>Endodoncia</h3>
+        <p>Tratamiento de conducto con tecnología de rotatoria y microscopio.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20endodoncia" class="esp-link" target="_blank">Consultar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="porque">
+  <div class="porque-inner">
+    <div class="porque-content">
+      <h2>¿Por qué elegirnos?</h2>
+      <p>Nos diferenciamos por nuestra dedicación, tecnología de punta y resultados garantizados.</p>
+      
+      <div class="porque-item">
+        <div class="porque-icon">🏥</div>
+        <div>
+          <h4>Instalaciones modernas</h4>
+          <p>Consultorios equipados con tecnología de última generación.</p>
+        </div>
+      </div>
+      
+      <div class="porque-item">
+        <div class="porque-icon">👨‍⚕️</div>
+        <div>
+          <h4>Equipo especializado</h4>
+          <p>Odontólogos con formación continua en las últimas técnicas.</p>
+        </div>
+      </div>
+      
+      <div class="porque-item">
+        <div class="porque-icon">✓</div>
+        <div>
+          <h4>Garantía de tratamientos</h4>
+          <p>Todos nuestros tratamientos incluyen garantía por escrito.</p>
+        </div>
+      </div>
+      
+      <div class="porque-item">
+        <div class="porque-icon">💳</div>
+        <div>
+          <h4>Financiación</h4>
+          <p>Hasta 12 cuotas sin interés con todas las tarjetas.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="porque-image">
+      <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=700&fit=crop" alt="Equipo odontológico">
+    </div>
+  </div>
+</section>
+
+<section class="equipo" id="equipo">
+  <div class="section-header">
+    <h2>Nuestro Equipo</h2>
+    <p>Profesionales dedicados a cuidar tu sonrisa</p>
+  </div>
+  
+  <div class="equipo-grid">
+    <div class="doctor-card">
+      <div class="doctor-img">👨‍⚕️</div>
+      <div class="doctor-info">
+        <h3>Dr. Carlos Martínez</h3>
+        <p>Director Médico - Implantes</p>
+      </div>
+    </div>
+    
+    <div class="doctor-card">
+      <div class="doctor-img">👩‍⚕️</div>
+      <div class="doctor-info">
+        <h3>Dra. Ana López</h3>
+        <p>Ortodoncia y Estética</p>
+      </div>
+    </div>
+    
+    <div class="doctor-card">
+      <div class="doctor-img">👩‍⚕️</div>
+      <div class="doctor-info">
+        <h3>Dra. María González</h3>
+        <p>Odontopediatría</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios" id="testimonios">
+  <div class="section-header">
+    <h2>Lo que dicen nuestros pacientes</h2>
+    <p>Experiencias reales de quienes confiaron en nosotros</p>
+  </div>
+  
+  <div class="testimonios-grid">
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Me hice el blanqueamiento y quedó espectacular. El equipo es muy profesional y el consultorio impecable."</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">M</div>
+        <div class="author-info">
+          <h4>Martín Rodríguez</h4>
+          <span>Paciente desde 2023</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Llevé a mis hijos y la verdad que la Dra. María tiene una paciencia increíble. Los chicos ya no le temen al dentista!"</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">L</div>
+        <div class="author-info">
+          <h4>Laura Fernández</h4>
+          <span>Paciente desde 2022</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonio-card">
+      <div class="stars">★★★★★</div>
+      <p>"Me colocaron implantes y el resultado fue mejor de lo esperado. Excelente atención y seguimiento post-operatorio."</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">R</div>
+        <div class="author-info">
+          <h4>Roberto Silva</h4>
+          <span>Paciente desde 2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Tu sonrisa perfecta te espera</h2>
+  <p>Primera consulta sin cargo. Agenda ahora y comenzá tu transformación.</p>
+  
+  <div class="cta-buttons">
+    <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20agendar%20mi%20primera%20consulta" class="btn-white" target="_blank">
+      Agendar consulta gratis
+    </a>
+    <a href="tel:2645304372" class="btn-transparent">
+      Llamar ahora
+    </a>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>🦷 Sonrisa Perfecta</h3>
+      <p>Odontología integral de excelencia en San Juan. Tu sonrisa es nuestra mejor carta de presentación.</p>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Especialidades</h4>
+      <a href="#">Odontología General</a>
+      <a href="#">Estética Dental</a>
+      <a href="#">Implantes</a>
+      <a href="#">Ortodoncia</a>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="#">Av. Libertador 1234</a>
+      <a href="#">San Juan, Argentina</a>
+      <a href="tel:2645304372">264-530-4372</a>
+      <a href="mailto:info@sonrisaperfecta.com">info@sonrisaperfecta.com</a>
+    </div>
+    
+    <div class="footer-col">
+      <h4>Horarios</h4>
+      <a href="#">Lun a Vie: 9:00 - 19:00</a>
+      <a href="#">Sábados: 9:00 - 13:00</a>
+      <a href="#">Domingos: Cerrado</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2026 Sonrisa Perfecta. Todos los derechos reservados. | Hecho con ❤️ por <a href="https://moviltecdigital.com.ar" target="_blank">Moviltec Digital</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/5492645304372" class="whatsapp-float" target="_blank" title="Chateá con nosotros">💬</a>
+
+</body>
+</html>

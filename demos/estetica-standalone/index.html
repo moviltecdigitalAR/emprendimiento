@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belleza Natural | Centro de Estética en San Juan</title>
+  <meta name="description" content="Centro de estética integral. Tratamientos faciales, corporales, manicura, depilación. Reservá tu turno online.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <style>
+    :root {
+      --primary: #D4A5A5;
+      --primary-dark: #B88A8A;
+      --secondary: #F5E6E0;
+      --accent: #E8B4B8;
+      --dark: #2D2D2D;
+      --light: #FDF8F5;
+      --text: #4A4A4A;
+      --gold: #C9A961;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--light);
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    
+    /* Header */
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--primary-dark); }
+    
+    .btn-reservar {
+      background: var(--primary);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-reservar:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--light) 50%, #fff 100%);
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(212,165,165,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    
+    .hero-content h1 span {
+      color: var(--primary-dark);
+      font-style: italic;
+    }
+    
+    .hero-content p {
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(212,165,165,0.3);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--dark);
+      padding: 16px 36px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid var(--primary);
+      transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .hero-image {
+      position: relative;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    }
+    
+    .hero-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .hero-badge .stars {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .hero-badge p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+    }
+    
+    /* Servicios */
+    .servicios {
+      padding: 100px 24px;
+      background: white;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.8rem;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    
+    .section-header p {
+      color: var(--text);
+      font-size: 1.1rem;
+    }
+    
+    .servicios-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .servicio-card {
+      background: var(--light);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .servicio-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    
+    .servicio-img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    
+    .servicio-content {
+      padding: 28px;
+    }
+    
+    .servicio-content h3 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    
+    .servicio-content p {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    
+    .servicio-precio {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .precio {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    
+    .precio span {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+    
+    .btn-servicio {
+      background: var(--primary);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-servicio:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Galería */
+    .galeria {
+      padding: 100px 24px;
+      background: var(--light);
+    }
+    
+    .galeria-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    
+    .galeria-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .galeria-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .galeria-item:nth-child(4) { grid-column: span 2; }
+    
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .galeria-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    /* Promociones */
+    .promos {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+    
+    .promos-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .promos-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .promos-content p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+    
+    .promo-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .promo-card .etiqueta {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    
+    .promo-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .promo-card .precio-promo {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .promo-card .precio-promo span {
+      font-size: 1rem;
+      opacity: 0.7;
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+    
+    /* Testimonios */
+    .testimonios {
+      padding: 100px 24px;
+      background: white;
+    }
+    
+    .testimonios-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonio-card {
+      background: var(--light);
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+    }
+    
+    .testimonio-card .avatar {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    
+    .testimonio-card .stars {
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+    
+    .testimonio-card p {
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 15px;
+    }
+    
+    .testimonio-card .nombre {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    /* Contacto */
+    .contacto {
+      padding: 100px 24px;
+      background: var(--dark);
+      color: white;
+    }
+    
+    .contacto-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+    
+    .contacto-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+    
+    .contacto-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .contacto-item .icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .contacto-item h4 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .contacto-item p {
+      font-size: 1.1rem;
+    }
+    
+    .horarios-box {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 16px;
+      margin-top: 30px;
+    }
+    
+    .horarios-box h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    
+    .horario-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .mapa {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.6);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    
+    footer p {
+      margin-bottom: 10px;
+    }
+    
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 65px;
+      height: 65px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 2rem;
+      box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+      transition: all 0.3s;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 40px rgba(37,211,102,0.5);
+    }
+    
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-inner,
+      .promos-inner,
+      .contacto-inner {
+        grid-template-columns: 1fr;
+      }
+      
+      .galeria-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .galeria-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+      
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Belleza Natural</a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#promos">Promociones</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20reservar%20un%20turno" class="btn-reservar" target="_blank">Reservar Turno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Tu belleza, <span>nuestra pasión</span></h1>
+      <p>Centro de estética integral en San Juan. Tratamientos faciales, corporales, manicura y más. Viví la experiencia de sentirte única.</p>
+      <div class="hero-buttons">
+        <a href="https://wa.me/5492645304372" class="btn-primary" target="_blank">Reservar ahora →</a>
+        <a href="#servicios" class="btn-secondary">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600&h=700&fit=crop" alt="Centro de estética">
+      <div class="hero-badge">
+        <div class="stars">★★★★★</div>
+        <p>+500 clientas satisfechas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servicios" id="servicios">
+  <div class="section-header">
+    <h2>Nuestros Servicios</h2>
+    <p>Tratamientos personalizados para realzar tu belleza natural</p>
+  </div>
+  
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <div class="servicio-img">💆</div>
+      <div class="servicio-content">
+        <h3>Tratamientos Faciales</h3>
+        <p>Limpieza profunda, hidratación, rejuvenecimiento y más para una piel radiante.</p>
+        <div class="servicio-precio">
+          <span class="precio">$8.500 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20tratamientos%20faciales" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="servicio-card">
+      <div class="servicio-img">💅</div>
+      <div class="servicio-content">
+        <h3>Manicura & Pedicura</h3>
+        <p>Uñas esculpidas, semipermanente, nail art y cuidado completo de manos y pies.</p>
+        <div class="servicio-precio">
+          <span class="precio">$5.500 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20reservar%20manicura" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="servicio-card">
+      <div class="servicio-img">✨</div>
+      <div class="servicio-content">
+        <h3>Depilación</h3>
+        <p>Cera tradicional, cera tibia y depilación definitiva con tecnología de punta.</p>
+        <div class="servicio-precio">
+          <span class="precio">$3.500 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20depilacion" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="servicio-card">
+      <div class="servicio-img">🌸</div>
+      <div class="servicio-content">
+        <h3>Masajes</h3>
+        <p>Relajantes, descontracturantes, reductores. El mejor cuidado para tu cuerpo.</p>
+        <div class="servicio-precio">
+          <span class="precio">$9.000 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20reservar%20un%20masaje" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="servicio-card">
+      <div class="servicio-img">👁️</div>
+      <div class="servicio-content">
+        <h3>Lifting de Pestañas</h3>
+        <p>Mirada impactante con lifting, tinte y extensiones de pestañas.</p>
+        <div class="servicio-precio">
+          <span class="precio">$7.000 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20lifting%20pestanas" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="servicio-card">
+      <div class="servicio-img">🦵</div>
+      <div class="servicio-content">
+        <h3>Tratamientos Corporales</h3>
+        <p>Reductores, reafirmantes, exfoliaciones. Tu cuerpo se lo merece.</p>
+        <div class="servicio-precio">
+          <span class="precio">$10.000 <span>desde</span></span>
+          <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20info%20sobre%20tratamientos%20corporales" class="btn-servicio" target="_blank">Reservar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="galeria" id="galeria">
+  <div class="section-header">
+    <h2>Nuestro Espacio</h2>
+    <p>Un ambiente diseñado para tu relax y bienestar</p>
+  </div>
+  
+  <div class="galeria-grid">
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop" alt="Sala de tratamientos">
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&h=300&fit=crop" alt="Manicura">
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=300&h=300&fit=crop" alt="Productos">
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=300&fit=crop" alt="Recepción">
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=300&h=300&fit=crop" alt="Masajes">
+    </div>
+  </div>
+</section>
+
+<section class="promos" id="promos">
+  <div class="promos-inner">
+    <div class="promos-content">
+      <h2>Promociones del mes</h2>
+      <p>Aprovechá nuestros combos especiales y regalate un momento de belleza y relax.</p>
+      <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20aprovechar%20la%20promo%20del%20mes" class="btn-primary" style="background: white; color: var(--primary-dark);" target="_blank">Consultar promos →</a>
+    </div>
+    <div class="promo-card">
+      <span class="etiqueta">MÁS POPULAR</span>
+      <h3>Combo Relax Total</h3>
+      <p>Masaje descontracturante + Limpieza facial + Manicura semipermanente</p>
+      <div class="precio-promo">$18.000 <span>$25.000</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios">
+  <div class="section-header">
+    <h2>Lo que dicen nuestras clientas</h2>
+    <p>Experiencias reales de quienes nos eligen</p>
+  </div>
+  
+  <div class="testimonios-grid">
+    <div class="testimonio-card">
+      <div class="avatar">👩</div>
+      <div class="stars">★★★★★</div>
+      <p>"El mejor lugar para consentirse. El ambiente es hermoso y las chicas son un amor. Vuelvo siempre!"</p>
+      <span class="nombre">— María G.</span>
+    </div>
+    <div class="testimonio-card">
+      <div class="avatar">👩</div>
+      <div class="stars">★★★★★</div>
+      <p>"Me hice el lifting de pestañas y quedó espectacular. Dura semanas y parece natural. Super recomendado!"</p>
+      <span class="nombre">— Lucía R.</span>
+    </div>
+    <div class="testimonio-card">
+      <div class="avatar">👩</div>
+      <div class="stars">★★★★★</div>
+      <p>"La limpieza facial es increíble. Mi piel quedó radiante. Además el lugar es divino para relajarse."</p>
+      <span class="nombre">— Ana P.</span>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-info">
+      <h2>Visitá nuestro centro</h2>
+      
+      <div class="contacto-item">
+        <div class="icon">📍</div>
+        <div>
+          <h4>Dirección</h4>
+          <p>Av. Libertador 1234, San Juan</p>
+        </div>
+      </div>
+      
+      <div class="contacto-item">
+        <div class="icon">📱</div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>264-530-4372</p>
+        </div>
+      </div>
+      
+      <div class="contacto-item">
+        <div class="icon">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p>info@bellezanatural.com</p>
+        </div>
+      </div>
+      
+      <div class="horarios-box">
+        <h3>Horarios de atención</h3>
+        <div class="horario-row">
+          <span>Lunes a Viernes</span>
+          <span>9:00 - 20:00</span>
+        </div>
+        <div class="horario-row">
+          <span>Sábados</span>
+          <span>10:00 - 18:00</span>
+        </div>
+        <div class="horario-row">
+          <span>Domingos</span>
+          <span>Cerrado</span>
+        </div>
+      </div>
+      
+      <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20reservar%20un%20turno" class="btn-primary" target="_blank" style="margin-top: 30px; display: inline-block;">Reservar turno ahora →</a>
+    </div>
+    
+    <div class="mapa">🗺️</div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Belleza Natural</strong> — Centro de Estética Integral</p>
+  <p>San Juan, Argentina</p>
+  <p style="margin-top: 20px;">Hecho con ❤️ por <a href="https://moviltecdigital.com.ar" target="_blank">Moviltec Digital</a></p>
+</footer>
+
+<a href="https://wa.me/5492645304372" class="whatsapp-float" target="_blank" title="Chateá con nosotras">💬</a>
+
+</body>
+</html>
