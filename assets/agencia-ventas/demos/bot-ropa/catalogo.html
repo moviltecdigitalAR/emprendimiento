@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MoviltecDigital Studio - Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --card:#1c1c1c;
+  --border:#2a2a2a;
+  --gold:#D4AF37;
+  --gold-light:#F4D03F;
+  --gold-dark:#8B6914;
+  --text:#ffffff;
+  --text-secondary:#a0a0a0;
+  --green:#25D366;
+  --r:16px
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1400px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:1.4rem;font-weight:900;letter-spacing:4px;color:var(--gold)}
+.logo span{color:var(--text);font-weight:400}
+.header-actions{display:flex;align-items:center;gap:16px}
+.cart-btn{position:relative;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:50px;font-size:.9rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s}
+.cart-btn:hover{border-color:var(--gold)}
+.cart-count{position:absolute;top:-8px;right:-8px;background:var(--gold);color:#000;width:24px;height:24px;border-radius:50%;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.back-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:10px 20px;border-radius:50px;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-btn:hover{border-color:var(--text);color:var(--text)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--bg) 0%,#1a1505 50%,var(--bg) 100%);padding:60px 24px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-1px;margin-bottom:16px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--text-secondary);font-size:1.1rem;max-width:600px;margin:0 auto}
+
+/* FILTROS */
+.filters{background:var(--surface);padding:20px 24px;border-bottom:1px solid var(--border)}
+.filters-inner{max-width:1400px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--text-secondary);padding:10px 24px;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.1)}
+
+/* CATALOGO */
+.catalog{max-width:1400px;margin:0 auto;padding:40px 24px}
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+
+/* PRODUCT CARD */
+.product{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.product:hover{transform:translateY(-4px);border-color:var(--gold-dark);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.product-image{height:350px;position:relative;overflow:hidden;background:var(--surface)}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product:hover .product-image img{transform:scale(1.05)}
+.product-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:.7rem;font-weight:800;padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:1px}
+.product-badge.sale{background:#e74c3c;color:#fff}
+.product-badge.new{background:var(--green);color:#fff}
+.product-actions{position:absolute;bottom:12px;right:12px;display:flex;gap:8px;opacity:0;transition:opacity .2s}
+.product:hover .product-actions{opacity:1}
+.action-btn{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all .2s}
+.action-btn:hover{background:var(--gold);border-color:var(--gold);color:#000}
+.product-info{padding:20px}
+.product-category{font-size:.75rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.product-name{font-size:1.1rem;font-weight:700;margin-bottom:8px;line-height:1.3}
+.product-desc{font-size:.85rem;color:var(--text-secondary);line-height:1.5;margin-bottom:16px;height:40px;overflow:hidden}
+.product-price{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.price-current{font-size:1.4rem;font-weight:800;color:var(--gold)}
+.price-old{font-size:.9rem;color:var(--text-secondary);text-decoration:line-through}
+.product-talles{margin-bottom:16px}
+.talles-label{font-size:.75rem;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.talles-options{display:flex;gap:8px;flex-wrap:wrap}
+.talle-option{width:40px;height:40px;border-radius:10px;background:var(--surface);border:2px solid var(--border);color:var(--text);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.talle-option:hover{border-color:var(--gold)}
+.talle-option.selected{background:var(--gold);border-color:var(--gold);color:#000}
+.talle-option.disabled{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.add-btn{width:100%;background:var(--gold);color:#000;border:none;padding:14px;border-radius:12px;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-btn:hover{background:var(--gold-light)}
+.add-btn:disabled{background:var(--border);color:var(--text-secondary);cursor:not-allowed}
+
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:200;opacity:0;visibility:hidden;transition:all .3s}
+.cart-overlay.active{opacity:1;visibility:visible}
+.cart-sidebar{position:fixed;top:0;right:0;width:100%;max-width:420px;height:100%;background:var(--surface);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column}
+.cart-sidebar.active{transform:translateX(0)}
+.cart-header{padding:24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-title{font-size:1.2rem;font-weight:800}
+.cart-close{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cart-close:hover{border-color:var(--gold)}
+.cart-items{flex:1;overflow-y:auto;padding:20px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--text-secondary)}
+.cart-empty-icon{font-size:4rem;margin-bottom:16px}
+.cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.cart-item-image{width:80px;height:80px;border-radius:12px;object-fit:cover;background:var(--card)}
+.cart-item-details{flex:1}
+.cart-item-name{font-weight:700;margin-bottom:4px}
+.cart-item-talle{font-size:.85rem;color:var(--text-secondary);margin-bottom:8px}
+.cart-item-price{font-size:1.1rem;font-weight:800;color:var(--gold)}
+.cart-item-actions{display:flex;align-items:center;gap:12px;margin-top:8px}
+.qty-btn{width:28px;height:28px;border-radius:6px;background:var(--card);border:1px solid var(--border);color:var(--text);cursor:pointer;font-weight:700}
+.qty-btn:hover{border-color:var(--gold)}
+.cart-item-qty{font-weight:700;min-width:20px;text-align:center}
+.remove-btn{color:#e74c3c;font-size:.8rem;cursor:pointer;background:none;border:none}
+.cart-footer{padding:24px;border-top:1px solid var(--border);background:var(--card)}
+.cart-subtotal{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.9rem;color:var(--text-secondary)}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:20px;font-size:1.3rem;font-weight:800}
+.cart-total span:last-child{color:var(--gold)}
+.checkout-btn{width:100%;background:var(--green);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;transition:opacity .2s}
+.checkout-btn:hover{opacity:.9}
+.continue-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--text);padding:14px;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}
+.continue-btn:hover{border-color:var(--gold)}
+
+/* VOLVER AL BOT */
+.return-banner{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(90deg,var(--gold-dark),var(--gold));padding:16px 24px;z-index:150;transform:translateY(100%);transition:transform .3s}
+.return-banner.active{transform:translateY(0)}
+.return-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.return-text{color:#000;font-weight:700}
+.return-btn{background:#000;color:var(--gold);padding:12px 24px;border-radius:50px;font-weight:800;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-size:.9rem}
+.return-btn:hover{background:var(--surface);color:var(--gold)}
+
+/* TOAST */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--gold);color:var(--text);padding:16px 24px;border-radius:12px;font-weight:600;z-index:300;opacity:0;transition:all .3s;display:flex;align-items:center;gap:12px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast-icon{color:var(--gold);font-size:1.2rem}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:40px 24px;text-align:center;margin-bottom:80px}
+footer p{color:var(--text-secondary);font-size:.9rem}
+
+@media(max-width:768px){
+  .catalog-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .product-image{height:250px}
+  .filters-inner{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;padding-bottom:8px}
+  .cart-sidebar{max-width:100%}
+}
+@media(max-width:480px){
+  .catalog-grid{grid-template-columns:1fr}
+  .header-inner{padding:12px 16px}
+  .logo{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">MoviltecDigital <span>Studio</span></div>
+    <div class="header-actions">
+      <a href="index.html" class="back-btn">← Volver al chat</a>
+      <button class="cart-btn" onclick="openCart()">
+        🛒 Carrito
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Catálogo <span>Primavera 2026</span></h1>
+  <p>Más de 50 prendas exclusivas. Elegí tus favoritas, seleccioná talle y completá tu look.</p>
+</section>
+
+<!-- FILTROS -->
+<section class="filters">
+  <div class="filters-inner">
+    <button class="filter-btn active" data-filter="all">Todo</button>
+    <button class="filter-btn" data-filter="remeras">👕 Remeras</button>
+    <button class="filter-btn" data-filter="buzos">🧥 Buzos</button>
+    <button class="filter-btn" data-filter="pantalones">👖 Pantalones</button>
+    <button class="filter-btn" data-filter="vestidos">👗 Vestidos</button>
+    <button class="filter-btn" data-filter="camperas">🧥 Camperas</button>
+  </div>
+</section>
+
+<!-- CATALOGO -->
+<section class="catalog">
+  <div class="catalog-grid" id="catalogGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>MoviltecDigital Studio - Moda Premium © 2026</p>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <div class="cart-title">🛒 Tu Carrito</div>
+    <button class="cart-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛍️</div>
+      <p>Tu carrito está vacío</p>
+      <p style="font-size:.85rem;margin-top:8px">Agregá productos para comenzar</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="subtotal">$0</span>
+    </div>
+    <div class="cart-total">
+      <span>TOTAL</span>
+      <span id="total">$0</span>
+    </div>
+    <button class="checkout-btn" onclick="returnToBot()">
+      💬 Volver al bot para pagar
+    </button>
+    <button class="continue-btn" onclick="closeCart()">Seguir comprando</button>
+  </div>
+</div>
+
+<!-- RETURN BANNER -->
+<div class="return-banner" id="returnBanner">
+  <div class="return-inner">
+    <span class="return-text">🛒 Tenés productos en tu carrito</span>
+    <button class="return-btn" onclick="returnToBot()">Volver al bot →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMessage">Producto agregado</span>
+</div>
+
+<script>
+// ============================================
+// CATÁLOGO MoviltecDigital Studio
+// ============================================
+
+const products = [
+  // REMERAS
+  {id:1,name:'Remera Oversize Premium',category:'remeras',price:8500,oldPrice:null,image:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',desc:'100% algodón peinado. Corte oversize relaxed.',talles:['XS','S','M','L','XL'],stock:{XS:true,S:true,M:true,L:true,XL:true},badge:'new'},
+  {id:2,name:'Camiseta Lino Natural',category:'remeras',price:11000,oldPrice:null,image:'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500',desc:'Lino 100%, corte recto. Varios colores.',talles:['S','M','L','XL'],stock:{S:true,M:true,L:true,XL:false},badge:null},
+  {id:3,name:'Remera Crop Top',category:'remeras',price:7500,oldPrice:9500,image:'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500',desc:'Algodón con elastano. Corte crop.',talles:['XS','S','M','L'],stock:{XS:true,S:true,M:true,L:true},badge:'sale'},
+  {id:4,name:'Remera Estampada Art',category:'remeras',price:9800,oldPrice:null,image:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500',desc:'Diseño exclusivo. Edición limitada.',talles:['S','M','L','XL','XXL'],stock:{S:true,M:true,L:true,XL:true,XXL:true},badge:'new'},
+  
+  // BUZOS
+  {id:5,name:'Buzo Hoodie Fleece',category:'buzos',price:16000,oldPrice:20000,image:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=500',desc:'Fleece interior súper suave. Capucha doble.',talles:['S','M','L','XL','XXL'],stock:{S:true,M:true,L:true,XL:true,XXL:false},badge:'sale'},
+  {id:6,name:'Crewneck Clásico',category:'buzos',price:14500,oldPrice:null,image:'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=500',desc:'Cuello redondo. Ideal para entretiempo.',talles:['XS','S','M','L','XL'],stock:{XS:true,S:true,M:true,L:true,XL:true},badge:null},
+  {id:7,name:'Buzo Oversize Gold',category:'buzos',price:18500,oldPrice:null,image:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500',desc:'Edición especial con detalles dorados.',talles:['S','M','L','XL'],stock:{S:true,M:true,L:false,XL:true},badge:'new'},
+  {id:8,name:'Zip Hoodie Premium',category:'buzos',price:19500,oldPrice:22000,image:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500',desc:'Cierre YKK premium. Bolsillos laterales.',talles:['S','M','L','XL','XXL'],stock:{S:true,M:true,L:true,XL:true,XXL:true},badge:'sale'},
+  
+  // PANTALONES
+  {id:9,name:'Jean Skinny Tiro Alto',category:'pantalones',price:22500,oldPrice:null,image:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500',desc:'Denim elastizado 2%. Negro y azul.',talles:['36','38','40','42','44'],stock:{36:true,38:true,40:true,42:true,44:false},badge:null},
+  {id:10,name:'Pantalón Cargo Wide',category:'pantalones',price:18700,oldPrice:22000,image:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500',desc:'Corte wide leg. Bolsillos cargo.',talles:['S','M','L','XL'],stock:{S:true,M:true,L:true,XL:true},badge:'sale'},
+  {id:11,name:'Jogger Premium',category:'pantalones',price:16500,oldPrice:null,image:'https://images.unsplash.com/photo-1517438476312-10d79c077509?w=500',desc:'Algodón frisa. Puños ajustables.',talles:['XS','S','M','L','XL'],stock:{XS:true,S:true,M:true,L:true,XL:true},badge:null},
+  {id:12,name:'Pantalón de Vestir',category:'pantalones',price:24500,oldPrice:null,image:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500',desc:'Tela de vestir. Corte recto elegante.',talles:['36','38','40','42','44','46'],stock:{36:true,38:true,40:true,42:true,44:true,46:false},badge:'new'},
+  
+  // VESTIDOS
+  {id:13,name:'Vestido Midi Satinado',category:'vestidos',price:28000,oldPrice:null,image:'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500',desc:'Satén liviano. Escote en V. Ideal para salidas.',talles:['XS','S','M','L'],stock:{XS:true,S:true,M:true,L:false},badge:'new'},
+  {id:14,name:'Vestido Negro Clásico',category:'vestidos',price:32000,oldPrice:38000,image:'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500',desc:'El clásico que no falla. Tela premium.',talles:['XS','S','M','L','XL'],stock:{XS:true,S:true,M:true,L:true,XL:true},badge:'sale'},
+  {id:15,name:'Vestido Floral Verano',category:'vestidos',price:26500,oldPrice:null,image:'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500',desc:'Estampado exclusivo. Fresco y liviano.',talles:['S','M','L','XL'],stock:{S:true,M:true,L:true,XL:true},badge:null},
+  
+  // CAMPERAS
+  {id:16,name:'Campera Bomber',category:'camperas',price:35000,oldPrice:null,image:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500',desc:'Estilo clásico. Interior forrado.',talles:['S','M','L','XL','XXL'],stock:{S:true,M:true,L:true,XL:true,XXL:true},badge:'new'},
+  {id:17,name:'Sobretodo Largo',category:'camperas',price:45000,oldPrice:52000,image:'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=500',desc:'Abrigo premium. Corte largo elegante.',talles:['S','M','L','XL'],stock:{S:true,M:true,L:true,XL:false},badge:'sale'},
+  {id:18,name:'Campera Denim',category:'camperas',price:28500,oldPrice:null,image:'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?w=500',desc:'Jean pesado. Estilo atemporal.',talles:['XS','S','M','L','XL'],stock:{XS:true,S:true,M:true,L:true,XL:true},badge:null},
+];
+
+let cart = [];
+let selectedTalles = {};
+
+// Inicializar
+window.onload = () => {
+  renderCatalog();
+  loadCart();
+  setupFilters();
+};
+
+// Renderizar catálogo
+function renderCatalog(filter = 'all') {
+  const grid = document.getElementById('catalogGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+  
+  grid.innerHTML = filtered.map(p => `
+    <div class="product" data-category="${p.category}">
+      <div class="product-image">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'sale' ? '-' + Math.round((1 - p.price/p.oldPrice)*100) + '%' : ''}</span>` : ''}
+        <div class="product-actions">
+          <button class="action-btn" title="Vista rápida">👁️</button>
+          <button class="action-btn" title="Favoritos">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.category}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">
+          <span class="price-current">$${p.price.toLocaleString()}</span>
+          ${p.oldPrice ? `<span class="price-old">$${p.oldPrice.toLocaleString()}</span>` : ''}
+        </div>
+        <div class="product-talles">
+          <div class="talles-label">Seleccioná tu talle</div>
+          <div class="talles-options" id="talles-${p.id}">
+            ${p.talles.map(t => `
+              <button class="talle-option ${!p.stock[t] ? 'disabled' : ''}" 
+                      onclick="selectTalle(${p.id}, '${t}', this)"
+                      ${!p.stock[t] ? 'disabled' : ''}>${t}</button>
+            `).join('')}
+          </div>
+        </div>
+        <button class="add-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">
+          + Agregar al carrito
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Setup filtros
+function setupFilters() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCatalog(btn.dataset.filter);
+    });
+  });
+}
+
+// Seleccionar talle
+function selectTalle(productId, talle, btn) {
+  // Deseleccionar otros del mismo producto
+  document.querySelectorAll(`#talles-${productId} .talle-option`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedTalles[productId] = talle;
+}
+
+// Agregar al carrito
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  const talle = selectedTalles[productId];
+  
+  if (!talle) {
+    showToast('Seleccioná un talle primero', '⚠️');
+    return;
+  }
+  
+  const existing = cart.find(item => item.id === productId && item.talle === talle);
+  
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      id: productId,
+      name: product.name,
+      price: product.price,
+      talle: talle,
+      quantity: 1,
+      image: product.image
+    });
+  }
+  
+  saveCart();
+  updateCartUI();
+  showReturnBanner();
+  showToast(`${product.name} agregado`, '✓');
+}
+
+// Guardar carrito
+function saveCart() {
+  localStorage.setItem('showroom_cart', JSON.stringify({items: cart}));
+  localStorage.setItem('showroom_cart_time', Date.now().toString());
+}
+
+// Cargar carrito
+function loadCart() {
+  const saved = localStorage.getItem('showroom_cart');
+  if (saved) {
+    const data = JSON.parse(saved);
+    cart = data.items || [];
+    updateCartUI();
+    if (cart.length > 0) showReturnBanner();
+  }
+}
+
+// Actualizar UI del carrito
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.quantity, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartCount').style.display = count > 0 ? 'flex' : 'none';
+  
+  renderCartItems();
+}
+
+// Renderizar items del carrito
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛍️</div>
+        <p>Tu carrito está vacío</p>
+        <p style="font-size:.85rem;margin-top:8px">Agregá productos para comenzar</p>
+      </div>
+    `;
+    footer.style.display = 'none';
+    return;
+  }
+  
+  container.innerHTML = cart.map((item, idx) => `
+    <div class="cart-item">
+      <img src="${item.image}" class="cart-item-image" alt="${item.name}">
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-talle">Talle: ${item.talle}</div>
+        <div class="cart-item-price">$${(item.price * item.quantity).toLocaleString()}</div>
+        <div class="cart-item-actions">
+          <button class="qty-btn" onclick="updateQty(${idx}, -1)">−</button>
+          <span class="cart-item-qty">${item.quantity}</span>
+          <button class="qty-btn" onclick="updateQty(${idx}, 1)">+</button>
+          <button class="remove-btn" onclick="removeItem(${idx})">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  footer.style.display = 'block';
+  
+  const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+  document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
+  document.getElementById('total').textContent = '$' + subtotal.toLocaleString();
+}
+
+// Actualizar cantidad
+function updateQty(idx, delta) {
+  cart[idx].quantity += delta;
+  if (cart[idx].quantity <= 0) {
+    cart.splice(idx, 1);
+  }
+  saveCart();
+  updateCartUI();
+  if (cart.length === 0) hideReturnBanner();
+}
+
+// Eliminar item
+function removeItem(idx) {
+  cart.splice(idx, 1);
+  saveCart();
+  updateCartUI();
+  if (cart.length === 0) hideReturnBanner();
+}
+
+// Abrir/cerrar carrito
+function openCart() {
+  document.getElementById('cartOverlay').classList.add('active');
+  document.getElementById('cartSidebar').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('active');
+  document.getElementById('cartSidebar').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Volver al bot
+function returnToBot() {
+  saveCart();
+  window.location.href = 'index.html';
+}
+
+// Mostrar banner de retorno
+function showReturnBanner() {
+  document.getElementById('returnBanner').classList.add('active');
+}
+
+function hideReturnBanner() {
+  document.getElementById('returnBanner').classList.remove('active');
+}
+
+// Toast
+function showToast(message, icon = '✓') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMessage').textContent = message;
+  toast.querySelector('.toast-icon').textContent = icon;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// Cerrar carrito con ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeCart();
+});
+</script>
+
+</body>
+</html>

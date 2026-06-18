@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Patitas Vet - Cuidamos a tu mejor amigo</title>
+<meta name="description" content="Veterinaria en San Juan. Atención 24hs, cirugía, vacunación, peluquería canina. Turnos online."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--surface:#111118;--card:#18181F;--border:#26262E;--primary:#0EA5E9;--primary-dark:#0284C7;--rose:#F43F5E;--green:#10B981;--white:#FFFFFF;--gray:#94A3B8;--gray2:#64748B;--r:16px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.nav-logo{font-size:1.3rem;font-weight:900;color:var(--primary)}
+.nav-logo span{color:var(--rose)}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-urgencia{background:var(--rose);color:#fff;padding:10px 22px;border-radius:50px;font-size:0.85rem;font-weight:700;text-decoration:none;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,0.4)}50%{box-shadow:0 0 0 10px rgba(244,63,94,0)}}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* HERO */
+.hero{padding:100px 24px;text-align:center;background:radial-gradient(ellipse at 60% 0%,rgba(14,165,233,0.15) 0%,transparent 55%),radial-gradient(ellipse at 30% 80%,rgba(244,63,94,0.1) 0%,transparent 55%),var(--bg)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.3);color:var(--rose);font-size:0.78rem;font-weight:600;padding:7px 18px;border-radius:50px;margin-bottom:26px;text-transform:uppercase;letter-spacing:.5px}
+.hero h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:22px;max-width:800px;margin-left:auto;margin-right:auto}
+.hero h1 span{color:var(--primary)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.15rem);color:var(--gray);max-width:600px;margin:0 auto 38px}
+.hero-cta{display:inline-flex;align-items:center;gap:9px;background:var(--primary);color:#fff;padding:17px 36px;border-radius:50px;font-size:1.05rem;font-weight:700;box-shadow:0 8px 32px rgba(14,165,233,.35);transition:all .2s;text-decoration:none}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(14,165,233,.45)}
+
+/* SERVICIOS */
+.servicios{padding:80px 24px;max-width:1200px;margin:0 auto}
+.section-title{text-align:center;font-size:2rem;font-weight:800;margin-bottom:50px}
+.serv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.serv-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:30px;text-align:center;transition:all .3s}
+.serv-card:hover{border-color:var(--primary);transform:translateY(-5px)}
+.serv-icon{font-size:3rem;margin-bottom:16px}
+.serv-card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+.serv-card p{color:var(--gray);font-size:.9rem;margin-bottom:16px}
+.serv-precio{display:inline-block;background:rgba(14,165,233,.1);color:var(--primary);padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600}
+
+/* URGENCIA */
+.urgencia{background:linear-gradient(135deg,rgba(244,63,94,.1),rgba(244,63,94,.05));border:2px solid rgba(244,63,94,.3);border-radius:var(--r);padding:40px;margin:40px 24px;max-width:1000px;margin-left:auto;margin-right:auto;text-align:center}
+.urgencia h2{font-size:1.8rem;font-weight:800;margin-bottom:16px;color:var(--rose)}
+.urgencia p{color:var(--gray);margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
+.urgencia-tel{font-size:2rem;font-weight:900;color:var(--rose);text-decoration:none;display:inline-flex;align-items:center;gap:12px}
+
+/* HORARIOS */
+.horarios{background:var(--surface);padding:80px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.horarios-inner{max-width:800px;margin:0 auto}
+.horarios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:40px}
+.horario-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;text-align:center}
+.horario-card.urgente{border-color:var(--rose);background:rgba(244,63,94,.05)}
+.horario-tipo{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.horario-hora{font-size:1.5rem;font-weight:800;color:var(--primary);margin-bottom:8px}
+.horario-nota{color:var(--gray);font-size:.85rem}
+.urgente-badge{display:inline-block;background:var(--rose);color:#fff;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:12px}
+
+/* TURNOS */
+.turnos{padding:80px 24px;max-width:600px;margin:0 auto;text-align:center}
+.turnos-form{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin-top:40px}
+.form-group{margin-bottom:20px;text-align:left}
+.form-group label{display:block;font-size:.9rem;font-weight:600;margin-bottom:8px}
+.form-group input,.form-group select{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--white);font-size:1rem}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary)}
+.btn-turno{width:100%;background:var(--primary);color:#fff;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-turno:hover{background:var(--primary-dark)}
+
+/* FOOTER */
+footer{background:#000;padding:40px 24px;text-align:center;color:var(--gray2);font-size:.9rem}
+
+/* WHATSAPP FLOAT */
+.wa-f{position:fixed;bottom:30px;right:30px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s;z-index:1000;text-decoration:none}
+.wa-f:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Patitas <span>Vet</span></div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#urgencia">Urgencias</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#turnos">Turnos</a></li>
+  </ul>
+  <a href="tel:02641234567" class="nav-urgencia">🚨 Urgencias 24hs</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🏥 Atención veterinaria integral</div>
+  <h1>Cuidamos a tu<br><span>mejor amigo</span></h1>
+  <p class="hero-sub">Veterinaria en San Juan con atención 24 horas, cirugía, vacunación, peluquería y todo lo que tu mascota necesita.</p>
+  <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20sacar%20turno%20para%20mi%20mascota" class="hero-cta" target="_blank">Sacar turno por WhatsApp →</a>
+</section>
+
+<section class="servicios" id="servicios">
+  <h2 class="section-title">Nuestros servicios</h2>
+  <div class="serv-grid">
+    <div class="serv-card">
+      <div class="serv-icon">🩺</div>
+      <h3>Consulta General</h3>
+      <p>Atención clínica completa. Diagnóstico, tratamiento y seguimiento.</p>
+      <span class="serv-precio">Desde $8.000</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💉</div>
+      <h3>Vacunación</h3>
+      <p>Todas las vacunas obligatorias y opcionales. Carnet sanitario digital.</p>
+      <span class="serv-precio">Desde $6.000</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">✂️</div>
+      <h3>Peluquería</h3>
+      <p>Baño, corte de pelo, uñas y limpieza de oídos. Productos hipoalergénicos.</p>
+      <span class="serv-precio">Desde $7.500</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🏥</div>
+      <h3>Cirugía</h3>
+      <p>Castración, cirugías de tejidos blandos, ortopedia. Anestesia inhalatoria.</p>
+      <span class="serv-precio">Presupuesto sin cargo</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🦷</div>
+      <h3>Odontología</h3>
+      <p>Limpieza dental, extracciones, tratamiento de enfermedades bucales.</p>
+      <span class="serv-precio">Desde $10.000</span>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🔬</div>
+      <h3>Laboratorio</h3>
+      <p>Análisis de sangre, orina, raspados de piel. Resultados en 24hs.</p>
+      <span class="serv-precio">Desde $12.000</span>
+    </div>
+  </div>
+</section>
+
+<section class="urgencia" id="urgencia">
+  <h2>🚨 Urgencias Veterinarias 24hs</h2>
+  <p>Atención inmediata para emergencias las 24 horas, los 365 días del año. No esperes si tu mascota lo necesita.</p>
+  <a href="tel:02641234567" class="urgencia-tel">📞 0264 123-4567</a>
+</section>
+
+<section class="horarios" id="horarios">
+  <div class="horarios-inner">
+    <h2 class="section-title">Horarios de atención</h2>
+    <div class="horarios-grid">
+      <div class="horario-card">
+        <div class="horario-tipo">Atención Regular</div>
+        <div class="horario-hora">8:00 - 20:00</div>
+        <div class="horario-nota">Lunes a Sábados<br>Turnos y consultas</div>
+      </div>
+      <div class="horario-card urgente">
+        <div class="urgente-badge">24 HORAS</div>
+        <div class="horario-tipo">Urgencias</div>
+        <div class="horario-hora">24hs / 365 días</div>
+        <div class="horario-nota">Todos los días<br>Atención inmediata</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="turnos" id="turnos">
+  <h2 class="section-title">Reservá tu turno</h2>
+  <p>Completá el formulario y te confirmamos por WhatsApp</p>
+  
+  <form class="turnos-form" onsubmit="event.preventDefault(); window.open('https://wa.me/5492645304372?text=' + encodeURIComponent('Hola! Quiero sacar turno:\n\nNombre: ' + document.getElementById('nombre').value + '\nMascota: ' + document.getElementById('mascota').value + '\nServicio: ' + document.getElementById('servicio').value + '\nFecha preferida: ' + document.getElementById('fecha').value), '_blank');">
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" id="nombre" placeholder="Ej: María González" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Nombre de la mascota</label>
+      <input type="text" id="mascota" placeholder="Ej: Luna" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Tipo de servicio</label>
+      <select id="servicio" required>
+        <option value="">Seleccioná un servicio</option>
+        <option value="Consulta general">Consulta general</option>
+        <option value="Vacunación">Vacunación</option>
+        <option value="Peluquería">Peluquería</option>
+        <option value="Cirugía (presupuesto)">Cirugía (presupuesto)</option>
+        <option value="Odontología">Odontología</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Fecha preferida</label>
+      <input type="date" id="fecha" required>
+    </div>
+    
+    <button type="submit" class="btn-turno">Solicitar turno por WhatsApp</button>
+  </form>
+</section>
+
+<footer>
+  <p><strong>Patitas Vet</strong> · Av. Libertador 567 · San Juan, Argentina</p>
+  <p>© 2026 Todos los derechos reservados · Hecho con ❤️ por Moviltec Digital</p>
+</footer>
+
+<button onclick="document.getElementById('formulario-inteligente').style.display='block';document.body.style.overflow='hidden';" class="wa-f" style="border:none;cursor:pointer;">💬</button>
+
+<!-- FORMULARIO INTELIGENTE INLINE -->
+<div id="formulario-inteligente" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.7);overflow-y:auto;">
+  <div style="max-width:500px;margin:30px auto;background:#1a1a2e;border-radius:16px;padding:30px 25px;position:relative;color:#fff;font-family:'Segoe UI',sans-serif;">
+    <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;">&times;</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="width:50px;height:50px;background:#10B981;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <h2 style="margin:0;font-size:1.3rem;color:#10B981;">Asistente Virtual</h2>
+      <p style="margin:5px 0 0;font-size:0.85rem;color:#aaa;">Patitas Vet</p>
+    </div>
+    <div id="fi-paso1" class="fi-paso">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">Hola! Bienvenido/a a <strong>Patitas Vet</strong>. Soy el asistente virtual. Selecciona que necesitas:</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:15px;">
+        <button class="fi-btn" onclick="fiPaso(2,'info')">Quiero informacion sobre servicios</button>
+        <button class="fi-btn" onclick="fiPaso(2,'turno')">Quiero reservar un turno</button>
+        <button class="fi-btn" onclick="fiPaso(2,'planes')">Me interesa tener esto para mi negocio</button>
+        <button class="fi-btn" onclick="fiPaso(2,'otro')">Otra consulta</button>
+      </div>
+    </div>
+    <div id="fi-paso2" class="fi-paso" style="display:none;">
+      <p id="fi-msg2" style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;"></p>
+      <div id="fi-opciones2" style="display:flex;flex-direction:column;gap:10px;margin-top:15px;"></div>
+    </div>
+    <div id="fi-paso3" class="fi-paso" style="display:none;">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">Perfecto! Dejanos tus datos y te contactamos en menos de 24hs:</p>
+      <form id="fi-form" style="margin-top:15px;display:flex;flex-direction:column;gap:12px;">
+        <input type="text" id="fi-nombre" placeholder="Tu nombre" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="tel" id="fi-tel" placeholder="Tu WhatsApp (ej: 2645551234)" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="text" id="fi-negocio" placeholder="Nombre de tu negocio (opcional)" style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="hidden" id="fi-interes" value="">
+        <button type="submit" style="padding:14px;background:#10B981;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;">Enviar y recibir info</button>
+      </form>
+    </div>
+    <div id="fi-paso4" class="fi-paso" style="display:none;">
+      <div style="padding:20px;">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="width:60px;height:60px;background:linear-gradient(135deg,#10B981,#34D399);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+            <svg width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <h3 style="color:#10B981;margin:0 0 6px;font-size:1.2rem;">Gracias por tu consulta</h3>
+          <p style="color:#999;font-size:0.8rem;margin:0;">Tu solicitud fue registrada correctamente</p>
+        </div>
+        <div id="fi-resumen" style="background:#2a2a4a;border-radius:10px;padding:16px;margin-bottom:18px;border-left:3px solid #10B981;"></div>
+        <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:14px;text-align:center;">
+          <p style="margin:0;color:#34D399;font-size:0.9rem;font-weight:600;">Nuestro equipo se comunicara contigo</p>
+          <p style="margin:6px 0 0;color:#aaa;font-size:0.82rem;">dentro de las proximas 24 horas habiles</p>
+        </div>
+        <a id="fi-wa-link" href="#" target="_blank" rel="noopener" style="display:block;margin-top:18px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.95rem;cursor:pointer;text-align:center;text-decoration:none;">Confirmar envio por WhatsApp</a>
+        <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';fiReset();" style="margin-top:10px;width:100%;padding:12px;background:transparent;color:#888;border:1px solid #444;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.fi-btn{padding:12px 16px;background:transparent;border:1.5px solid #10B981;color:#10B981;border-radius:8px;font-size:0.9rem;cursor:pointer;transition:all .2s;text-align:left;}
+.fi-btn:hover{background:#10B981;color:#fff;}
+</style>
+<script>
+let fiEleccion = '';
+function fiReset() {
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  document.getElementById('fi-paso1').style.display = 'block';
+  document.getElementById('fi-form').reset();
+}
+function fiPaso(paso, tipo) {
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  if (paso === 2) {
+    fiEleccion = tipo;
+    const msg = document.getElementById('fi-msg2');
+    const opts = document.getElementById('fi-opciones2');
+    opts.innerHTML = '';
+    if (tipo === 'info') {
+      msg.innerHTML = 'Nuestros servicios veterinarios:<br><br>&#8226; Consulta general<br>&#8226; Vacunacion<br>&#8226; Cirugia<br>&#8226; Emergencias 24hs<br>&#8226; Peluqueria canina<br>&#8226; Pension<br><br>Necesitas un turno?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(2,\'turno\')">Reservar turno</button><button class="fi-btn" onclick="fiPaso(3,\'info servicios\')">Quiero que me contacten</button>';
+    } else if (tipo === 'turno') {
+      msg.innerHTML = 'Para reservar tu turno, necesitamos algunos datos. Te contactaremos para confirmar dia y horario.';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'turno veterinaria\')">Dejar mis datos</button>';
+    } else if (tipo === 'planes') {
+      msg.innerHTML = 'Excelente! Moviltec Digital ofrece 3 planes para que tu negocio venda mas:<br><br><strong>1. Presencia Digital</strong> - Landing page + WhatsApp<br><strong>2. Ventas Automaticas</strong> - Bot + catalogo + pagos<br><strong>3. Negocio Digital Pro</strong> - Todo incluido + app<br><br>Cual te interesa?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'Plan Presencia Digital\')">Presencia Digital</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Ventas Automaticas\')">Ventas Automaticas</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Negocio Digital Pro\')">Negocio Digital Pro</button>';
+    } else {
+      msg.innerHTML = 'Contanos en que podemos ayudarte. Dejanos tus datos y te contactamos!';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'consulta general\')">Dejar mis datos</button>';
+    }
+    document.getElementById('fi-paso2').style.display = 'block';
+  } else if (paso === 3) {
+    document.getElementById('fi-interes').value = tipo;
+    document.getElementById('fi-paso3').style.display = 'block';
+  }
+}
+document.getElementById('fi-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('fi-nombre').value;
+  const tel = document.getElementById('fi-tel').value;
+  const negocio = document.getElementById('fi-negocio').value;
+  const interes = document.getElementById('fi-interes').value;
+  let resumenHTML = '<p style="margin:0 0 8px;font-size:0.82rem;color:#888;text-transform:uppercase;letter-spacing:1px;">Datos enviados</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#10B981;">Nombre:</strong> ' + nombre + '</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#10B981;">WhatsApp:</strong> ' + tel + '</p>';
+  if (negocio) resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#10B981;">Negocio:</strong> ' + negocio + '</p>';
+  resumenHTML += '<p style="margin:0;color:#eee;font-size:0.9rem;"><strong style="color:#10B981;">Consulta:</strong> ' + interes + '</p>';
+  document.getElementById('fi-resumen').innerHTML = resumenHTML;
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  document.getElementById('fi-paso4').style.display = 'block';
+  const lineas = ['*Nuevo contacto - Demo Veterinaria*','','*Nombre:* ' + nombre,'*WhatsApp:* ' + tel];
+  if (negocio) lineas.push('*Negocio:* ' + negocio);
+  lineas.push('*Interes:* ' + interes);
+  lineas.push('');
+  lineas.push('_Enviado desde moviltecdigital.com.ar_');
+  document.getElementById('fi-wa-link').href = 'https://wa.me/5492645304372?text=' + encodeURIComponent(lineas.join('\n'));
+});
+</script>
+
+</body>
+</html>

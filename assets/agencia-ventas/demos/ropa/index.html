@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MoviltecDigital Studio &mdash; Moda &amp; Indumentaria</title>
+<meta name="description" content="Tienda de ropa y accesorios premium. Cat&aacute;logo online, talles disponibles, env&iacute;os a todo el pa&iacute;s."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080808;--surface:#111111;--card:#181818;--border:#242424;--rose:#F43F5E;--rose2:#FB7185;--purple:#8B5CF6;--green:#25D366;--green2:#1aad54;--gray:#94A3B8;--gray2:#64748B;--r:14px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:200;background:rgba(8,8,8,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 26px;gap:12px}
+.nav-logo{font-size:1.1rem;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+.nav-logo span{background:linear-gradient(90deg,var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-r{display:flex;align-items:center;gap:10px}
+.nav-cart{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);color:#fff;padding:9px 16px;border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;position:relative}
+.nav-cart:hover{border-color:var(--rose)}
+.nbadge{background:var(--rose);color:#fff;font-size:.68rem;font-weight:800;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;top:-7px;right:-7px;opacity:0;transition:opacity .2s}
+.nbadge.on{opacity:1}
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:90px 60px 60px;background:linear-gradient(90deg,rgba(8,8,8,.92) 40%,rgba(8,8,8,.3) 100%),url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&auto=format&q=75') right center/cover no-repeat;position:relative;min-height:94vh}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(244,63,94,.08) 0%,transparent 50%)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(244,63,94,.15);border:1px solid rgba(244,63,94,.3);color:var(--rose2);font-size:.77rem;font-weight:600;padding:7px 17px;border-radius:50px;margin-bottom:24px}
+.htdot{width:7px;height:7px;background:var(--rose);border-radius:50%;animation:bl 1.5s infinite;flex-shrink:0}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:900;line-height:1.02;letter-spacing:-3px;margin-bottom:18px;max-width:600px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.65);max-width:420px;line-height:1.75;margin-bottom:34px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-rose{background:linear-gradient(135deg,var(--rose),var(--purple));color:#fff;text-decoration:none;padding:15px 30px;border-radius:50px;font-size:.98rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 8px 30px rgba(244,63,94,.35)}
+.btn-rose:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(244,63,94,.45)}
+.hstats{display:flex;gap:44px;flex-wrap:wrap}
+.snum{font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.slbl{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:3px}
+/* FILTROS */
+.sec{padding:72px 24px}
+.ctr{max-width:1200px;margin:0 auto}
+.tc{text-align:center}
+.stag{display:inline-block;background:rgba(244,63,94,.12);color:var(--rose2);font-size:.72rem;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:11px;text-transform:uppercase;letter-spacing:.5px}
+.stitle{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:10px}
+.ssub{color:var(--gray);font-size:.93rem;line-height:1.7;max-width:460px;margin:0 auto 36px}
+.pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.pill{background:var(--card);border:1px solid var(--border);color:var(--gray);padding:9px 20px;border-radius:50px;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s}
+.pill:hover,.pill.on{background:rgba(244,63,94,.15);border-color:var(--rose);color:var(--rose2)}
+/* GRID PRODUCTOS */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.prod-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.prod-card:hover{transform:translateY(-5px);border-color:rgba(244,63,94,.3);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.prod-img{height:280px;position:relative;overflow:hidden;background:var(--surface)}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.prod-badge{position:absolute;top:12px;left:12px;font-size:.68rem;font-weight:800;padding:4px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.3px;z-index:2}
+.pb-nuevo{background:rgba(244,63,94,.9);color:#fff}
+.pb-oferta{background:rgba(239,68,68,.9);color:#fff}
+.pb-agotado{background:rgba(100,116,139,.7);color:#fff}
+.prod-actions{position:absolute;bottom:12px;right:12px;display:flex;flex-direction:column;gap:8px;opacity:0;transition:opacity .2s}
+.prod-card:hover .prod-actions{opacity:1}
+.pa-btn{background:rgba(8,8,8,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .15s}
+.pa-btn:hover{background:var(--rose);border-color:var(--rose)}
+.prod-body{padding:18px 18px 20px}
+.prod-cat{font-size:.68rem;font-weight:700;color:var(--rose2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.prod-name{font-size:.98rem;font-weight:800;margin-bottom:6px;letter-spacing:-.3px;line-height:1.3}
+.prod-desc{font-size:.78rem;color:var(--gray);line-height:1.55;margin-bottom:12px}
+.talles{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.talle{background:var(--surface);border:1px solid var(--border);color:var(--gray);font-size:.72rem;font-weight:700;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+.talle:hover,.talle.on{background:rgba(244,63,94,.2);border-color:var(--rose);color:var(--rose2)}
+.talle.out{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.prod-price{font-size:1.2rem;font-weight:900;letter-spacing:-.5px}
+.prod-old{font-size:.75rem;color:var(--gray2);text-decoration:line-through;margin-left:4px}
+.btn-add{background:linear-gradient(135deg,var(--rose),var(--purple));color:#fff;border:none;padding:10px 18px;border-radius:50px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap}
+.btn-add:hover{opacity:.9;transform:translateY(-1px)}
+.btn-add:disabled{opacity:.4;cursor:not-allowed;transform:none}
+/* CART BAR */
+.cbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--surface);border-top:1px solid var(--border);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+.cbar.on{transform:translateY(0)}
+.cbar-l{display:flex;align-items:center;gap:10px}
+.cbar-ico{font-size:1.3rem}
+.cbar-cnt{font-size:.95rem;font-weight:800}
+.cbar-lbl{font-size:.78rem;color:var(--gray)}
+.cbar-tot{font-size:1.1rem;font-weight:900;color:var(--rose2);letter-spacing:-.5px}
+.btn-vp{background:linear-gradient(135deg,var(--rose),var(--purple));color:#fff;border:none;padding:11px 22px;border-radius:50px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s}
+.btn-vp:hover{opacity:.9;transform:translateY(-1px)}
+/* CART MODAL */
+.cm{position:fixed;inset:0;z-index:500;display:none}
+.cov{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px)}
+.cdraw{position:absolute;bottom:0;left:0;right:0;background:var(--surface);border-radius:24px 24px 0 0;max-height:88vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.cm.on .cdraw{transform:translateY(0)}
+.chandle{width:44px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
+.chead{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.ctitle{font-size:1rem;font-weight:800}
+.cclose{background:var(--card);border:1px solid var(--border);color:var(--gray);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.cclose:hover{color:#fff;border-color:var(--gray2)}
+.citems{overflow-y:auto;padding:12px 24px;flex:1}
+.ci{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);gap:10px}
+.ci:last-child{border-bottom:none}
+.ci-l{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.ci-img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.ci-name{font-size:.85rem;font-weight:700;margin-bottom:2px}
+.ci-talle{font-size:.72rem;color:var(--gray)}
+.ci-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ci-sub{font-size:.9rem;font-weight:800;color:var(--rose2);min-width:66px;text-align:right}
+.ci-del{background:none;border:none;color:var(--gray2);cursor:pointer;font-size:1rem;padding:4px;transition:color .2s}
+.ci-del:hover{color:var(--rose)}
+.cfooter{padding:16px 24px 0;border-top:1px solid var(--border);flex-shrink:0}
+.ctrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.ct-lbl{font-size:.82rem;color:var(--gray)}
+.ct-amt{font-size:1.5rem;font-weight:900;letter-spacing:-1px}
+.cnote{font-size:.74rem;color:var(--gray);margin-bottom:14px;line-height:1.5}
+.btn-send{width:100%;background:linear-gradient(135deg,var(--green),#1aad54);color:#fff;border:none;padding:14px;border-radius:12px;font-size:.98rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:opacity .2s;margin-bottom:10px}
+.btn-send:hover{opacity:.92}
+.cempty{text-align:center;padding:36px 24px;color:var(--gray);font-size:.88rem;line-height:1.7}
+/* ENVÍOS */
+.sec-ship{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ship-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.ship-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;display:flex;align-items:flex-start;gap:14px}
+.ship-ico{font-size:1.8rem;flex-shrink:0}
+.ship-title{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.ship-desc{font-size:.78rem;color:var(--gray);line-height:1.55}
+footer{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:38px 24px}
+.f-logo{font-size:1.1rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.f-logo span{background:linear-gradient(90deg,var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+footer p{font-size:.81rem;color:var(--gray);line-height:1.7;margin-bottom:14px}
+.f-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.f-links a{color:var(--gray2);text-decoration:none;font-size:.81rem;transition:color .2s}
+.f-links a:hover{color:var(--rose2)}
+.f-copy{font-size:.72rem;color:var(--gray2);border-top:1px solid var(--border);padding-top:16px}
+.wa-f{position:fixed;bottom:28px;right:22px;z-index:290;background:var(--green);color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .2s,bottom .3s;animation:pw 2.5s infinite}
+.wa-f:hover{transform:scale(1.1)}
+@keyframes pw{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
+@media(max-width:700px){.hero{padding:72px 20px 50px;align-items:center;text-align:center;min-height:80vh}.hbtns{justify-content:center}.hstats{justify-content:center;gap:22px}.prod-grid{grid-template-columns:repeat(2,1fr)}.prod-img{height:200px}nav{padding:12px 16px}}
+@media(max-width:400px){.prod-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MoviltecDigital <span>Studio</span></div>
+  <div class="nav-r">
+    <button class="nav-cart" onclick="openCart()" aria-label="Carrito">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Carrito
+      <span class="nbadge" id="nb">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag"><div class="htdot"></div>Nueva colecci&oacute;n Primavera 2026</div>
+  <h1>Moda que<br><em>define.</em></h1>
+  <p>Indumentaria premium para mujeres y hombres. Dise&ntilde;os &uacute;nicos, talles del XS al XXL, env&iacute;os a todo el pa&iacute;s.</p>
+  <div class="hbtns">
+    <a href="#catalogo" class="btn-rose">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Ver cat&aacute;logo
+    </a>
+  </div>
+  <div class="hstats">
+    <div><div class="snum">200+</div><div class="slbl">Productos</div></div>
+    <div><div class="snum">48hs</div><div class="slbl">Entrega CABA/GBA</div></div>
+    <div><div class="snum">XS&mdash;XXL</div><div class="slbl">Todos los talles</div></div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section class="sec" id="catalogo">
+  <div class="ctr tc">
+    <div class="stag">Cat&aacute;logo</div>
+    <h2 class="stitle">Colecci&oacute;n Primavera 2026</h2>
+    <p class="ssub">Elegí tu talle, agr&eacute;galo al carrito y complet&aacute; el pedido por WhatsApp.</p>
+    <div class="pills" id="pills">
+      <button class="pill on" data-cat="all">Todo</button>
+      <button class="pill" data-cat="remeras">Remeras</button>
+      <button class="pill" data-cat="buzos">Buzos</button>
+      <button class="pill" data-cat="pantalones">Pantalones</button>
+      <button class="pill" data-cat="vestidos">Vestidos</button>
+    </div>
+    <div class="prod-grid" id="pg">
+
+      <div class="prod-card" data-cat="remeras">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&auto=format&q=75" alt="Remera"/><span class="prod-badge pb-nuevo">Nuevo</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Remeras</div>
+          <div class="prod-name">Remera oversize algod&oacute;n</div>
+          <div class="prod-desc">100% algod&oacute;n premium, corte oversize relaxed. Lavable a m&aacute;quina.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">XS</span><span class="talle" onclick="selTalle(this)">S</span><span class="talle on" onclick="selTalle(this)">M</span><span class="talle" onclick="selTalle(this)">L</span><span class="talle" onclick="selTalle(this)">XL</span></div>
+          <div class="prod-foot"><div class="prod-price">$8.500</div><button class="btn-add" onclick="addCart(this,'Remera oversize algod\u00f3n',8500)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="buzos">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=400&auto=format&q=75" alt="Buzo"/><span class="prod-badge pb-oferta">-20%</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Buzos</div>
+          <div class="prod-name">Buzo hoodie fleece</div>
+          <div class="prod-desc">Fleece interior extra suave, capucha doble capa, bolsillo canguro.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">S</span><span class="talle" onclick="selTalle(this)">M</span><span class="talle" onclick="selTalle(this)">L</span><span class="talle" onclick="selTalle(this)">XL</span><span class="talle out">XXL</span></div>
+          <div class="prod-foot"><div class="prod-price">$16.000 <span class="prod-old">$20.000</span></div><button class="btn-add" onclick="addCart(this,'Buzo hoodie fleece',16000)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="pantalones">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&auto=format&q=75" alt="Jean"/></div>
+        <div class="prod-body">
+          <div class="prod-cat">Pantalones</div>
+          <div class="prod-name">Jean skinny tiro alto</div>
+          <div class="prod-desc">Denim elastizado 2%, corte skinny, tiro alto. Color negro y azul disponible.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">36</span><span class="talle" onclick="selTalle(this)">38</span><span class="talle" onclick="selTalle(this)">40</span><span class="talle" onclick="selTalle(this)">42</span><span class="talle out">44</span></div>
+          <div class="prod-foot"><div class="prod-price">$22.500</div><button class="btn-add" onclick="addCart(this,'Jean skinny tiro alto',22500)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="vestidos">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&auto=format&q=75" alt="Vestido"/><span class="prod-badge pb-nuevo">Nuevo</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Vestidos</div>
+          <div class="prod-name">Vestido midi satinado</div>
+          <div class="prod-desc">Satén liviano, largo midi, escote en V. Ideal para ocasiones especiales o salidas.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">XS</span><span class="talle" onclick="selTalle(this)">S</span><span class="talle" onclick="selTalle(this)">M</span><span class="talle out">L</span></div>
+          <div class="prod-foot"><div class="prod-price">$28.000</div><button class="btn-add" onclick="addCart(this,'Vestido midi satinado',28000)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="remeras">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=400&auto=format&q=75" alt="Camiseta"/></div>
+        <div class="prod-body">
+          <div class="prod-cat">Remeras</div>
+          <div class="prod-name">Camiseta lino premium</div>
+          <div class="prod-desc">Lino 100%, corte recto, cuello redondo. Perfecta para climas c&aacute;lidos. Varios colores.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">S</span><span class="talle" onclick="selTalle(this)">M</span><span class="talle" onclick="selTalle(this)">L</span><span class="talle" onclick="selTalle(this)">XL</span></div>
+          <div class="prod-foot"><div class="prod-price">$11.000</div><button class="btn-add" onclick="addCart(this,'Camiseta lino premium',11000)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="pantalones">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&auto=format&q=75" alt="Pantalon"/><span class="prod-badge pb-oferta">-15%</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Pantalones</div>
+          <div class="prod-name">Pantalón cargo wide leg</div>
+          <div class="prod-desc">Corte wide leg amplio, tiro medio, bolsillos cargo laterales. Tela liviana resistente.</div>
+          <div class="talles"><span class="talle" onclick="selTalle(this)">S</span><span class="talle" onclick="selTalle(this)">M</span><span class="talle" onclick="selTalle(this)">L</span><span class="talle" onclick="selTalle(this)">XL</span></div>
+          <div class="prod-foot"><div class="prod-price">$18.700 <span class="prod-old">$22.000</span></div><button class="btn-add" onclick="addCart(this,'Pantal\u00f3n cargo wide leg',18700)">&#43; Agregar</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ENVÍOS -->
+<section class="sec sec-ship">
+  <div class="ctr tc">
+    <div class="stag">Log&iacute;stica</div>
+    <h2 class="stitle">Env&iacute;os a todo el pa&iacute;s</h2>
+    <p class="ssub" style="margin-bottom:36px">Comprá desde donde est&eacute;s. Env&iacute;os r&aacute;pidos y seguros con seguimiento online.</p>
+    <div class="ship-grid">
+      <div class="ship-card"><div class="ship-ico"><i class="fas fa-car"></i></div><div><div class="ship-title">CABA &amp; GBA</div><div class="ship-desc">Entrega en 24&ndash;48hs. Desde $1.500. Gratis en compras sobre $30.000.</div></div></div>
+      <div class="ship-card"><div class="ship-ico">&#128666;</div><div><div class="ship-title">Interior del pa&iacute;s</div><div class="ship-desc">OCA o Andreani. 3&ndash;7 d&iacute;as h&aacute;biles seg&uacute;n destino. Seguimiento online.</div></div></div>
+      <div class="ship-card"><div class="ship-ico">&#128683;</div><div><div class="ship-title">Retiro en local</div><div class="ship-desc">Retir&aacute; gratis en nuestro local de Palermo. Coordinamos por WhatsApp.</div></div></div>
+      <div class="ship-card"><div class="ship-ico">&#128260;</div><div><div class="ship-title">Cambios &amp; Devoluciones</div><div class="ship-desc">30 d&iacute;as para cambio de talle o devoluci&oacute;n. Sin preguntas, sin burocracia.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">MoviltecDigital <span>Studio</span></div>
+  <p>Moda &amp; Indumentaria premium &middot; Buenos Aires, Argentina<br>Env&iacute;os a todo el pa&iacute;s &middot; Cambios hasta 30 d&iacute;as</p>
+  <div class="f-links"><a href="#catalogo">Cat&aacute;logo</a><a href="https://wa.me/5492645304372" target="_blank">WhatsApp</a><a href="https://instagram.com/" target="_blank">Instagram</a></div>
+  <div class="f-copy">&copy; 2026 MoviltecDigital Studio &middot; Todos los derechos reservados</div>
+</footer>
+
+<!-- CART BAR -->
+<div class="cbar" id="cbar">
+  <div class="cbar-l"><div class="cbar-ico">&#128722;</div><div><div class="cbar-cnt" id="cbcnt">0 productos</div><div class="cbar-lbl">en tu carrito</div></div></div>
+  <div style="display:flex;align-items:center;gap:12px"><div class="cbar-tot" id="cbtot">$0</div><button class="btn-vp" onclick="openCart()">Ver carrito <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+</div>
+
+<!-- CART MODAL -->
+<div class="cm" id="cm">
+  <div class="cov" onclick="closeCart()"></div>
+  <div class="cdraw">
+    <div class="chandle"></div>
+    <div class="chead"><div class="ctitle">&#128722; Tu carrito</div><button class="cclose" onclick="closeCart()">&#10005;</button></div>
+    <div class="citems" id="citems"></div>
+    <div class="cfooter">
+      <div class="ctrow"><div class="ct-lbl">Total</div><div class="ct-amt" id="ctamt">$0</div></div>
+      <p class="cnote">&#128683; Retiro en Palermo gratis &middot; Env&iacute;o a domicilio desde $1.500 &middot; Cambios hasta 30 d&iacute;as</p>
+      <button class="btn-send" onclick="sendOrder()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Completar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<button onclick="document.getElementById('formulario-inteligente').style.display='block';document.body.style.overflow='hidden';" class="wa-f" id="waf" style="border:none;cursor:pointer;">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
+<script>
+var cart=[];
+function fmt(n){return'$'+n.toLocaleString('es-AR');}
+function selTalle(el){var p=el.closest('.talles');p.querySelectorAll('.talle').forEach(function(t){t.classList.remove('on');});if(!el.classList.contains('out'))el.classList.add('on');}
+function getTalle(btn){var talles=btn.closest('.prod-card').querySelectorAll('.talle.on');return talles.length?talles[0].textContent:null;}
+function addCart(btn,name,price){var talle=getTalle(btn);if(!talle){alert('Seleccion\u00e1 un talle primero');return;}cart.push({name:name,price:price,talle:talle,id:Date.now()});upBar();var orig=btn.textContent;btn.textContent='<i class="fas fa-check"></i> Agregado';btn.disabled=true;setTimeout(function(){btn.innerHTML='&#43; Agregar';btn.disabled=false;},1500);}
+function tot(){return cart.reduce(function(s,i){return s+i.price;},0);}
+function upBar(){var bar=document.getElementById('cbar');var nb=document.getElementById('nb');if(cart.length>0){bar.classList.add('on');nb.textContent=cart.length;nb.classList.add('on');document.getElementById('cbcnt').textContent=cart.length+' '+(cart.length===1?'producto':'productos');document.getElementById('cbtot').textContent=fmt(tot());document.getElementById('waf').style.bottom='86px';}else{bar.classList.remove('on');nb.classList.remove('on');document.getElementById('waf').style.bottom='28px';}}
+function buildItems(){if(!cart.length)return'<div class="cempty">Tu carrito est\u00e1 vac\u00edo.<br>Explor\u00e1 el cat\u00e1logo <i class="fas fa-camera"></i></div>';return cart.map(function(it){return'<div class="ci"><div class="ci-l"><div><div class="ci-name">'+it.name+'</div><div class="ci-talle">Talle: '+it.talle+'</div></div></div><div class="ci-r"><div class="ci-sub">'+fmt(it.price)+'</div><button class="ci-del" onclick="removeItem('+it.id+')">&#10005;</button></div></div>';}).join('');}
+function removeItem(id){cart=cart.filter(function(i){return i.id!==id;});rCart();upBar();}
+function rCart(){document.getElementById('citems').innerHTML=buildItems();document.getElementById('ctamt').textContent=fmt(tot());}
+function openCart(){rCart();var m=document.getElementById('cm');m.style.display='flex';setTimeout(function(){m.classList.add('on');},10);}
+function closeCart(){var m=document.getElementById('cm');m.classList.remove('on');setTimeout(function(){m.style.display='none';},350);}
+function sendOrder(){if(!cart.length)return;var msg='\uD83D\uDECD\uFE0F *Pedido \u2014 MoviltecDigital Studio*\n\n';cart.forEach(function(it){msg+='\u2022 '+it.name+' (talle '+it.talle+') \u2014 '+fmt(it.price)+'\n';});msg+='\n\uD83D\uDCB0 *Total: '+fmt(tot())+'*\n\n\u00BFMe pueden confirmar disponibilidad y datos de pago? \u00A1Gracias!';window.open('https://wa.me/5492645304372?text='+encodeURIComponent(msg),'_blank');}
+document.getElementById('pills').addEventListener('click',function(e){var b=e.target.closest('.pill');if(!b)return;document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('on');});b.classList.add('on');var cat=b.dataset.cat;document.querySelectorAll('.prod-card').forEach(function(c){c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});});
+</script>
+
+<!-- FORMULARIO INTELIGENTE INLINE -->
+<div id="formulario-inteligente" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.7);overflow-y:auto;">
+  <div style="max-width:500px;margin:30px auto;background:#1a1a2e;border-radius:16px;padding:30px 25px;position:relative;color:#fff;font-family:'Inter',sans-serif;">
+    <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;">&times;</button>
+
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="width:50px;height:50px;background:#F43F5E;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <h2 style="margin:0;font-size:1.3rem;color:#F43F5E;">Asistente Virtual</h2>
+      <p style="margin:5px 0 0;font-size:0.85rem;color:#aaa;">MoviltecDigital Studio - Indumentaria</p>
+    </div>
+
+    <div id="fi-paso1" class="fi-paso">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">
+        Hola! Bienvenido/a a <strong>MoviltecDigital Studio</strong>. Soy el asistente virtual. Selecciona que te interesa:
+      </p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:15px;">
+        <button class="fi-btn" onclick="fiPaso(2,'info')">Quiero ver el catalogo</button>
+        <button class="fi-btn" onclick="fiPaso(2,'turno')">Quiero atencion personalizada</button>
+        <button class="fi-btn" onclick="fiPaso(2,'planes')">Me interesa tener esto para mi negocio</button>
+        <button class="fi-btn" onclick="fiPaso(2,'otro')">Otra consulta</button>
+      </div>
+    </div>
+
+    <div id="fi-paso2" class="fi-paso" style="display:none;">
+      <p id="fi-msg2" style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;"></p>
+      <div id="fi-opciones2" style="display:flex;flex-direction:column;gap:10px;margin-top:15px;"></div>
+    </div>
+
+    <div id="fi-paso3" class="fi-paso" style="display:none;">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">
+        Perfecto! Dejanos tus datos y te contactamos en menos de 24hs:
+      </p>
+      <form id="fi-form" style="margin-top:15px;display:flex;flex-direction:column;gap:12px;">
+        <input type="text" id="fi-nombre" placeholder="Tu nombre" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="tel" id="fi-tel" placeholder="Tu WhatsApp (ej: 2645551234)" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="text" id="fi-negocio" placeholder="Nombre de tu negocio (opcional)" style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="hidden" id="fi-interes" value="">
+        <button type="submit" style="padding:14px;background:#F43F5E;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;">Enviar y recibir info</button>
+      </form>
+    </div>
+
+    <div id="fi-paso4" class="fi-paso" style="display:none;">
+      <div style="padding:20px;">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="width:60px;height:60px;background:linear-gradient(135deg,#F43F5E,#FB7185);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+            <svg width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <h3 style="color:#F43F5E;margin:0 0 6px;font-size:1.2rem;">Gracias por tu consulta</h3>
+          <p style="color:#999;font-size:0.8rem;margin:0;">Tu solicitud fue registrada correctamente</p>
+        </div>
+        <div id="fi-resumen" style="background:#2a2a4a;border-radius:10px;padding:16px;margin-bottom:18px;border-left:3px solid #F43F5E;"></div>
+        <div style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.3);border-radius:10px;padding:14px;text-align:center;">
+          <p style="margin:0;color:#FB7185;font-size:0.9rem;font-weight:600;">Nuestro equipo se comunicara contigo</p>
+          <p style="margin:6px 0 0;color:#aaa;font-size:0.82rem;">dentro de las proximas 24 horas habiles</p>
+        </div>
+        <a id="fi-wa-link" href="#" target="_blank" rel="noopener" style="display:block;margin-top:18px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.95rem;cursor:pointer;text-align:center;text-decoration:none;">Confirmar envio por WhatsApp</a>
+        <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';fiReset();" style="margin-top:10px;width:100%;padding:12px;background:transparent;color:#888;border:1px solid #444;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.fi-btn{padding:12px 16px;background:transparent;border:1.5px solid #F43F5E;color:#F43F5E;border-radius:8px;font-size:0.9rem;cursor:pointer;transition:all .2s;text-align:left;}
+.fi-btn:hover{background:#F43F5E;color:#fff;}
+</style>
+
+<script>
+var fiEleccion = '';
+function fiReset() {
+  document.querySelectorAll('.fi-paso').forEach(function(p){p.style.display='none';});
+  document.getElementById('fi-paso1').style.display = 'block';
+  document.getElementById('fi-form').reset();
+}
+function fiPaso(paso, tipo) {
+  document.querySelectorAll('.fi-paso').forEach(function(p){p.style.display='none';});
+  if (paso === 2) {
+    fiEleccion = tipo;
+    var msg = document.getElementById('fi-msg2');
+    var opts = document.getElementById('fi-opciones2');
+    opts.innerHTML = '';
+    if (tipo === 'info') {
+      msg.innerHTML = 'Nuestro catalogo incluye:<br><br>&#8226; Catalogo completo<br>&#8226; Colecciones nuevas<br>&#8226; Talles y stock<br>&#8226; Asesoramiento de imagen<br><br>Queres atencion personalizada o consultar stock?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(2,\'turno\')">Atencion personalizada</button><button class="fi-btn" onclick="fiPaso(3,\'consulta de talles y stock\')">Consultar stock/talles</button>';
+    } else if (tipo === 'turno') {
+      msg.innerHTML = 'Para brindarte atencion personalizada, dejanos tus datos y te contactamos para asesorarte con lo que necesites.';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'atencion personalizada\')">Dejar mis datos</button>';
+    } else if (tipo === 'planes') {
+      msg.innerHTML = 'Excelente! Moviltec Digital ofrece 3 planes para que tu negocio venda mas:<br><br><strong>1. Presencia Digital</strong> - Landing page + WhatsApp<br><strong>2. Ventas Automaticas</strong> - Bot + catalogo + pagos<br><strong>3. Negocio Digital Pro</strong> - Todo incluido + app<br><br>Cual te interesa?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'Plan Presencia Digital\')">Presencia Digital</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Ventas Automaticas\')">Ventas Automaticas</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Negocio Digital Pro\')">Negocio Digital Pro</button>';
+    } else {
+      msg.innerHTML = 'Contanos en que podemos ayudarte. Dejanos tus datos y te contactamos!';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'consulta general\')">Dejar mis datos</button>';
+    }
+    document.getElementById('fi-paso2').style.display = 'block';
+  } else if (paso === 3) {
+    document.getElementById('fi-interes').value = tipo;
+    document.getElementById('fi-paso3').style.display = 'block';
+  }
+}
+document.getElementById('fi-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var nombre = document.getElementById('fi-nombre').value;
+  var tel = document.getElementById('fi-tel').value;
+  var negocio = document.getElementById('fi-negocio').value;
+  var interes = document.getElementById('fi-interes').value;
+  var resumenHTML = '<p style="margin:0 0 8px;font-size:0.82rem;color:#888;text-transform:uppercase;letter-spacing:1px;">Datos enviados</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#F43F5E;">Nombre:</strong> ' + nombre + '</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#F43F5E;">WhatsApp:</strong> ' + tel + '</p>';
+  if (negocio) resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#F43F5E;">Negocio:</strong> ' + negocio + '</p>';
+  resumenHTML += '<p style="margin:0;color:#eee;font-size:0.9rem;"><strong style="color:#F43F5E;">Consulta:</strong> ' + interes + '</p>';
+  document.getElementById('fi-resumen').innerHTML = resumenHTML;
+  document.querySelectorAll('.fi-paso').forEach(function(p){p.style.display='none';});
+  document.getElementById('fi-paso4').style.display = 'block';
+  var lineas = ['*Nuevo contacto - Demo Indumentaria*','','*Nombre:* ' + nombre,'*WhatsApp:* ' + tel];
+  if (negocio) lineas.push('*Negocio:* ' + negocio);
+  lineas.push('*Interes:* ' + interes);
+  lineas.push('');
+  lineas.push('_Enviado desde moviltecdigital.com.ar_');
+  document.getElementById('fi-wa-link').href = 'https://wa.me/5492645304372?text=' + encodeURIComponent(lineas.join('\n'));
+});
+</script>
+</body>
+</html>
+

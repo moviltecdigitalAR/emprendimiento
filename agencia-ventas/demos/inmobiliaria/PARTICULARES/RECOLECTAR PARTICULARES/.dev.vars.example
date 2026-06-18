@@ -1,0 +1,23 @@
+# ══════════════════════════════════════════════
+#  Grupo Inversa — Variables de entorno locales
+#
+#  1. Copiar este archivo: cp .dev.vars.example .dev.vars
+#  2. Completar los valores reales en .dev.vars
+#  3. .dev.vars está en .gitignore → nunca se sube a GitHub
+#  4. Para producción, cargar estas variables en:
+#     Cloudflare Pages → tu proyecto → Settings → Environment variables
+# ══════════════════════════════════════════════
+
+# ─── Resend (email) ─────────────────────────
+# Obtener en: https://resend.com/api-keys
+# Plan gratuito: 3.000 emails/mes, 100/día
+RESEND_API_KEY=re_XXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# ─── Notificaciones ──────────────────────────
+# Dirección donde llegan las consultas del formulario
+NOTIFICATION_EMAIL=info@grupoinversa.com.ar
+
+# ─── Remitente ───────────────────────────────
+# Debe ser un dominio verificado en Resend (ver docs.resend.com/docs/send-with-custom-domain)
+# Para pruebas sin dominio propio, dejar vacío → usa onboarding@resend.dev
+FROM_EMAIL=notificaciones@grupoinversa.com.ar

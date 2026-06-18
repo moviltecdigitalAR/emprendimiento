@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>MoviltecDigital Studio - Bot de Ventas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wa-bg:#0b141a;
+  --wa-surface:#111b21;
+  --wa-card:#1f2c34;
+  --wa-border:#2a3942;
+  --wa-green:#00a884;
+  --wa-green-dark:#008f72;
+  --wa-text:#e9edef;
+  --wa-text-secondary:#8696a0;
+  --wa-bubble-out:#005c4b;
+  --wa-bubble-in:#1f2c34;
+  --wa-check:#53bdeb;
+  --wa-gold:#D4AF37;
+  --wa-gold-light:#F4D03F;
+}
+html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#000;overflow:hidden}
+
+/* MARCO DE CELULAR */
+.phone-frame{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);padding:10px}
+.phone{width:100%;max-width:375px;height:100%;max-height:812px;background:#000;border-radius:40px;overflow:hidden;position:relative;box-shadow:0 25px 80px rgba(0,0,0,.6),0 0 0 12px #1a1a1a,0 0 0 14px #333}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:30px;background:#000;border-radius:0 0 20px 20px;z-index:100}
+.phone-screen{width:100%;height:100%;background:var(--wa-bg);display:flex;flex-direction:column;position:relative}
+
+/* HEADER WHATSAPP */
+.wa-header{background:var(--wa-surface);padding:50px 16px 12px;border-bottom:1px solid var(--wa-border);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.wa-back{width:24px;height:24px;color:var(--wa-text);cursor:pointer}
+.wa-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--wa-gold),#8B6914);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.wa-info{flex:1;min-width:0}
+.wa-name{font-size:16px;font-weight:600;color:var(--wa-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-status{font-size:12px;color:var(--wa-green);display:flex;align-items:center;gap:4px}
+.wa-actions{display:flex;gap:16px;color:var(--wa-text-secondary)}
+.wa-icon{width:22px;height:22px;cursor:pointer}
+
+/* CHAT AREA */
+.chat-area{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:4px;background:linear-gradient(180deg,#0b141a 0%,#0f1a20 100%);scroll-behavior:smooth}
+.chat-area::-webkit-scrollbar{width:4px}
+.chat-area::-webkit-scrollbar-thumb{background:rgba(134,150,160,.3);border-radius:2px}
+
+/* FECHA */
+.chat-date{text-align:center;margin:8px 0}
+.chat-date span{background:rgba(134,150,160,.2);color:var(--wa-text-secondary);font-size:11px;padding:4px 12px;border-radius:12px}
+
+/* BURBUJAS */
+.bubble{max-width:85%;padding:8px 12px;border-radius:12px;font-size:14px;line-height:1.45;position:relative;animation:msgIn .25s ease;word-wrap:break-word}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.bubble-in{align-self:flex-start;background:var(--wa-bubble-in);color:var(--wa-text);border-top-left-radius:4px}
+.bubble-out{align-self:flex-end;background:var(--wa-bubble-out);color:#fff;border-top-right-radius:4px}
+
+.bubble-time{font-size:10px;color:var(--wa-text-secondary);float:right;margin:4px 0 0 8px;display:flex;align-items:center;gap:3px}
+.bubble-out .bubble-time{color:rgba(255,255,255,.7)}
+.bubble-check{color:var(--wa-check);font-size:12px}
+
+/* TYPING */
+.typing{align-self:flex-start;background:var(--wa-bubble-in);padding:12px 16px;border-radius:12px;border-top-left-radius:4px;display:flex;gap:4px;margin:4px 0}
+.typing-dot{width:7px;height:7px;background:var(--wa-text-secondary);border-radius:50%;animation:typing 1.4s infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+
+/* TARJETA DE CATALOGO EXTERNO */
+.catalog-card{width:100%;max-width:280px;background:var(--wa-card);border-radius:12px;overflow:hidden;border:1px solid var(--wa-border);margin:4px 0}
+.catalog-header{background:linear-gradient(135deg,var(--wa-gold),#8B6914);padding:16px;text-align:center}
+.catalog-logo{font-size:20px;font-weight:800;color:#fff;letter-spacing:2px}
+.catalog-sub{font-size:11px;color:rgba(255,255,255,.8);margin-top:2px}
+.catalog-body{padding:16px}
+.catalog-title{font-size:14px;font-weight:600;color:var(--wa-text);margin-bottom:8px}
+.catalog-features{font-size:12px;color:var(--wa-text-secondary);line-height:1.8;margin-bottom:16px}
+.catalog-features li{margin-bottom:4px;list-style:none}
+.catalog-features li::before{content:"✓";color:var(--wa-green);margin-right:8px;font-weight:700}
+.catalog-btn{width:100%;background:var(--wa-green);color:#fff;border:none;padding:12px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.catalog-btn:hover{background:var(--wa-green-dark)}
+
+/* RESUMEN DE CARRITO RECIBIDO */
+.cart-summary{background:var(--wa-card);border:1px solid var(--wa-border);border-radius:12px;padding:16px;margin:8px 0}
+.cart-title{font-size:14px;font-weight:600;color:var(--wa-text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--wa-border);font-size:13px}
+.cart-item:last-child{border-bottom:none}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:12px;margin-top:12px;border-top:2px solid var(--wa-green);font-size:15px;font-weight:700;color:var(--wa-green)}
+
+/* OPCIONES RÁPIDAS */
+.quick-replies{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:flex-end}
+.quick-btn{background:transparent;border:1px solid var(--wa-green);color:var(--wa-green);padding:6px 14px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s}
+.quick-btn:hover{background:rgba(0,168,132,.1)}
+
+/* INPUT AREA */
+.input-area{background:var(--wa-surface);padding:8px 12px 24px;display:flex;align-items:flex-end;gap:8px;border-top:1px solid var(--wa-border);flex-shrink:0}
+.input-btn{width:40px;height:40px;border-radius:50%;border:none;background:transparent;color:var(--wa-text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;flex-shrink:0}
+.input-btn:hover{color:var(--wa-text)}
+.input-box{flex:1;background:var(--wa-card);border-radius:20px;padding:10px 16px;display:flex;align-items:center;min-height:40px}
+.input-text{color:var(--wa-text-secondary);font-size:15px}
+.send-btn{width:40px;height:40px;border-radius:50%;background:var(--wa-green);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:transform .1s}
+.send-btn:active{transform:scale(.95)}
+
+/* BOTÓN PAGO MP */
+.mp-btn{width:100%;background:linear-gradient(135deg,#00a884,#0095d9);color:#fff;border:none;padding:14px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;transition:opacity .2s}
+.mp-btn:hover{opacity:.9}
+
+/* MODO DEMO - Controles */
+.demo-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:200}
+.demo-btn{background:rgba(0,0,0,.8);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 20px;border-radius:25px;font-size:13px;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s}
+.demo-btn:hover{background:rgba(0,0,0,.9);border-color:var(--wa-green)}
+.demo-btn.primary{background:var(--wa-green);border-color:var(--wa-green)}
+
+/* Indicador de modo */
+.mode-indicator{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;backdrop-filter:blur(10px);z-index:200}
+
+/* Responsive */
+@media(max-width:480px){.phone{border-radius:0;max-width:100%;max-height:100%;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="phone">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      
+      <!-- HEADER -->
+      <div class="wa-header">
+        <svg class="wa-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <div class="wa-avatar">SR</div>
+        <div class="wa-info">
+          <div class="wa-name">MoviltecDigital Studio</div>
+          <div class="wa-status">● En línea</div>
+        </div>
+        <div class="wa-actions">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div class="chat-area" id="chat">
+        <div class="chat-date"><span>hoy</span></div>
+      </div>
+
+      <!-- INPUT -->
+      <div class="input-area">
+        <button class="input-btn">😊</button>
+        <button class="input-btn">+</button>
+        <div class="input-box">
+          <span class="input-text">Mensaje</span>
+        </div>
+        <button class="send-btn" id="micBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Controles para demo -->
+<div class="mode-indicator" id="modeIndicator">Modo: Interactivo</div>
+<div class="demo-controls">
+  <button class="demo-btn" onclick="resetChat()">🔄 Reiniciar</button>
+  <button class="demo-btn primary" onclick="toggleAutoPlay()" id="autoBtn">▶️ Auto Play</button>
+</div>
+
+<script>
+// ============================================
+// BOT DE VENTAS - MoviltecDigital Studio
+// ============================================
+
+const chat = document.getElementById('chat');
+let currentState = 'welcome';
+let autoPlayInterval = null;
+let isAutoPlay = false;
+let cartData = null;
+
+// Verificar si hay carrito guardado al cargar
+function checkSavedCart() {
+  const saved = localStorage.getItem('showroom_cart');
+  const timestamp = localStorage.getItem('showroom_cart_time');
+  
+  if (saved && timestamp) {
+    const age = Date.now() - parseInt(timestamp);
+    // Solo recuperar si tiene menos de 30 minutos
+    if (age < 30 * 60 * 1000) {
+      return JSON.parse(saved);
+    } else {
+      localStorage.removeItem('showroom_cart');
+      localStorage.removeItem('showroom_cart_time');
+    }
+  }
+  return null;
+}
+
+// Utilidades
+function getTime() {
+  const now = new Date();
+  return now.toLocaleTimeString('es-AR', {hour:'2-digit', minute:'2-digit'});
+}
+
+function scrollToBottom() {
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function showTyping(duration = 1500) {
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.id = 'typing';
+  typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  chat.appendChild(typing);
+  scrollToBottom();
+  return new Promise(r => setTimeout(() => {
+    typing.remove();
+    r();
+  }, duration));
+}
+
+function addBubble(text, isOut = false, extraHTML = '') {
+  const bubble = document.createElement('div');
+  bubble.className = `bubble ${isOut ? 'bubble-out' : 'bubble-in'}`;
+  bubble.innerHTML = `${text} ${extraHTML}<span class="bubble-time">${getTime()} ${isOut ? '<span class="bubble-check">✓✓</span>' : ''}</span>`;
+  chat.appendChild(bubble);
+  scrollToBottom();
+  return bubble;
+}
+
+function addQuickReplies(options) {
+  const container = document.createElement('div');
+  container.className = 'quick-replies';
+  container.id = 'quick-replies';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => handleQuickReply(opt);
+    container.appendChild(btn);
+  });
+  chat.appendChild(container);
+  scrollToBottom();
+}
+
+function removeQuickReplies() {
+  const qr = document.getElementById('quick-replies');
+  if (qr) qr.remove();
+}
+
+// FLUJO DEL BOT
+async function botWelcome() {
+  // Verificar si volvió de la landing con carrito
+  cartData = checkSavedCart();
+  
+  await showTyping(1200);
+  addBubble('¡Hola! 👋 Bienvenido a <b>MoviltecDigital Studio</b>');
+  
+  await showTyping(1000);
+  addBubble('Soy tu asistente personal de compras. Te ayudo a encontrar las mejores prendas y responder todas tus dudas. ✨');
+  
+  if (cartData && cartData.items && cartData.items.length > 0) {
+    // El usuario volvió con un carrito guardado
+    await showTyping(800);
+    addBubble('¡Veo que tenés productos en tu carrito! 🛒');
+    showCartSummary();
+  } else {
+    await showTyping(800);
+    addBubble('¿Querés ver nuestro catálogo completo? Tenemos más de 50 prendas disponibles.');
+    
+    addQuickReplies([
+      {text: '🛍️ Ver catálogo', action: 'go_catalog'},
+      {text: '💰 Precios', action: 'prices'},
+      {text: '🚚 Envíos', action: 'shipping'},
+      {text: '📏 Guía de talles', action: 'sizes'}
+    ]);
+    currentState = 'menu';
+  }
+}
+
+// Mostrar tarjeta para ir al catálogo externo
+async function showCatalogCard() {
+  removeQuickReplies();
+  
+  await showTyping(1000);
+  addBubble('Te llevo a nuestro catálogo completo 👇');
+  
+  await showTyping(600);
+  const card = document.createElement('div');
+  card.className = 'bubble bubble-in';
+  card.style.maxWidth = '300px';
+  card.style.padding = '4px';
+  card.innerHTML = `
+    <div class="catalog-card" style="margin:0;border:none">
+      <div class="catalog-header">
+        <div class="catalog-logo">MoviltecDigital</div>
+        <div class="catalog-sub">Moda Premium</div>
+      </div>
+      <div class="catalog-body">
+        <div class="catalog-title">🛍️ Catálogo Completo</div>
+        <ul class="catalog-features">
+          <li>Más de 50 prendas exclusivas</li>
+          <li>Filtros por categoría y precio</li>
+          <li>Todos los talles disponibles</li>
+          <li>Carrito persistente</li>
+          <li>Pago seguro con MercadoPago</li>
+        </ul>
+        <a href="catalogo.html" class="catalog-btn" target="_blank">
+          Ver catálogo →
+        </a>
+      </div>
+    </div>
+    <span class="bubble-time">${getTime()}</span>
+  `;
+  chat.appendChild(card);
+  scrollToBottom();
+  
+  await showTyping(800);
+  addBubble('Elegí tus prendas, seleccioná los talles y agregá al carrito. Cuando termines, volvé al chat y te ayudo a finalizar la compra. 😉');
+  
+  addQuickReplies([
+    {text: '🔄 Ya elegí, volví al chat', action: 'check_cart'},
+    {text: '💰 Precios', action: 'prices'},
+    {text: '🚚 Envíos', action: 'shipping'}
+  ]);
+  currentState = 'catalog_sent';
+}
+
+// Mostrar resumen del carrito recibido
+async function showCartSummary() {
+  const total = cartData.items.reduce((s, i) => s + (i.price * i.quantity), 0);
+  
+  await showTyping(800);
+  const summary = document.createElement('div');
+  summary.className = 'bubble bubble-in';
+  summary.style.maxWidth = '300px';
+  summary.innerHTML = `
+    <div class="cart-summary" style="margin:0;border:none;padding:0">
+      <div class="cart-title">🛒 Tu selección</div>
+      ${cartData.items.map(item => `
+        <div class="cart-item">
+          <span>${item.quantity}x ${item.name} (${item.talle})</span>
+          <span style="color:var(--wa-green)">$${(item.price * item.quantity).toLocaleString()}</span>
+        </div>
+      `).join('')}
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span>$${total.toLocaleString()}</span>
+      </div>
+    </div>
+    <span class="bubble-time">${getTime()}</span>
+  `;
+  chat.appendChild(summary);
+  scrollToBottom();
+  
+  await showTyping(600);
+  addBubble('¿Confirmamos el pedido? Te preparo el link de pago seguro. 💳');
+  
+  addQuickReplies([
+    {text: '💳 Pagar ahora', action: 'checkout'},
+    {text: '🛍️ Seguir comprando', action: 'go_catalog'},
+    {text: '🗑️ Vaciar carrito', action: 'clear_cart'}
+  ]);
+  currentState = 'cart_summary';
+}
+
+// Checkout
+async function processCheckout() {
+  removeQuickReplies();
+  
+  if (!cartData || !cartData.items.length) {
+    addBubble('No tengo productos en el carrito. ¿Querés ver el catálogo?', true);
+    await showTyping(600);
+    showCatalogCard();
+    return;
+  }
+  
+  addBubble('Quiero pagar 💳', true);
+  
+  await showTyping(1000);
+  addBubble('¡Perfecto! Para completar tu pedido, necesito saber cómo querés recibirlo 📦');
+  
+  await showTyping(600);
+  addBubble('¿Envío a domicilio o retirás en nuestro local?');
+  
+  addQuickReplies([
+    {text: '🏠 Envío a domicilio', action: 'shipping_home'},
+    {text: '🏪 Retiro en local', action: 'shipping_pickup'}
+  ]);
+  currentState = 'checkout_shipping';
+}
+
+async function finalizeCheckout(shippingType) {
+  removeQuickReplies();
+  
+  const shippingCost = shippingType === 'shipping_home' ? 1500 : 0;
+  const subtotal = cartData.items.reduce((s, i) => s + (i.price * i.quantity), 0);
+  const total = subtotal + shippingCost;
+  
+  if (shippingType === 'shipping_home') {
+    addBubble('Envío a domicilio 🏠', true);
+    await showTyping(800);
+    addBubble('📍 Envíos a todo el país por OCA/Andreani<br>⏱️ Llega en 3-7 días hábiles<br>💰 Costo: $1.500');
+  } else {
+    addBubble('Retiro en local 🏪', true);
+    await showTyping(800);
+    addBubble('📍 Av. Santa Fe 2850, Palermo<br>⏱️ Listo en 2 horas<br>💰 ¡Sin costo!');
+  }
+  
+  await showTyping(1000);
+  
+  // Resumen final con botón de pago
+  const finalSummary = document.createElement('div');
+  finalSummary.className = 'bubble bubble-in';
+  finalSummary.style.maxWidth = '300px';
+  finalSummary.innerHTML = `
+    <div class="cart-summary" style="margin:0;border:none;padding:0">
+      <div class="cart-title">📋 Resumen final</div>
+      ${cartData.items.map(item => `
+        <div class="cart-item">
+          <span>${item.quantity}x ${item.name}</span>
+          <span>$${(item.price * item.quantity).toLocaleString()}</span>
+        </div>
+      `).join('')}
+      <div class="cart-item" style="border-top:1px solid var(--wa-border);margin-top:8px;padding-top:8px">
+        <span>Envío ${shippingType === 'shipping_home' ? 'a domicilio' : '(retiro gratis)'}</span>
+        <span>${shippingCost === 0 ? 'GRATIS' : '$' + shippingCost.toLocaleString()}</span>
+      </div>
+      <div class="cart-total">
+        <span>TOTAL A PAGAR</span>
+        <span>$${total.toLocaleString()}</span>
+      </div>
+      <button class="mp-btn" onclick="processPayment(${total})">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Pagar con MercadoPago
+      </button>
+    </div>
+    <span class="bubble-time">${getTime()}</span>
+  `;
+  chat.appendChild(finalSummary);
+  scrollToBottom();
+  
+  currentState = 'payment';
+}
+
+async function processPayment(total) {
+  await showTyping(800);
+  addBubble('Generando link de pago seguro... 🔒');
+  
+  await showTyping(1500);
+  
+  const paymentBubble = document.createElement('div');
+  paymentBubble.className = 'bubble bubble-in';
+  paymentBubble.style.maxWidth = '280px';
+  paymentBubble.innerHTML = `
+    <div style="text-align:center;padding:8px">
+      <div style="font-size:40px;margin-bottom:12px">💳</div>
+      <div style="font-weight:700;margin-bottom:8px">Link de pago listo</div>
+      <div style="font-size:24px;font-weight:800;color:var(--wa-green);margin-bottom:12px">$${total.toLocaleString()}</div>
+      <a href="https://www.mercadopago.com.ar" target="_blank" style="display:block;background:linear-gradient(135deg,#00a884,#0095d9);color:#fff;text-decoration:none;padding:14px;border-radius:12px;font-weight:700;margin-bottom:8px">
+        Pagar ahora →
+      </a>
+      <div style="font-size:11px;color:var(--wa-text-secondary)">Pagá con tarjeta, débito o efectivo</div>
+    </div>
+    <span class="bubble-time">${getTime()}</span>
+  `;
+  chat.appendChild(paymentBubble);
+  scrollToBottom();
+  
+  await showTyping(800);
+  addBubble('✅ Una vez realizado el pago, recibirás la confirmación por WhatsApp con los detalles de envío.<br><br>¡Gracias por elegir MoviltecDigital Studio! 🖤✨');
+  
+  // Limpiar carrito
+  localStorage.removeItem('showroom_cart');
+  localStorage.removeItem('showroom_cart_time');
+  
+  currentState = 'completed';
+}
+
+// RESPUESTAS A CONSULTAS
+async function answerPrices() {
+  removeQuickReplies();
+  addBubble('Quiero saber los precios 💰', true);
+  
+  await showTyping(1000);
+  addBubble('Estos son nuestros rangos de precios 👇');
+  
+  await showTyping(600);
+  addBubble('👕 <b>Remeras:</b> $8.500 - $11.000<br>🧥 <b>Buzos:</b> $16.000 - $22.000<br>👖 <b>Pantalones:</b> $18.000 - $28.000<br>👗 <b>Vestidos:</b> $25.000 - $35.000<br>🧥 <b>Camperas:</b> $32.000 - $45.000');
+  
+  await showTyping(800);
+  addBubble('💳 Aceptamos todos los medios de pago<br>🎉 10% OFF en transferencia bancaria<br>📦 Envío gratis en compras +$30.000');
+  
+  await showTyping(600);
+  addBubble('¿Querés ver el catálogo completo?');
+  
+  addQuickReplies([
+    {text: '🛍️ Ver catálogo', action: 'go_catalog'},
+    {text: '✅ Listo, gracias', action: 'end'}
+  ]);
+}
+
+async function answerShipping() {
+  removeQuickReplies();
+  addBubble('Información sobre envíos 🚚', true);
+  
+  await showTyping(1000);
+  addBubble('📍 <b>CABA & GBA:</b> 24-48hs - $1.500 (Gratis +$30.000)<br>📦 <b>Interior:</b> 3-7 días - $2.500<br>🏪 <b>Retiro en Palermo:</b> Gratis - Listo en 2hs');
+  
+  await showTyping(800);
+  addBubble('Trabajamos con OCA y Andreani. Te damos número de seguimiento apenas despachamos. 📲');
+  
+  addQuickReplies([
+    {text: '🛍️ Ver catálogo', action: 'go_catalog'},
+    {text: '📏 Guía de talles', action: 'sizes'}
+  ]);
+}
+
+async function answerSizes() {
+  removeQuickReplies();
+  addBubble('Consulta de talles 📏', true);
+  
+  await showTyping(1000);
+  addBubble('Nuestra tabla de talles es estándar argentina 👇');
+  
+  await showTyping(600);
+  addBubble('<b>Remeras/Buzos:</b><br>XS: 85-90cm pecho<br>S: 90-95cm<br>M: 95-100cm<br>L: 100-105cm<br>XL: 105-110cm<br>XXL: 110-115cm<br><br><b>Jeans:</b><br>36: Talle 36-38<br>38: Talle 38-40<br>40: Talle 40-42<br>42: Talle 42-44<br>44: Talle 44-46');
+  
+  await showTyping(800);
+  addBubble('💡 Si tenés dudas, comprá tranquilo: tenemos <b>cambio de talle gratis</b> durante 30 días.');
+  
+  addQuickReplies([
+    {text: '🛍️ Ver catálogo', action: 'go_catalog'},
+    {text: '🚚 Info de envíos', action: 'shipping'}
+  ]);
+}
+
+async function clearCart() {
+  localStorage.removeItem('showroom_cart');
+  localStorage.removeItem('showroom_cart_time');
+  cartData = null;
+  
+  removeQuickReplies();
+  addBubble('Vaciar carrito', true);
+  await showTyping(600);
+  addBubble('Carrito vacío 🗑️ ¿Querés empezar de nuevo?');
+  
+  addQuickReplies([
+    {text: '🛍️ Ver catálogo', action: 'go_catalog'}
+  ]);
+}
+
+async function endChat() {
+  removeQuickReplies();
+  addBubble('Gracias!', true);
+  await showTyping(800);
+  addBubble('¡Gracias a vos por contactarnos! 🖤✨<br><br>Si tenés más dudas, escribime cuando quieras. ¡Te espero!');
+}
+
+// HANDLERS
+function handleQuickReply(option) {
+  removeQuickReplies();
+  
+  switch(option.action) {
+    case 'go_catalog':
+      showCatalogCard();
+      break;
+    case 'check_cart':
+      cartData = checkSavedCart();
+      if (cartData && cartData.items.length > 0) {
+        showCartSummary();
+      } else {
+        addBubble('Todavía no tenés productos en el carrito. ¿Querés ver el catálogo?', true);
+        setTimeout(() => showCatalogCard(), 600);
+      }
+      break;
+    case 'prices':
+      answerPrices();
+      break;
+    case 'shipping':
+      answerShipping();
+      break;
+    case 'sizes':
+      answerSizes();
+      break;
+    case 'checkout':
+      processCheckout();
+      break;
+    case 'shipping_home':
+      finalizeCheckout('shipping_home');
+      break;
+    case 'shipping_pickup':
+      finalizeCheckout('shipping_pickup');
+      break;
+    case 'clear_cart':
+      clearCart();
+      break;
+    case 'end':
+      endChat();
+      break;
+  }
+}
+
+// MODO AUTO-PLAY (para videos)
+const autoPlaySteps = [
+  {delay: 1000, action: () => {}},
+  {delay: 2500, action: () => botWelcome()},
+  {delay: 4000, action: () => {
+    const btn = document.querySelector('[data-action="go_catalog"]');
+    if (btn) btn.click();
+  }},
+  {delay: 4000, action: () => {
+    // Simular que volvió del catálogo con items
+    localStorage.setItem('showroom_cart', JSON.stringify({
+      items: [
+        {name: 'Remera Oversize Premium', price: 8500, quantity: 1, talle: 'M'},
+        {name: 'Jean Skinny Tiro Alto', price: 22500, quantity: 1, talle: '38'}
+      ]
+    }));
+    localStorage.setItem('showroom_cart_time', Date.now().toString());
+    cartData = checkSavedCart();
+    if (cartData) showCartSummary();
+  }},
+  {delay: 4000, action: () => {
+    const btns = document.querySelectorAll('.quick-btn');
+    const checkoutBtn = Array.from(btns).find(b => b.textContent.includes('Pagar'));
+    if (checkoutBtn) checkoutBtn.click();
+  }},
+  {delay: 3000, action: () => {
+    const btns = document.querySelectorAll('.quick-btn');
+    const homeBtn = Array.from(btns).find(b => b.textContent.includes('domicilio'));
+    if (homeBtn) homeBtn.click();
+  }},
+  {delay: 4000, action: () => {
+    const mpBtn = document.querySelector('.mp-btn');
+    if (mpBtn) mpBtn.click();
+  }}
+];
+
+function toggleAutoPlay() {
+  const btn = document.getElementById('autoBtn');
+  const indicator = document.getElementById('modeIndicator');
+  
+  if (isAutoPlay) {
+    clearInterval(autoPlayInterval);
+    isAutoPlay = false;
+    btn.textContent = '▶️ Auto Play';
+    btn.classList.add('primary');
+    indicator.textContent = 'Modo: Interactivo';
+  } else {
+    resetChat();
+    isAutoPlay = true;
+    btn.textContent = '⏹️ Detener';
+    btn.classList.remove('primary');
+    indicator.textContent = 'Modo: Auto-Play (Demo)';
+    
+    let accumulatedDelay = 0;
+    autoPlaySteps.forEach((stepData) => {
+      accumulatedDelay += stepData.delay;
+      setTimeout(() => {
+        if (isAutoPlay) stepData.action();
+      }, accumulatedDelay);
+    });
+  }
+}
+
+function resetChat() {
+  if (autoPlayInterval) clearInterval(autoPlayInterval);
+  isAutoPlay = false;
+  document.getElementById('autoBtn').textContent = '▶️ Auto Play';
+  document.getElementById('autoBtn').classList.add('primary');
+  document.getElementById('modeIndicator').textContent = 'Modo: Interactivo';
+  
+  chat.innerHTML = '<div class="chat-date"><span>hoy</span></div>';
+  cartData = null;
+  currentState = 'welcome';
+  setTimeout(() => botWelcome(), 500);
+}
+
+// INICIALIZAR
+window.onload = () => {
+  setTimeout(() => botWelcome(), 800);
+};
+</script>
+
+</body>
+</html>

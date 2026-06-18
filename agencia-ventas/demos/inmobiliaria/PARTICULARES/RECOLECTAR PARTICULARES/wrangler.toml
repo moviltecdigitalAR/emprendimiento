@@ -1,0 +1,32 @@
+# ══════════════════════════════════════════════
+#   Grupo Inversa — Cloudflare Pages Config
+#   Documentación: https://developers.cloudflare.com/pages/
+# ══════════════════════════════════════════════
+
+name = "grupo-inversa"
+
+# Cloudflare Pages auto-detecta el directorio raíz
+pages_build_output_dir = "."
+
+# Fecha de compatibilidad del Workers runtime
+# Mantener actualizada: https://developers.cloudflare.com/workers/configuration/compatibility-dates/
+compatibility_date = "2025-01-01"
+
+# ─────────────────────────────────────────────
+# Variables de entorno NO secretas
+# Para secretos (API keys), usar el Dashboard de CF Pages
+# o el archivo .dev.vars (solo para desarrollo local, nunca subir a Git)
+# ─────────────────────────────────────────────
+[vars]
+ENVIRONMENT = "production"
+SITE_NAME    = "Grupo Inversa"
+
+# ─────────────────────────────────────────────
+# Desarrollo local
+# Crear .dev.vars con los valores reales antes de correr: wrangler pages dev .
+# Ejemplo de .dev.vars:
+#
+#   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+#   NOTIFICATION_EMAIL=info@grupoinversa.com.ar
+#   FROM_EMAIL=notificaciones@grupoinversa.com.ar
+# ─────────────────────────────────────────────

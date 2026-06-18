@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Viandas Valeria &mdash; Comida casera a domicilio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0A;--surface:#141414;--card:#1C1C1C;--border:#2A2A2A;--orange:#FF6B35;--orange2:#FFB347;--green:#25D366;--green2:#1aad54;--gray:#9CA3AF;--gray2:#6B7280;--r:16px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:200;background:rgba(10,10,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.nav-brand{font-size:1.1rem;font-weight:800}.nav-brand span{color:var(--orange)}
+.nav-cart{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);color:#fff;padding:9px 18px;border-radius:50px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;position:relative}
+.nav-cart:hover{border-color:var(--orange)}
+.nbadge{background:var(--orange);color:#fff;font-size:0.68rem;font-weight:800;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;top:-7px;right:-7px;opacity:0;transition:opacity 0.2s}
+.nbadge.on{opacity:1}
+.hero{min-height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 56px;background:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.7) 55%,#0A0A0A 100%),url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&auto=format&q=75') center/cover no-repeat;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 30%,rgba(255,107,53,0.07) 0%,transparent 60%)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.3);color:var(--orange2);font-size:0.78rem;font-weight:600;padding:7px 16px;border-radius:50px;margin-bottom:22px}
+.htag-dot{width:7px;height:7px;background:var(--orange);border-radius:50%;animation:blink 1.5s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.4rem,7vw,4.2rem);font-weight:900;line-height:1.06;letter-spacing:-2px;margin-bottom:18px;max-width:680px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--orange2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,0.65);max-width:460px;line-height:1.75;margin-bottom:34px}
+.hbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
+.btn-p{background:linear-gradient(135deg,var(--orange),#FF8C42);color:#fff;text-decoration:none;padding:15px 30px;border-radius:50px;font-size:0.98rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;box-shadow:0 8px 30px rgba(255,107,53,0.35)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,107,53,0.45)}
+.btn-w{background:var(--green);color:#fff;text-decoration:none;padding:15px 26px;border-radius:50px;font-size:0.95rem;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
+.btn-w:hover{background:var(--green2);transform:translateY(-2px)}
+.hstats{display:flex;justify-content:center;gap:44px;flex-wrap:wrap}
+.snum{font-size:1.9rem;font-weight:900;color:var(--orange);letter-spacing:-1px;text-align:center}
+.slbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px;font-weight:500;text-align:center}
+section.menu-s{padding:72px 24px}
+.ctr{max-width:1100px;margin:0 auto}
+.sh{text-align:center;margin-bottom:44px}
+.stag{display:inline-block;background:rgba(255,107,53,0.12);color:var(--orange);font-size:0.72rem;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:11px;text-transform:uppercase;letter-spacing:.5px}
+.stitle{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:10px}
+.ssub{color:var(--gray);font-size:0.93rem;line-height:1.7;max-width:460px;margin:0 auto}
+.pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:38px}
+.pill{background:var(--card);border:1px solid var(--border);color:var(--gray);padding:9px 20px;border-radius:50px;font-size:0.84rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.pill:hover,.pill.on{background:rgba(255,107,53,0.15);border-color:var(--orange);color:var(--orange)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s}
+.mc:hover{transform:translateY(-4px);border-color:rgba(255,107,53,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.5)}
+.mch{height:168px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mch .em{font-size:6rem;transform:rotate(-12deg);transition:transform 0.3s ease;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.4));z-index:1}
+.mc:hover .mch .em{transform:rotate(0deg) scale(1.1)}
+.mch .glow{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,0.08) 0%,transparent 70%)}
+.h1c{background:linear-gradient(135deg,#7C2D12,#EA580C,#FD8B3A)}
+.h2c{background:linear-gradient(135deg,#450A0A,#991B1B,#DC2626)}
+.h3c{background:linear-gradient(135deg,#451A03,#92400E,#D97706)}
+.h4c{background:linear-gradient(135deg,#052E16,#166534,#16A34A)}
+.h5c{background:linear-gradient(135deg,#2D1B00,#78350F,#B45309)}
+.h6c{background:linear-gradient(135deg,#1E1B4B,#3730A3,#6366F1)}
+.mbadge{position:absolute;top:12px;left:12px;font-size:0.7rem;font-weight:800;padding:4px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.3px;z-index:2}
+.bp{background:rgba(255,107,53,0.92);color:#fff}
+.bn{background:rgba(255,255,255,0.14);color:#fff;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.2)}
+.bo{background:rgba(239,68,68,0.92);color:#fff}
+.mcb{padding:20px}
+.mcat{font-size:0.7rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.mcb h3{font-size:1.03rem;font-weight:800;margin-bottom:6px;line-height:1.3;letter-spacing:-.3px}
+.mcb p{font-size:0.81rem;color:var(--gray);line-height:1.6;margin-bottom:16px}
+.mcf{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mprice{font-size:1.25rem;font-weight:900;letter-spacing:-.5px}
+.mprice span{font-size:0.7rem;color:var(--gray);font-weight:500;margin-left:2px}
+.qc{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:50px;overflow:hidden}
+.qb{background:none;border:none;color:#fff;width:36px;height:36px;font-size:1.1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s}
+.qb:hover:not(:disabled){background:rgba(255,107,53,0.2)}
+.qb:disabled{opacity:.3;cursor:not-allowed}
+.qb.plus{color:var(--orange)}
+.qn{font-size:0.88rem;font-weight:800;min-width:26px;text-align:center}
+section.steps-s{padding:72px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px 22px;text-align:center}
+.snum2{width:44px;height:44px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;margin:0 auto 12px;color:#fff}
+.sico{font-size:1.7rem;margin-bottom:10px}
+.scard h3{font-size:.94rem;font-weight:700;margin-bottom:6px}
+.scard p{font-size:.81rem;color:var(--gray);line-height:1.6}
+section.test-s{padding:72px 24px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px}
+.tstars{color:var(--orange);font-size:.88rem;letter-spacing:2px;margin-bottom:13px}
+.ttext{font-size:.86rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:16px;font-style:italic}
+.tau{display:flex;align-items:center;gap:12px}
+.tav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:800;flex-shrink:0}
+.tname{font-size:.86rem;font-weight:700}
+.tloc{font-size:.73rem;color:var(--gray);margin-top:2px}
+footer{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:38px 24px}
+.fbrand{font-size:1.15rem;font-weight:900;margin-bottom:8px;letter-spacing:-.5px}
+.fbrand span{color:var(--orange)}
+footer p{font-size:.81rem;color:var(--gray);line-height:1.7;margin-bottom:14px}
+.flinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.flinks a{color:var(--gray2);text-decoration:none;font-size:.81rem;transition:color .2s}
+.flinks a:hover{color:var(--orange)}
+.fcopy{font-size:.72rem;color:var(--gray2);border-top:1px solid var(--border);padding-top:16px}
+.cbar{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--surface);border-top:1px solid var(--border);padding:15px 22px;display:flex;align-items:center;justify-content:space-between;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);box-shadow:0 -8px 40px rgba(0,0,0,.5)}
+.cbar.on{transform:translateY(0)}
+.cbar-l{display:flex;align-items:center;gap:12px}
+.cbar-ico{font-size:1.35rem}
+.cbar-cnt{font-size:1rem;font-weight:800}
+.cbar-lbl{font-size:.8rem;color:var(--gray)}
+.cbar-tot{font-size:1.15rem;font-weight:900;color:var(--orange);letter-spacing:-.5px}
+.btn-vp{background:linear-gradient(135deg,var(--orange),#FF8C42);color:#fff;border:none;padding:12px 24px;border-radius:50px;font-size:.92rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:7px;transition:all .2s}
+.btn-vp:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,107,53,.4)}
+.cm{position:fixed;inset:0;z-index:500;display:none}
+.cov{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+.cdraw{position:absolute;bottom:0;left:0;right:0;background:var(--surface);border-radius:24px 24px 0 0;max-height:90vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.cm.on .cdraw{transform:translateY(0)}
+.chandle{width:44px;height:4px;background:var(--border);border-radius:2px;margin:13px auto 0}
+.chead{display:flex;align-items:center;justify-content:space-between;padding:18px 24px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.ctitle{font-size:1.05rem;font-weight:800}
+.cclose{background:var(--card);border:1px solid var(--border);color:var(--gray);width:33px;height:33px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cclose:hover{color:#fff;border-color:var(--gray2)}
+.citems{overflow-y:auto;padding:12px 24px;flex:1}
+.ci{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);gap:10px}
+.ci:last-child{border-bottom:none}
+.ci-l{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.ci-em{font-size:1.9rem;flex-shrink:0}
+.ci-name{font-size:.88rem;font-weight:700;margin-bottom:2px}
+.ci-unit{font-size:.73rem;color:var(--gray)}
+.ci-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ci-qc{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:50px;overflow:hidden}
+.ci-qc .qb{width:30px;height:30px;font-size:.88rem}
+.ci-qc .qn{font-size:.82rem;min-width:22px}
+.ci-sub{font-size:.92rem;font-weight:800;color:var(--orange);min-width:68px;text-align:right}
+.cfooter{padding:18px 24px 0;border-top:1px solid var(--border);flex-shrink:0}
+.ctrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.ct-lbl{font-size:.84rem;color:var(--gray)}
+.ct-amt{font-size:1.55rem;font-weight:900;letter-spacing:-1px}
+.cnote{font-size:.76rem;color:var(--gray);margin-bottom:16px;line-height:1.5}
+.btn-send{width:100%;background:linear-gradient(135deg,var(--green),#1aad54);color:#fff;border:none;padding:15px;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:opacity .2s,transform .2s;letter-spacing:-.2px}
+.btn-send:hover{opacity:.92;transform:translateY(-1px)}
+.cempty{text-align:center;padding:36px 24px;color:var(--gray);font-size:.88rem;line-height:1.7}
+.wa-f{position:fixed;bottom:28px;right:22px;z-index:290;background:var(--green);color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;transition:transform .2s,bottom .3s;animation:pg 2.5s infinite}
+.wa-f:hover{transform:scale(1.1)}
+@keyframes pg{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
+@media(max-width:600px){.hero{min-height:80vh;padding:70px 18px 50px}.hstats{gap:22px}.mgrid{grid-template-columns:1fr}nav{padding:12px 16px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Viandas <span>Valeria</span></div>
+  <button class="nav-cart" onclick="openCart()" aria-label="Ver carrito">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Mi pedido
+    <span class="nbadge" id="nb">0</span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag"><div class="htag-dot"></div>Pedidos abiertos &mdash; cierre martes 20hs</div>
+  <h1>Comida casera que<br><em>sabe a hogar.</em></h1>
+  <p>Viandas frescas y abundantes listas para calentar. Entregamos en toda la Zona Norte del GBA.</p>
+  <div class="hbtns">
+    <a href="#menu" class="btn-p">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+      Ver el men&uacute;
+    </a>
+    <a href="https://wa.me/5492645304372?text=Hola%20Valeria!%20Quiero%20consultar%20por%20las%20viandas" class="btn-w" target="_blank">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Consultar
+    </a>
+  </div>
+  <div class="hstats">
+    <div><div class="snum">+200</div><div class="slbl">Clientes felices</div></div>
+    <div><div class="snum">3 a&ntilde;os</div><div class="slbl">Cocinando con amor</div></div>
+    <div><div class="snum">4.9<i class="fas fa-star"></i></div><div class="slbl">Calificaci&oacute;n</div></div>
+  </div>
+</section>
+
+<section class="menu-s" id="menu">
+  <div class="ctr">
+    <div class="sh">
+      <div class="stag">Men&uacute; semanal</div>
+      <h2 class="stitle">&#191;Qu&eacute; cocinamos esta semana?</h2>
+      <p class="ssub">Agreg&aacute; porciones con los botones + y &minus;. Tu total se actualiza en tiempo real.</p>
+    </div>
+    <div class="pills" id="pills">
+      <button class="pill on" data-cat="all">Todos</button>
+      <button class="pill" data-cat="carnes">Carnes</button>
+      <button class="pill" data-cat="pastas">Pastas</button>
+      <button class="pill" data-cat="veggie">Vegetariano</button>
+      <button class="pill" data-cat="pack">Pack semanal</button>
+    </div>
+    <div class="mgrid" id="mg">
+
+      <div class="mc" data-cat="carnes">
+        <div class="mch h1c"><div class="glow"></div><div class="em">&#127831;</div><span class="mbadge bp">Popular</span></div>
+        <div class="mcb">
+          <div class="mcat">Carnes &middot; Aves</div>
+          <h3>Pollo al horno con papas</h3>
+          <p>Pollo marinado en hierbas, papas doradas y ensalada verde de acompa&ntilde;amiento.</p>
+          <div class="mcf">
+            <div class="mprice">$2.800<span>/porci&oacute;n</span></div>
+            <div class="qc"><button class="qb" id="m1" onclick="cq(1,-1)" disabled>&#8722;</button><span class="qn" id="q1">0</span><button class="qb plus" onclick="cq(1,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc" data-cat="carnes">
+        <div class="mch h2c"><div class="glow"></div><div class="em">&#129385;</div><span class="mbadge bn">Esta semana</span></div>
+        <div class="mcb">
+          <div class="mcat">Carnes &middot; Vacuna</div>
+          <h3>Milanesas napolitanas</h3>
+          <p>Milanesa de ternera con salsa napolitana casera, queso gratinado y pur&eacute; casero.</p>
+          <div class="mcf">
+            <div class="mprice">$3.200<span>/porci&oacute;n</span></div>
+            <div class="qc"><button class="qb" id="m2" onclick="cq(2,-1)" disabled>&#8722;</button><span class="qn" id="q2">0</span><button class="qb plus" onclick="cq(2,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc" data-cat="pastas">
+        <div class="mch h3c"><div class="glow"></div><div class="em">&#127837;</div><span class="mbadge bp">Favorito</span></div>
+        <div class="mcb">
+          <div class="mcat">Pastas</div>
+          <h3>Fideos con tuco y alb&oacute;ndigas</h3>
+          <p>Pasta con tuco casero en olla y alb&oacute;ndigas de carne artesanales bien condimentadas.</p>
+          <div class="mcf">
+            <div class="mprice">$2.500<span>/porci&oacute;n</span></div>
+            <div class="qc"><button class="qb" id="m3" onclick="cq(3,-1)" disabled>&#8722;</button><span class="qn" id="q3">0</span><button class="qb plus" onclick="cq(3,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc" data-cat="veggie">
+        <div class="mch h4c"><div class="glow"></div><div class="em">&#129367;</div><span class="mbadge bn">Saludable</span></div>
+        <div class="mcb">
+          <div class="mcat">Vegetariano</div>
+          <h3>Tarta de verdura y queso</h3>
+          <p>Masa crocante, espinaca, zapallitos, huevo y queso cremoso. Reci&eacute;n horneada.</p>
+          <div class="mcf">
+            <div class="mprice">$2.200<span>/porci&oacute;n</span></div>
+            <div class="qc"><button class="qb" id="m4" onclick="cq(4,-1)" disabled>&#8722;</button><span class="qn" id="q4">0</span><button class="qb plus" onclick="cq(4,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc" data-cat="veggie">
+        <div class="mch h5c"><div class="glow"></div><div class="em">&#129365;</div><span class="mbadge bn">Especial</span></div>
+        <div class="mcb">
+          <div class="mcat">Guiso &middot; Legumbres</div>
+          <h3>Guiso de lentejas</h3>
+          <p>Lentejas con chorizo, papas, zanahoria y especias. El guiso que todos piden en invierno.</p>
+          <div class="mcf">
+            <div class="mprice">$2.400<span>/porci&oacute;n</span></div>
+            <div class="qc"><button class="qb" id="m5" onclick="cq(5,-1)" disabled>&#8722;</button><span class="qn" id="q5">0</span><button class="qb plus" onclick="cq(5,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc" data-cat="pack">
+        <div class="mch h6c"><div class="glow"></div><div class="em">&#128230;</div><span class="mbadge bo">Ahorra 15%</span></div>
+        <div class="mcb">
+          <div class="mcat">Pack semanal</div>
+          <h3>Pack 5 viandas &mdash; semana completa</h3>
+          <p>Lunes a viernes. Eleg&iacute;s los platos o te sorprendemos. La opci&oacute;n m&aacute;s conveniente.</p>
+          <div class="mcf">
+            <div class="mprice">$12.000<span>/semana</span></div>
+            <div class="qc"><button class="qb" id="m6" onclick="cq(6,-1)" disabled>&#8722;</button><span class="qn" id="q6">0</span><button class="qb plus" onclick="cq(6,1)">&#43;</button></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="steps-s">
+  <div class="ctr">
+    <div class="sh"><div class="stag">C&oacute;mo funciona</div><h2 class="stitle">Simple como tiene que ser</h2></div>
+    <div class="sgrid">
+      <div class="scard"><div class="snum2">1</div><div class="sico">&#128203;</div><h3>Eleg&iacute; tu men&uacute;</h3><p>Sum&aacute; porciones con + y &minus;. Ves el total en tiempo real abajo.</p></div>
+      <div class="scard"><div class="snum2">2</div><div class="sico"><i class="fas fa-comments"></i></div><h3>Rev&iacute;s tu pedido</h3><p>Tap en "Ver pedido" y confirm&aacute; todo antes de enviar.</p></div>
+      <div class="scard"><div class="snum2">3</div><div class="sico">&#128179;</div><h3>Pag&aacute; f&aacute;cil</h3><p>Transferencia o MercadoPago. Confirmamos en el momento.</p></div>
+      <div class="scard"><div class="snum2">4</div><div class="sico">&#128664;</div><h3>Recib&iacute;s en casa</h3><p>Env&iacute;os mi&eacute;rcoles y viernes en toda Zona Norte GBA.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="test-s">
+  <div class="ctr">
+    <div class="sh"><div class="stag">Opiniones</div><h2 class="stitle">Lo que dicen nuestros clientes</h2></div>
+    <div class="tgrid">
+      <div class="tc"><div class="tstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="ttext">"Llegaba del trabajo y la vianda ya estaba lista. La comida es incre&iacute;ble, como la de mi mam&aacute;. Hace 8 meses que pido todas las semanas."</p><div class="tau"><div class="tav">M</div><div><div class="tname">Marcela R.</div><div class="tloc"><i class="fas fa-map-marker-alt"></i> San Isidro, GBA Norte</div></div></div></div>
+      <div class="tc"><div class="tstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="ttext">"El pack semanal para toda la familia fue la mejor decisi&oacute;n. Los chicos comen sano y a nosotros nos sobra tiempo. Recomendad&iacute;simo."</p><div class="tau"><div class="tav">G</div><div><div class="tname">Gustavo y Ana L.</div><div class="tloc"><i class="fas fa-map-marker-alt"></i> Vicente L&oacute;pez, GBA Norte</div></div></div></div>
+      <div class="tc"><div class="tstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="ttext">"Para el almuerzo del trabajo es ideal. 5 d&iacute;as y me olvido de cocinar. El guiso de lentejas es adictivo, nunca falta en mi pedido."</p><div class="tau"><div class="tav">L</div><div><div class="tname">Luciana P.</div><div class="tloc"><i class="fas fa-map-marker-alt"></i> Palermo, CABA</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">Viandas <span>Valeria</span></div>
+  <p>Comida casera con amor &middot; Zona Norte GBA<br>Pedidos hasta el martes 20hs &middot; Env&iacute;os mi&eacute;rcoles y viernes</p>
+  <div class="flinks"><a href="#menu">Ver men&uacute;</a><a href="https://wa.me/5492645304372" target="_blank">WhatsApp</a><a href="https://instagram.com/" target="_blank">Instagram</a></div>
+  <div class="fcopy">&#169; 2026 Viandas Valeria &middot; Todos los derechos reservados</div>
+</footer>
+
+<!-- CART BAR -->
+<div class="cbar" id="cbar">
+  <div class="cbar-l"><div class="cbar-ico">&#128722;</div><div><div class="cbar-cnt" id="cbcnt">0 art&iacute;culos</div><div class="cbar-lbl">en tu pedido</div></div></div>
+  <div style="display:flex;align-items:center;gap:14px"><div class="cbar-tot" id="cbtot">$0</div><button class="btn-vp" onclick="openCart()">Ver pedido <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+</div>
+
+<!-- CART MODAL -->
+<div class="cm" id="cm">
+  <div class="cov" onclick="closeCart()"></div>
+  <div class="cdraw">
+    <div class="chandle"></div>
+    <div class="chead"><div class="ctitle">&#128722; Tu pedido</div><button class="cclose" onclick="closeCart()">&#10005;</button></div>
+    <div class="citems" id="citems"></div>
+    <div class="cfooter">
+      <div class="ctrow"><div class="ct-lbl">Total del pedido</div><div class="ct-amt" id="ctamt">$0</div></div>
+      <p class="cnote">&#128204; Cierre martes 20hs &middot; Env&iacute;o mi&eacute;rcoles y viernes &middot; Pago por transferencia o MercadoPago</p>
+      <button class="btn-send" onclick="sendOrder()">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<button onclick="document.getElementById('formulario-inteligente').style.display='block';document.body.style.overflow='hidden';" class="wa-f" id="waf" style="border:none;cursor:pointer;">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.336-1.506A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.502-5.39-1.38l-.386-.23-3.985.947.982-3.884-.253-.4A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
+<script>
+var items={1:{n:"Pollo al horno con papas",p:2800,e:"&#127831;"},2:{n:"Milanesas napolitanas",p:3200,e:"&#129385;"},3:{n:"Fideos con tuco y alb\u00f3ndigas",p:2500,e:"&#127837;"},4:{n:"Tarta de verdura y queso",p:2200,e:"&#129367;"},5:{n:"Guiso de lentejas",p:2400,e:"&#129365;"},6:{n:"Pack 5 viandas \u2014 semana completa",p:12000,e:"&#128230;"}};
+var cart={};
+function cq(id,d){if(!cart[id])cart[id]=0;cart[id]=Math.max(0,cart[id]+d);if(cart[id]===0)delete cart[id];document.getElementById('q'+id).textContent=cart[id]||0;var mb=document.getElementById('m'+id);if(mb)mb.disabled=!(cart[id]>0);upBar();}
+function tot(){var ids=Object.keys(cart);return{qty:ids.reduce(function(s,i){return s+cart[i]},0),price:ids.reduce(function(s,i){return s+items[i].p*cart[i]},0)};}
+function fmt(n){return'$'+n.toLocaleString('es-AR');}
+function upBar(){var t=tot();var bar=document.getElementById('cbar');var nb=document.getElementById('nb');if(t.qty>0){bar.classList.add('on');nb.textContent=t.qty;nb.classList.add('on');document.getElementById('cbcnt').textContent=t.qty+' '+(t.qty===1?'art\u00edculo':'art\u00edculos');document.getElementById('cbtot').textContent=fmt(t.price);document.getElementById('waf').style.bottom='90px';}else{bar.classList.remove('on');nb.classList.remove('on');document.getElementById('waf').style.bottom='28px';}}
+function buildItems(){var ids=Object.keys(cart);if(!ids.length)return '<div class="cempty">Tu carrito est\u00e1 vac\u00edo.<br>Agrega alg\u00fan plato del men\u00fa &#128521;</div>';return ids.map(function(id){var it=items[id];var sub=it.p*cart[id];return '<div class="ci"><div class="ci-l"><div class="ci-em">'+it.e+'</div><div><div class="ci-name">'+it.n+'</div><div class="ci-unit">'+fmt(it.p)+' por porci\u00f3n</div></div></div><div class="ci-r"><div class="ci-qc"><button class="qb" onclick="cq('+id+',-1);rCart()" style="'+(cart[id]<=1?'opacity:.35':'')+'">&#8722;</button><span class="qn">'+cart[id]+'</span><button class="qb plus" onclick="cq('+id+',1);rCart()">&#43;</button></div><div class="ci-sub">'+fmt(sub)+'</div></div></div>';}).join('');}
+function rCart(){document.getElementById('citems').innerHTML=buildItems();document.getElementById('ctamt').textContent=fmt(tot().price);}
+function openCart(){rCart();var m=document.getElementById('cm');m.style.display='flex';setTimeout(function(){m.classList.add('on');},10);}
+function closeCart(){var m=document.getElementById('cm');m.classList.remove('on');setTimeout(function(){m.style.display='none';},350);}
+function sendOrder(){var ids=Object.keys(cart);if(!ids.length)return;var t=tot();var msg='Hola Valeria! \uD83C\uDF7D\uFE0F Quiero hacer un pedido:\n\n';ids.forEach(function(id){var it=items[id];msg+=it.n+' x'+cart[id]+' = '+fmt(it.p*cart[id])+'\n';});msg+='\n\uD83D\uDCB0 Total: '+fmt(t.price)+'\n\nQuedo esperando confirmaci\u00f3n y datos de pago. \u00a1Gracias!';window.open('https://wa.me/5492645304372?text='+encodeURIComponent(msg),'_blank');}
+document.getElementById('pills').addEventListener('click',function(e){var b=e.target.closest('.pill');if(!b)return;document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('on');});b.classList.add('on');var cat=b.dataset.cat;document.querySelectorAll('.mc').forEach(function(c){c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});});
+</script>
+
+<!-- FORMULARIO INTELIGENTE INLINE -->
+<div id="formulario-inteligente" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.7);overflow-y:auto;">
+  <div style="max-width:500px;margin:30px auto;background:#1a1a2e;border-radius:16px;padding:30px 25px;position:relative;color:#fff;font-family:'Segoe UI',sans-serif;">
+    <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';" style="position:absolute;top:12px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;">&times;</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="width:50px;height:50px;background:#FF6B35;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+      <h2 style="margin:0;font-size:1.3rem;color:#FF6B35;">Asistente Virtual</h2>
+      <p style="margin:5px 0 0;font-size:0.85rem;color:#aaa;">MoviltecDigital Studio - Gastronomia</p>
+    </div>
+    <div id="fi-paso1" class="fi-paso">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">Hola! Bienvenido/a. Soy el asistente virtual. Selecciona que te interesa:</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:15px;">
+        <button class="fi-btn" onclick="fiPaso(2,'info')">Ver menu y opciones</button>
+        <button class="fi-btn" onclick="fiPaso(2,'turno')">Quiero hacer un pedido</button>
+        <button class="fi-btn" onclick="fiPaso(2,'planes')">Me interesa tener esto para mi negocio</button>
+        <button class="fi-btn" onclick="fiPaso(2,'otro')">Otra consulta</button>
+      </div>
+    </div>
+    <div id="fi-paso2" class="fi-paso" style="display:none;">
+      <p id="fi-msg2" style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;"></p>
+      <div id="fi-opciones2" style="display:flex;flex-direction:column;gap:10px;margin-top:15px;"></div>
+    </div>
+    <div id="fi-paso3" class="fi-paso" style="display:none;">
+      <p style="background:#2a2a4a;padding:14px;border-radius:10px;font-size:0.95rem;line-height:1.5;">Perfecto! Dejanos tus datos y te contactamos en menos de 24hs:</p>
+      <form id="fi-form" style="margin-top:15px;display:flex;flex-direction:column;gap:12px;">
+        <input type="text" id="fi-nombre" placeholder="Tu nombre" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="tel" id="fi-tel" placeholder="Tu WhatsApp (ej: 2645551234)" required style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="text" id="fi-negocio" placeholder="Nombre de tu negocio (opcional)" style="padding:12px;border-radius:8px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:0.95rem;">
+        <input type="hidden" id="fi-interes" value="">
+        <button type="submit" style="padding:14px;background:#FF6B35;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;">Enviar y recibir info</button>
+      </form>
+    </div>
+    <div id="fi-paso4" class="fi-paso" style="display:none;">
+      <div style="padding:20px;">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="width:60px;height:60px;background:linear-gradient(135deg,#FF6B35,#FF8C5A);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+            <svg width="30" height="30" fill="#fff" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <h3 style="color:#FF6B35;margin:0 0 6px;font-size:1.2rem;">Gracias por tu consulta</h3>
+          <p style="color:#999;font-size:0.8rem;margin:0;">Tu solicitud fue registrada correctamente</p>
+        </div>
+        <div id="fi-resumen" style="background:#2a2a4a;border-radius:10px;padding:16px;margin-bottom:18px;border-left:3px solid #FF6B35;"></div>
+        <div style="background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);border-radius:10px;padding:14px;text-align:center;">
+          <p style="margin:0;color:#FF8C5A;font-size:0.9rem;font-weight:600;">Nuestro equipo se comunicara contigo</p>
+          <p style="margin:6px 0 0;color:#aaa;font-size:0.82rem;">dentro de las proximas 24 horas habiles</p>
+        </div>
+        <a id="fi-wa-link" href="#" target="_blank" rel="noopener" style="display:block;margin-top:18px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.95rem;cursor:pointer;text-align:center;text-decoration:none;">Confirmar envio por WhatsApp</a>
+        <button onclick="document.getElementById('formulario-inteligente').style.display='none';document.body.style.overflow='auto';fiReset();" style="margin-top:10px;width:100%;padding:12px;background:transparent;color:#888;border:1px solid #444;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.fi-btn{padding:12px 16px;background:transparent;border:1.5px solid #FF6B35;color:#FF6B35;border-radius:8px;font-size:0.9rem;cursor:pointer;transition:all .2s;text-align:left;}
+.fi-btn:hover{background:#FF6B35;color:#fff;}
+</style>
+<script>
+let fiEleccion = '';
+function fiReset() {
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  document.getElementById('fi-paso1').style.display = 'block';
+  document.getElementById('fi-form').reset();
+}
+function fiPaso(paso, tipo) {
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  if (paso === 2) {
+    fiEleccion = tipo;
+    const msg = document.getElementById('fi-msg2');
+    const opts = document.getElementById('fi-opciones2');
+    opts.innerHTML = '';
+    if (tipo === 'info') {
+      msg.innerHTML = 'Nuestras opciones gastronomicas:<br><br>&#8226; Menu del dia<br>&#8226; Viandas semanales<br>&#8226; Catering para eventos<br>&#8226; Pedidos especiales<br>&#8226; Postres y tortas<br><br>Queres hacer un pedido o mas info?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(2,\'turno\')">Hacer un pedido</button><button class="fi-btn" onclick="fiPaso(3,\'menu\')">Quiero que me contacten</button>';
+    } else if (tipo === 'turno') {
+      msg.innerHTML = 'Para gestionar tu pedido, dejanos tus datos y te contactamos para confirmar opciones y entrega.';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'pedido\')">Dejar mis datos</button>';
+    } else if (tipo === 'planes') {
+      msg.innerHTML = 'Excelente! Moviltec Digital ofrece 3 planes para que tu negocio venda mas:<br><br><strong>1. Presencia Digital</strong> - Landing page + WhatsApp<br><strong>2. Ventas Automaticas</strong> - Bot + catalogo + pagos<br><strong>3. Negocio Digital Pro</strong> - Todo incluido + app<br><br>Cual te interesa?';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'Plan Presencia Digital\')">Presencia Digital</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Ventas Automaticas\')">Ventas Automaticas</button><button class="fi-btn" onclick="fiPaso(3,\'Plan Negocio Digital Pro\')">Negocio Digital Pro</button>';
+    } else {
+      msg.innerHTML = 'Contanos en que podemos ayudarte. Dejanos tus datos y te contactamos!';
+      opts.innerHTML = '<button class="fi-btn" onclick="fiPaso(3,\'consulta general\')">Dejar mis datos</button>';
+    }
+    document.getElementById('fi-paso2').style.display = 'block';
+  } else if (paso === 3) {
+    document.getElementById('fi-interes').value = tipo;
+    document.getElementById('fi-paso3').style.display = 'block';
+  }
+}
+document.getElementById('fi-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('fi-nombre').value;
+  const tel = document.getElementById('fi-tel').value;
+  const negocio = document.getElementById('fi-negocio').value;
+  const interes = document.getElementById('fi-interes').value;
+  let resumenHTML = '<p style="margin:0 0 8px;font-size:0.82rem;color:#888;text-transform:uppercase;letter-spacing:1px;">Datos enviados</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#FF6B35;">Nombre:</strong> ' + nombre + '</p>';
+  resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#FF6B35;">WhatsApp:</strong> ' + tel + '</p>';
+  if (negocio) resumenHTML += '<p style="margin:0 0 6px;color:#eee;font-size:0.9rem;"><strong style="color:#FF6B35;">Negocio:</strong> ' + negocio + '</p>';
+  resumenHTML += '<p style="margin:0;color:#eee;font-size:0.9rem;"><strong style="color:#FF6B35;">Consulta:</strong> ' + interes + '</p>';
+  document.getElementById('fi-resumen').innerHTML = resumenHTML;
+  document.querySelectorAll('.fi-paso').forEach(p => p.style.display = 'none');
+  document.getElementById('fi-paso4').style.display = 'block';
+  const lineas = ['*Nuevo contacto - Demo Gastronomia*','','*Nombre:* ' + nombre,'*WhatsApp:* ' + tel];
+  if (negocio) lineas.push('*Negocio:* ' + negocio);
+  lineas.push('*Interes:* ' + interes);
+  lineas.push('');
+  lineas.push('_Enviado desde moviltecdigital.com.ar_');
+  document.getElementById('fi-wa-link').href = 'https://wa.me/5492645304372?text=' + encodeURIComponent(lineas.join('\n'));
+});
+</script>
+</body>
+</html>

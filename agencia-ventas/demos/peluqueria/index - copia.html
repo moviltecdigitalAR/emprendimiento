@@ -1,0 +1,880 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Noir — Peluquería & Estética Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'noir': {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            500: '#71717a',
+                            600: '#52525b',
+                            700: '#3f3f46',
+                            800: '#27272a',
+                            900: '#18181b',
+                            950: '#09090b',
+                        },
+                        'gold': {
+                            400: '#d4af37',
+                            500: '#c9a227',
+                            600: '#a8861f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .glass-border { border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glow-border { box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.15); }
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .iphone-notch { 
+            width: 120px; height: 28px; background: #000; 
+            border-radius: 0 0 18px 18px; position: absolute; 
+            top: 0; left: 50%; transform: translateX(-50%); z-index: 10;
+        }
+        .chat-bubble-in { background: #27272a; border-radius: 18px 18px 18px 4px; }
+        .chat-bubble-out { background: linear-gradient(135deg, #d4af37 0%, #a8861f 100%); border-radius: 18px 18px 4px 18px; }
+        .plan-highlight {
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .cal-day.occupied { background: #3f1d1d; color: #fca5a5; cursor: not-allowed; text-decoration: line-through; }
+        .cal-day.past { background: #18181b; color: #52525b; cursor: not-allowed; }
+        .time-slot.occupied { background: #3f1d1d; color: #fca5a5; border-color: #7f1d1d; cursor: not-allowed; text-decoration: line-through; }
+    </style>
+</head>
+<body class="bg-noir-950 text-white antialiased overflow-x-hidden">
+
+    <!-- ============ HEADER ============ -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass glass-border">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                    <span class="font-black text-noir-950 text-lg">S</span>
+                </div>
+                <span class="font-bold text-lg tracking-tight">Studio Noir</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#galeria" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+                <a href="#opiniones" class="hover:text-white transition-colors">Opiniones</a>
+                <a href="#turno" class="hover:text-white transition-colors">Turnos</a>
+            </nav>
+            <a href="#turno" class="hidden md:inline-flex items-center gap-2 bg-white text-noir-950 px-5 py-2.5 rounded-full text-sm font-semibold hover:-translate-y-0.5 transition-transform">
+                Reservar turno
+            </a>
+        </div>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="relative pt-40 pb-24 px-6 grid-bg">
+        <div class="absolute inset-0 bg-gradient-to-b from-gold-600/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="relative max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass glass-border text-xs font-medium text-zinc-300 mb-8">
+                <span class="w-2 h-2 rounded-full bg-gold-400"></span>
+                Turnos disponibles esta semana
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] mb-8">
+                Donde el estilo<br>
+                <span class="bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 bg-clip-text text-transparent">cobra vida.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+                Peluquería premium para mujeres y hombres. Cortes, color, tratamientos y más. Porque tu look importa.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#turno" class="group inline-flex items-center gap-3 bg-white text-noir-950 px-8 py-4 rounded-full text-base font-bold hover:-translate-y-1 transition-transform shadow-xl shadow-white/10">
+                    Reservar mi turno
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+                <a href="#servicios" class="inline-flex items-center gap-2 glass glass-border px-8 py-4 rounded-full text-base font-semibold text-white hover:-translate-y-1 transition-transform">
+                    Ver servicios y precios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="py-16 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <p class="text-4xl md:text-5xl font-black text-white mb-2">+800</p>
+                <p class="text-sm text-zinc-500 uppercase tracking-widest">Clientas felices</p>
+            </div>
+            <div class="text-center">
+                <p class="text-4xl md:text-5xl font-black text-white mb-2">5</p>
+                <p class="text-sm text-zinc-500 uppercase tracking-widest">Años de experiencia</p>
+            </div>
+            <div class="text-center">
+                <p class="text-4xl md:text-5xl font-black text-gold-400 mb-2">4.9</p>
+                <p class="text-sm text-zinc-500 uppercase tracking-widest">Calificación</p>
+            </div>
+            <div class="text-center">
+                <p class="text-4xl md:text-5xl font-black text-white mb-2">48hs</p>
+                <p class="text-sm text-zinc-500 uppercase tracking-widest">Máx. espera turno</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ PORTFOLIO - BENTO GRID ============ -->
+    <section id="galeria" class="py-32 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-20">
+                <p class="text-gold-400 font-semibold text-sm uppercase tracking-widest mb-4">Portfolio</p>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+                    Nuestros trabajos.
+                </h2>
+                <p class="text-xl text-zinc-400 leading-relaxed">
+                    Cada corte, cada color, una transformación real. Estos son algunos de nuestros últimos trabajos.
+                </p>
+            </div>
+
+            <!-- Bento Grid 3 columnas -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Imagen destacada grande (ocupa 2 columnas) -->
+                <div class="relative group rounded-2xl overflow-hidden h-80 col-span-2 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&q=80" alt="Balayage rubio" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 class="text-2xl font-black text-white mb-1">Balayage rubio</h3>
+                        <p class="text-sm text-zinc-300">Técnica de iluminación natural</p>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&auto=format&q=80" alt="Corte bob" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Corte bob</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&auto=format&q=80" alt="Liso perfecto" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Liso perfecto</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&auto=format&q=80" alt="Color fantasía" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Color fantasía</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&auto=format&q=80" alt="Brushing" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Brushing</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=400&auto=format&q=80" alt="Mechas" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Mechas</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&auto=format&q=80" alt="Fade masculino" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Fade masculino</h3>
+                    </div>
+                </div>
+
+                <div class="relative group rounded-2xl overflow-hidden h-80 hover:-translate-y-1 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&auto=format&q=80" alt="Corte + barba" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-noir-950/90 via-noir-950/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-xl font-black text-white">Corte + barba</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SERVICIOS & PRECIOS ============ -->
+    <section id="servicios" class="py-32 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-20">
+                <p class="text-gold-400 font-semibold text-sm uppercase tracking-widest mb-4">Servicios & Precios</p>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+                    Precios claros,<br>sin sorpresas.
+                </h2>
+                <p class="text-xl text-zinc-400 leading-relaxed">
+                    Sabés exactamente qué vas a pagar antes de entrar. Sin letra chica.
+                </p>
+            </div>
+
+            <!-- Grid 3 columnas -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Servicio 1 -->
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-500 font-mono">45 min</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Corte femenino</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">Corte con lavado, secado y styling final incluido. Consultá por largo especial.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-white/5">
+                        <span class="text-3xl font-black">$4.500</span>
+                        <a href="#turno" class="text-sm text-gold-400 font-semibold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 - DESTACADO (central) -->
+                <div class="plan-highlight rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-400 to-gold-500 text-noir-950 text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                        Más pedido
+                    </div>
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/20 border border-gold-400/40 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-400 font-mono">3 hs</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Balayage / Mechas</h3>
+                    <p class="text-zinc-300 text-sm leading-relaxed mb-6 flex-1">Técnica de iluminación a mano alzada. Resultado natural y luminoso. Incluye máscara hidratante.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-gold-400/20">
+                        <div>
+                            <p class="text-xs text-gold-400 uppercase tracking-wider">Desde</p>
+                            <span class="text-3xl font-black text-white">$12.000</span>
+                        </div>
+                        <a href="#turno" class="text-sm text-gold-400 font-bold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-500 font-mono">2 hs</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Color completo</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">Tinte de raíz a puntas con coloristas certificadas. Todas las marcas premium disponibles.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-white/5">
+                        <div>
+                            <p class="text-xs text-zinc-500 uppercase tracking-wider">Desde</p>
+                            <span class="text-3xl font-black">$8.500</span>
+                        </div>
+                        <a href="#turno" class="text-sm text-gold-400 font-semibold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-500 font-mono">3-4 hs</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Keratina / Lissage</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">Tratamiento alisador de larga duración. Resultado liso, sedoso y sin frizz por hasta 5 meses.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-white/5">
+                        <div>
+                            <p class="text-xs text-zinc-500 uppercase tracking-wider">Desde</p>
+                            <span class="text-3xl font-black">$18.000</span>
+                        </div>
+                        <a href="#turno" class="text-sm text-gold-400 font-semibold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-500 font-mono">40 min</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Brushing & Peinado</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">Liso, ondas, rulos. El brushing perfecto para el día a día o para una ocasión especial.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-white/5">
+                        <span class="text-3xl font-black">$3.500</span>
+                        <a href="#turno" class="text-sm text-gold-400 font-semibold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform flex flex-col">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        </div>
+                        <span class="text-xs text-zinc-500 font-mono">35 min</span>
+                    </div>
+                    <h3 class="text-xl font-black mb-2">Corte masculino</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">Corte, fade, degradado y diseño de barba. Incluye lavado y styling con cera o pomada.</p>
+                    <div class="flex items-end justify-between pt-4 border-t border-white/5">
+                        <span class="text-3xl font-black">$3.200</span>
+                        <a href="#turno" class="text-sm text-gold-400 font-semibold hover:underline">Reservar →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ OPINIONES ============ -->
+    <section id="opiniones" class="py-32 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-20">
+                <p class="text-gold-400 font-semibold text-sm uppercase tracking-widest mb-4">Opiniones</p>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+                    Lo que dicen<br>nuestras clientas.
+                </h2>
+                <p class="text-xl text-zinc-400 leading-relaxed">
+                    Resultados reales, clientes reales. Sin filtros.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-zinc-300 leading-relaxed mb-6">"Llevo 3 años viniéndome acá y nunca me fui decepcionada. El balayage que me hicieron quedó increíble. Todo el mundo me pregunta dónde me lo hice."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-700 flex items-center justify-center font-bold text-sm">S</div>
+                        <div>
+                            <p class="font-semibold text-sm">Sol B.</p>
+                            <p class="text-xs text-zinc-500">Palermo, CABA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-zinc-300 leading-relaxed mb-6">"La keratina que me hicieron fue la mejor decisión. Después de años con frizz por fin tengo el pelo que siempre quise. El equipo es super profesional y amable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center font-bold text-sm">M</div>
+                        <div>
+                            <p class="font-semibold text-sm">Martina L.</p>
+                            <p class="text-xs text-zinc-500">Recoleta, CABA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass glass-border rounded-2xl p-8 hover:-translate-y-1 transition-transform">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-zinc-300 leading-relaxed mb-6">"Vine a cortarme el pelo y terminé con color también, ja. El resultado fue tan bueno que no me arrepentí. Los precios son justos y el ambiente es muy agradable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center font-bold text-sm">A</div>
+                        <div>
+                            <p class="font-semibold text-sm">Agustina R.</p>
+                            <p class="text-xs text-zinc-500">Villa Urquiza, CABA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TURNOS ONLINE ============ -->
+    <section id="turno" class="py-32 px-6 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-600/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <p class="text-gold-400 font-semibold text-sm uppercase tracking-widest mb-4">Turnos online</p>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+                    Reservá tu turno ahora.
+                </h2>
+                <p class="text-xl text-zinc-400 leading-relaxed">
+                    Elegí el día y horario disponible. Tu turno queda reservado al instante.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+                <!-- Mockup iPhone (2 cols) -->
+                <div class="lg:col-span-2 flex justify-center">
+                    <div class="relative w-[300px] h-[620px] bg-zinc-900 rounded-[45px] p-3 shadow-2xl shadow-black/50 border border-zinc-800">
+                        <div class="iphone-notch"></div>
+                        <div class="w-full h-full bg-noir-950 rounded-[38px] overflow-hidden relative flex flex-col">
+                            <!-- Header -->
+                            <div class="bg-[#1f1f23] px-4 pt-10 pb-3 flex items-center gap-3 border-b border-white/5">
+                                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                                    <span class="font-black text-noir-950 text-sm">S</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-white font-semibold text-sm">Studio Noir</p>
+                                    <p class="text-green-400 text-xs">en línea</p>
+                                </div>
+                            </div>
+                            <!-- Chat -->
+                            <div class="flex-1 p-3 space-y-2.5 overflow-y-auto bg-[#0b0b0e]">
+                                <div class="flex justify-start">
+                                    <div class="chat-bubble-in px-3 py-2 max-w-[85%]">
+                                        <p class="text-xs text-white">Hola! Quiero reservar un turno 👋</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="chat-bubble-out px-3 py-2 max-w-[85%]">
+                                        <p class="text-[10px] text-noir-950/70 font-bold mb-0.5">Asistente Virtual</p>
+                                        <p class="text-xs text-white">¡Hola! Bienvenida a Studio Noir. ¿Qué servicio te interesa?</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="chat-bubble-out px-3 py-2 max-w-[85%]">
+                                        <p class="text-xs text-white">1. Corte femenino</p>
+                                        <p class="text-xs text-white">2. Balayage / Mechas</p>
+                                        <p class="text-xs text-white">3. Color completo</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="chat-bubble-in px-3 py-2 max-w-[85%]">
+                                        <p class="text-xs text-white">Quiero balayage ✨</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="chat-bubble-out px-3 py-2 max-w-[85%]">
+                                        <p class="text-xs text-white">Perfecto. Elegí día y horario:</p>
+                                        <div class="bg-white/10 rounded-lg p-2 mt-1.5 grid grid-cols-3 gap-1">
+                                            <div class="text-[9px] text-center bg-white/10 rounded py-1">Lun 10</div>
+                                            <div class="text-[9px] text-center bg-gold-400 text-noir-950 rounded py-1 font-bold">Mar 11</div>
+                                            <div class="text-[9px] text-center bg-white/10 rounded py-1">Mié 12</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="chat-bubble-out px-3 py-2 max-w-[85%]">
+                                        <p class="text-xs text-white">✅ Turno confirmado: Martes 11 a las 15hs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sistema de Reservas (3 cols) -->
+                <div class="lg:col-span-3">
+                    <div class="glass glass-border rounded-3xl overflow-hidden">
+                        <div class="flex border-b border-white/5">
+                            <button id="tab-wa" onclick="openTab('whatsapp', event)" class="flex-1 py-4 px-4 text-sm font-bold bg-white/5 text-gold-400 border-b-2 border-gold-400">
+                                📱 WhatsApp
+                            </button>
+                            <button id="tab-cal" onclick="openTab('calendar', event)" class="flex-1 py-4 px-4 text-sm font-bold text-zinc-400 border-b-2 border-transparent hover:text-white transition-colors">
+                                📅 Calendario
+                            </button>
+                        </div>
+
+                        <!-- Tab WhatsApp -->
+                        <div id="whatsapp" class="p-8">
+                            <h3 class="text-xl font-black mb-6">Solicitar turno por WhatsApp</h3>
+                            <form onsubmit="sendWhatsApp(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Nombre y Apellido</label>
+                                    <input type="text" id="wa-name" required placeholder="Ej: María González" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-400 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Número de Móvil</label>
+                                    <input type="tel" id="wa-phone" required placeholder="Ej: 11 1234 5678" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-400 transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Servicio</label>
+                                    <select id="wa-service" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-gold-400 transition-colors">
+                                        <option value="">Seleccioná un servicio...</option>
+                                        <option value="Corte femenino">Corte femenino - $4.500</option>
+                                        <option value="Balayage / Mechas">Balayage / Mechas - desde $12.000</option>
+                                        <option value="Color completo">Color completo - desde $8.500</option>
+                                        <option value="Keratina / Lissage">Keratina / Lissage - desde $18.000</option>
+                                        <option value="Brushing & Peinado">Brushing & Peinado - $3.500</option>
+                                        <option value="Corte masculino">Corte masculino - $3.200</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-white text-noir-950 py-4 rounded-xl font-bold hover:-translate-y-0.5 transition-transform">
+                                    Enviar por WhatsApp →
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Tab Calendario -->
+                        <div id="calendar" class="p-8 hidden">
+                            <div id="loading-calendar" class="text-center py-8 text-zinc-500">⏳ Cargando disponibilidad...</div>
+                            <div id="calendar-wrapper" style="display:none;">
+                                <div class="flex items-center justify-between mb-4">
+                                    <button onclick="changeMonth(-1)" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">◀</button>
+                                    <span id="current-month-year" class="font-bold"></span>
+                                    <button onclick="changeMonth(1)" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">▶</button>
+                                </div>
+                                <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-zinc-500 mb-2">
+                                    <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+                                </div>
+                                <div id="calendar-days" class="grid grid-cols-7 gap-1"></div>
+                            </div>
+
+                            <div id="time-selection" class="mt-6 hidden">
+                                <h4 class="font-bold mb-3">Horarios del <span id="selected-date-text"></span>:</h4>
+                                <div id="time-slots" class="grid grid-cols-4 gap-2"></div>
+                            </div>
+
+                            <form id="cal-form" class="mt-6 space-y-4 hidden" onsubmit="confirmCalendarBooking(event)">
+                                <input type="text" id="cal-name" required placeholder="Nombre y Apellido" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-400">
+                                <input type="tel" id="cal-phone" required placeholder="Teléfono" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-gold-400">
+                                <select id="cal-service" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-gold-400">
+                                    <option value="">Servicio...</option>
+                                    <option>Corte femenino</option>
+                                    <option>Balayage / Mechas</option>
+                                    <option>Color completo</option>
+                                    <option>Keratina / Lissage</option>
+                                    <option>Brushing & Peinado</option>
+                                    <option>Corte masculino</option>
+                                </select>
+                                <input type="hidden" id="cal-selected-date">
+                                <input type="hidden" id="cal-selected-time">
+                                <button type="submit" class="w-full bg-gold-400 text-noir-950 py-4 rounded-xl font-bold hover:-translate-y-0.5 transition-transform">
+                                    Confirmar reserva →
+                                </button>
+                                <p class="text-xs text-zinc-500 text-center italic">Se abrirá WhatsApp para confirmar con el salón.</p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 glass glass-border rounded-2xl p-6 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-400/10 border border-gold-400/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Studio Noir</p>
+                            <p class="text-xs text-zinc-500">Lun a Vie 9–20hs · Sáb 9–17hs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="py-32 px-6 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gold-600/5 via-transparent to-gold-600/5 pointer-events-none"></div>
+        <div class="relative max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-7xl font-black tracking-tight leading-[1] mb-8">
+                Tu próximo look<br>
+                <span class="bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">te está esperando.</span>
+            </h2>
+            <a href="#turno" class="group inline-flex items-center gap-3 bg-white text-noir-950 px-10 py-5 rounded-full text-lg font-bold hover:-translate-y-1 transition-transform shadow-2xl shadow-white/10">
+                Reservar mi turno ahora
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="border-t border-white/5 py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="font-black text-noir-950 text-lg">S</span>
+                        </div>
+                        <span class="font-bold text-lg">Studio Noir</span>
+                    </div>
+                    <p class="text-sm text-zinc-500 max-w-sm">Peluquería & Estética premium · CABA, Argentina<br>Lunes a viernes 9–20hs · Sábados 9–17hs</p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Navegación</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#galeria" class="text-zinc-500 hover:text-white transition-colors">Portfolio</a></li>
+                        <li><a href="#servicios" class="text-zinc-500 hover:text-white transition-colors">Precios</a></li>
+                        <li><a href="#turno" class="text-zinc-500 hover:text-white transition-colors">Turnos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Contacto</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://wa.me/5492645304372" target="_blank" class="text-zinc-500 hover:text-white transition-colors">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-zinc-600">© 2026 Studio Noir · Todos los derechos reservados</p>
+                <p class="text-xs text-zinc-600">Demo creado por <a href="https://moviltecdigital.com.ar" target="_blank" class="text-gold-400 hover:underline">Moviltec Digital</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ ASISTENTE VIRTUAL FLOTANTE ============ -->
+    <button onclick="toggleAssistant()" id="assistant-btn" class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 text-noir-950 shadow-2xl shadow-gold-400/30 flex items-center justify-center hover:-translate-y-1 transition-transform z-40">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+    </button>
+
+    <div id="assistant-panel" class="fixed bottom-24 right-6 w-[340px] max-h-[500px] bg-noir-900 border border-white/10 rounded-2xl shadow-2xl z-40 hidden flex-col overflow-hidden">
+        <div class="p-5 border-b border-white/5 bg-gradient-to-br from-gold-400/10 to-transparent">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                    <span class="font-black text-noir-950">S</span>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">Studio Noir</p>
+                    <p class="text-xs text-zinc-500">Asistente Virtual</p>
+                </div>
+                <button onclick="toggleAssistant()" class="ml-auto text-zinc-500 hover:text-white">✕</button>
+            </div>
+        </div>
+        <div class="p-5 space-y-3 overflow-y-auto">
+            <div class="chat-bubble-in px-4 py-3 max-w-[90%]">
+                <p class="text-sm text-white">¡Hola! 👋 Bienvenido/a a Studio Noir. ¿En qué te puedo ayudar?</p>
+            </div>
+            <button onclick="assistantOption('servicios')" class="w-full text-left px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors">
+                💇 Información sobre servicios
+            </button>
+            <button onclick="assistantOption('turno')" class="w-full text-left px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors">
+                📅 Reservar un turno
+            </button>
+            <button onclick="assistantOption('negocio')" class="w-full text-left px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors">
+                🤖 Me interesa tener esto para mi negocio
+            </button>
+            <button onclick="assistantOption('otra')" class="w-full text-left px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors">
+                💬 Otra consulta
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============ CONFIGURACIÓN ============
+        const SALON_PHONE = "5492645304372";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLTTIatrZ-PEn1FbP0_6rDNb9le663uzyLFdHoTphc7AizWZ0wcUjdUZ81QrpAyWSX6g/exec";
+        const AVAILABLE_HOURS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+        
+        let occupiedSlots = [];
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // ============ PESTAÑAS ============
+        function openTab(tabName, event) {
+            document.getElementById('whatsapp').classList.add('hidden');
+            document.getElementById('calendar').classList.add('hidden');
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            document.getElementById('tab-wa').classList.remove('text-gold-400', 'border-gold-400', 'bg-white/5');
+            document.getElementById('tab-wa').classList.add('text-zinc-400', 'border-transparent');
+            document.getElementById('tab-cal').classList.remove('text-gold-400', 'border-gold-400', 'bg-white/5');
+            document.getElementById('tab-cal').classList.add('text-zinc-400', 'border-transparent');
+            
+            event.target.classList.remove('text-zinc-400', 'border-transparent');
+            event.target.classList.add('text-gold-400', 'border-gold-400', 'bg-white/5');
+            
+            if (tabName === 'calendar' && occupiedSlots.length === 0) {
+                fetchOccupiedSlots();
+            }
+        }
+
+        // ============ WHATSAPP DIRECTO ============
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('wa-name').value;
+            const phone = document.getElementById('wa-phone').value;
+            const service = document.getElementById('wa-service').value;
+            const message = `Hola! Soy *${name}*.\nMi número: ${phone}.\nQuiero reservar turno para: *${service}*.\n¿Tienen disponibilidad?`;
+            window.open(`https://wa.me/${SALON_PHONE}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // ============ GOOGLE SHEETS ============
+        async function fetchOccupiedSlots() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                occupiedSlots = data || [];
+                document.getElementById('loading-calendar').style.display = 'none';
+                document.getElementById('calendar-wrapper').style.display = 'block';
+                generateCalendar();
+            } catch (error) {
+                document.getElementById('loading-calendar').textContent = "❌ Error al cargar agenda.";
+            }
+        }
+
+        function generateCalendar() {
+            const grid = document.getElementById('calendar-days');
+            grid.innerHTML = '';
+            const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            document.getElementById('current-month-year').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                grid.appendChild(empty);
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'cal-day p-2 text-center text-sm rounded-lg cursor-pointer hover:bg-white/10 transition-colors';
+                dayDiv.textContent = day;
+                
+                const dateObj = new Date(currentYear, currentMonth, day);
+                const dateStr = formatDate(dateObj);
+                
+                if (dateObj < today) {
+                    dayDiv.classList.add('past');
+                } else {
+                    const occupiedCount = occupiedSlots.filter(s => s.fecha === dateStr).length;
+                    if (occupiedCount >= AVAILABLE_HOURS.length) {
+                        dayDiv.classList.add('occupied');
+                    } else {
+                        dayDiv.onclick = () => selectDate(dateStr, dayDiv);
+                    }
+                }
+                grid.appendChild(dayDiv);
+            }
+        }
+
+        function changeMonth(dir) {
+            currentMonth += dir;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            else if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            generateCalendar();
+            document.getElementById('time-selection').classList.add('hidden');
+            document.getElementById('cal-form').classList.add('hidden');
+        }
+
+        function formatDate(d) {
+            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        function selectDate(dateStr, el) {
+            document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('bg-gold-400', 'text-noir-950', 'font-bold'));
+            el.classList.add('bg-gold-400', 'text-noir-950', 'font-bold');
+            selectedDate = dateStr;
+            const parts = dateStr.split('-');
+            document.getElementById('selected-date-text').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
+            document.getElementById('time-selection').classList.remove('hidden');
+            document.getElementById('cal-form').classList.add('hidden');
+            generateTimeSlots(dateStr);
+        }
+
+        function generateTimeSlots(dateStr) {
+            const container = document.getElementById('time-slots');
+            container.innerHTML = '';
+            AVAILABLE_HOURS.forEach(hour => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot py-2 text-center text-sm rounded-lg cursor-pointer border border-white/10 hover:border-gold-400 transition-colors';
+                slot.textContent = hour;
+                const isOccupied = occupiedSlots.some(s => s.fecha === dateStr && s.horario === hour);
+                if (isOccupied) {
+                    slot.classList.add('occupied');
+                } else {
+                    slot.onclick = () => selectTime(hour, slot);
+                }
+                container.appendChild(slot);
+            });
+        }
+
+        function selectTime(hour, el) {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('bg-gold-400', 'text-noir-950', 'font-bold', 'border-gold-400'));
+            el.classList.add('bg-gold-400', 'text-noir-950', 'font-bold', 'border-gold-400');
+            selectedTime = hour;
+            document.getElementById('cal-selected-date').value = selectedDate;
+            document.getElementById('cal-selected-time').value = selectedTime;
+            document.getElementById('cal-form').classList.remove('hidden');
+        }
+
+        async function confirmCalendarBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('cal-name').value;
+            const phone = document.getElementById('cal-phone').value;
+            const service = document.getElementById('cal-service').value;
+            const dateStr = document.getElementById('cal-selected-date').value;
+            const timeStr = document.getElementById('cal-selected-time').value;
+            
+            const data = { fecha: dateStr, horario: timeStr, cliente: name, telefono: phone, servicio: service, estado: "Pendiente" };
+            
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(data)
+                });
+                
+                const parts = dateStr.split('-');
+                const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                const message = `Hola! Reservé turno por la web.\n*Nombre:* ${name}\n*Tél:* ${phone}\n*Servicio:* ${service}\n*Fecha:* ${formattedDate}\n*Hora:* ${timeStr}`;
+                window.open(`https://wa.me/${SALON_PHONE}?text=${encodeURIComponent(message)}`, '_blank');
+                
+                setTimeout(() => fetchOccupiedSlots(), 2000);
+            } catch (err) {
+                alert("Error al registrar. Intentá por WhatsApp directo.");
+            }
+        }
+
+        // ============ ASISTENTE VIRTUAL ============
+        function toggleAssistant() {
+            const panel = document.getElementById('assistant-panel');
+            panel.classList.toggle('hidden');
+            panel.classList.toggle('flex');
+        }
+
+        function assistantOption(option) {
+            if (option === 'turno') {
+                toggleAssistant();
+                document.getElementById('turno').scrollIntoView({ behavior: 'smooth' });
+            } else if (option === 'servicios') {
+                toggleAssistant();
+                document.getElementById('servicios').scrollIntoView({ behavior: 'smooth' });
+            } else if (option === 'negocio') {
+                window.open('https://wa.me/5492645304372?text=Hola!%20Me%20interesa%20tener%20un%20bot%20como%20el%20de%20Studio%20Noir%20para%20mi%20negocio', '_blank');
+            } else {
+                window.open(`https://wa.me/${SALON_PHONE}?text=Hola!%20Tengo%20una%20consulta`, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>

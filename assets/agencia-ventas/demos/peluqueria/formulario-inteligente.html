@@ -1,0 +1,326 @@
+<!-- Formulario Inteligente para Demo Peluquería -->
+<div id="formulario-inteligente" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:9999;overflow-y:auto;">
+  
+  <!-- Paso 0: Bienvenida -->
+  <div id="paso-bienvenida" class="form-paso">
+    <div style="max-width:500px;margin:60px auto;padding:40px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:20px;border:1px solid #333;">
+      <button onclick="cerrarFormulario()" style="float:right;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;">✕</button>
+      
+      <div style="text-align:center;margin-bottom:30px;">
+        <div style="font-size:60px;margin-bottom:20px;">💇‍♀️</div>
+        <h2 style="color:#C9A84C;font-size:28px;margin-bottom:10px;">¡Bienvenido a Studio Noir!</h2>
+        <p style="color:#aaa;">Te ayudamos a tener tu web de peluquería profesional</p>
+      </div>
+      
+      <p style="color:#fff;margin-bottom:30px;text-align:center;">¿Qué necesitás?</p>
+      
+      <div style="display:flex;flex-direction:column;gap:15px;">
+        <button onclick="mostrarPaso('info')" style="padding:20px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:12px;color:#000;font-weight:700;font-size:16px;cursor:pointer;">
+          📋 Quiero conocer los servicios
+        </button>
+        
+        <button onclick="mostrarPaso('planes')" style="padding:20px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:12px;color:#000;font-weight:700;font-size:16px;cursor:pointer;">
+          🚀 Quiero ver planes y precios
+        </button>
+        
+        <button onclick="mostrarPaso('contacto')" style="padding:20px;background:transparent;border:2px solid #C9A84C;border-radius:12px;color:#C9A84C;font-weight:700;font-size:16px;cursor:pointer;">
+          💬 Hablar con una persona
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Paso 1: Info de Servicios -->
+  <div id="paso-info" class="form-paso" style="display:none;">
+    <div style="max-width:600px;margin:40px auto;padding:30px;background:#1a1a2e;border-radius:20px;">
+      <button onclick="volverAtras()" style="background:none;border:none;color:#C9A84C;font-size:16px;cursor:pointer;margin-bottom:20px;">← Volver</button>
+      
+      <h2 style="color:#C9A84C;text-align:center;margin-bottom:30px;">💇 Nuestros Servicios</h2>
+      
+      <div style="display:grid;gap:15px;">
+        <div style="background:#252540;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;">
+          <h3 style="color:#fff;margin-bottom:8px;">✂️ Corte Femenino — $4.500</h3>
+          <p style="color:#aaa;font-size:14px;">Corte personalizado con lavado, masaje capilar y styling</p>
+        </div>
+        
+        <div style="background:#252540;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;">
+          <h3 style="color:#fff;margin-bottom:8px;">✨ Balayage/Mechas — desde $12.000</h3>
+          <p style="color:#aaa;font-size:14px;">Técnica francesa de iluminación a mano alzada</p>
+        </div>
+        
+        <div style="background:#252540;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;">
+          <h3 style="color:#fff;margin-bottom:8px;">🎨 Color Completo — desde $8.500</h3>
+          <p style="color:#aaa;font-size:14px;">Coloristas certificadas con productos premium</p>
+        </div>
+        
+        <div style="background:#252540;padding:20px;border-radius:12px;border-left:4px solid #C9A84C;">
+          <h3 style="color:#fff;margin-bottom:8px;">💨 Keratina — desde $18.000</h3>
+          <p style="color:#aaa;font-size:14px;">Alisado progresivo, resultado hasta 5 meses</p>
+        </div>
+      </div>
+      
+      <div style="margin-top:30px;text-align:center;">
+        <p style="color:#aaa;margin-bottom:20px;">¿Te interesa algún servicio?</p>
+        
+        <button onclick="mostrarPaso('planes')" style="padding:15px 40px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:50px;color:#000;font-weight:700;font-size:16px;cursor:pointer;">
+          Ver planes disponibles →
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Paso 2: Planes -->
+  <div id="paso-planes" class="form-paso" style="display:none;">
+    <div style="max-width:700px;margin:40px auto;padding:30px;background:#1a1a2e;border-radius:20px;">
+      <button onclick="volverAtras()" style="background:none;border:none;color:#C9A84C;font-size:16px;cursor:pointer;margin-bottom:20px;">← Volver</button>
+      
+      <h2 style="color:#C9A84C;text-align:center;margin-bottom:10px;">🚀 Planes Disponibles</h2>
+      <p style="color:#aaa;text-align:center;margin-bottom:30px;">Elegí el que mejor se adapte a tu negocio</p>
+      
+      <div style="display:grid;gap:20px;">
+        <!-- Plan Presencia -->
+        <div style="background:#252540;padding:25px;border-radius:16px;border:2px solid #444;position:relative;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <h3 style="color:#fff;font-size:20px;">Presencia Digital</h3>
+            <div style="font-size:28px;font-weight:800;color:#C9A84C;">$15.000<span style="font-size:14px;color:#888;">/mes</span></div>
+          </div>
+          
+          <ul style="color:#aaa;margin-bottom:20px;padding-left:20px;">
+            <li>Web profesional</li>
+            <li>Botón WhatsApp</li>
+            <li>Formulario de contacto</li>
+            <li>Diseño mobile</li>
+          </ul>
+          
+          <button onclick="seleccionarPlan('presencia')" style="width:100%;padding:12px;background:transparent;border:2px solid #C9A84C;border-radius:8px;color:#C9A84C;font-weight:600;cursor:pointer;">
+            Elegir este plan
+          </button>
+        </div>
+        
+        <!-- Plan Ventas -->
+        <div style="background:linear-gradient(135deg,#252540,#2a2a50);padding:25px;border-radius:16px;border:2px solid #C9A84C;position:relative;">
+          <div style="position:absolute;top:-12px;right:20px;background:#C9A84C;color:#000;padding:5px 15px;border-radius:20px;font-size:12px;font-weight:700;">⭐ MÁS POPULAR</div>
+          
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <h3 style="color:#fff;font-size:20px;">Ventas Automáticas</h3>
+            <div style="font-size:28px;font-weight:800;color:#C9A84C;">$35.000<span style="font-size:14px;color:#888;">/mes</span></div>
+          </div>
+          
+          <p style="color:#C9A84C;font-size:14px;margin-bottom:10px;">Todo lo de Presencia PLUS:</p>
+          
+          <ul style="color:#aaa;margin-bottom:20px;padding-left:20px;">
+            <li>Catálogo con precios</li>
+            <li>Sistema de reservas</li>
+            <li>Carrito de servicios</li>
+            <li>Confirmación por WhatsApp</li>
+          </ul>
+          
+          <button onclick="seleccionarPlan('ventas')" style="width:100%;padding:12px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:8px;color:#000;font-weight:700;cursor:pointer;">
+            Elegir este plan
+          </button>
+        </div>
+        
+        <!-- Plan Pro -->
+        <div style="background:#252540;padding:25px;border-radius:16px;border:2px solid #444;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <h3 style="color:#fff;font-size:20px;">Negocio Digital Pro</h3>
+            <div style="font-size:28px;font-weight:800;color:#C9A84C;">$55.000<span style="font-size:14px;color:#888;">/mes</span></div>
+          </div>
+          
+          <p style="color:#C9A84C;font-size:14px;margin-bottom:10px;">Todo lo de Ventas PLUS:</p>
+          
+          <ul style="color:#aaa;margin-bottom:20px;padding-left:20px;">
+            <li>Calendario de turnos online</li>
+            <li>Gestión de disponibilidad</li>
+            <li>Base de datos de clientes</li>
+            <li>Soporte prioritario</li>
+          </ul>
+          
+          <button onclick="seleccionarPlan('pro')" style="width:100%;padding:12px;background:transparent;border:2px solid #C9A84C;border-radius:8px;color:#C9A84C;font-weight:600;cursor:pointer;">
+            Elegir este plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Paso 3: Formulario de Datos -->
+  <div id="paso-datos" class="form-paso" style="display:none;">
+    <div style="max-width:500px;margin:40px auto;padding:30px;background:#1a1a2e;border-radius:20px;">
+      <button onclick="volverAtras()" style="background:none;border:none;color:#C9A84C;font-size:16px;cursor:pointer;margin-bottom:20px;">← Volver</button>
+      
+      <div style="text-align:center;margin-bottom:30px;">
+        <div style="font-size:50px;margin-bottom:15px;">🎉</div>
+        <h2 style="color:#C9A84C;">¡Excelente elección!</h2>
+        <p style="color:#aaa;">Completa tus datos y te contactamos en 24hs</p>
+      </div>
+      
+      <form id="form-datos" onsubmit="enviarFormulario(event)">
+        <input type="hidden" id="plan-seleccionado" name="plan">
+        
+        <div style="margin-bottom:20px;">
+          <label style="display:block;color:#aaa;margin-bottom:8px;">Nombre de tu peluquería *</label>
+          <input type="text" name="nombre_negocio" required style="width:100%;padding:15px;background:#252540;border:1px solid #444;border-radius:10px;color:#fff;font-size:16px;">
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <label style="display:block;color:#aaa;margin-bottom:8px;">Tu WhatsApp *</label>
+          <input type="tel" name="whatsapp" required placeholder="Ej: 2644123456" style="width:100%;padding:15px;background:#252540;border:1px solid #444;border-radius:10px;color:#fff;font-size:16px;">
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <label style="display:block;color:#aaa;margin-bottom:8px;">Email</label>
+          <input type="email" name="email" style="width:100%;padding:15px;background:#252540;border:1px solid #444;border-radius:10px;color:#fff;font-size:16px;">
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <label style="display:block;color:#aaa;margin-bottom:8px;">Ciudad *</label>
+          <input type="text" name="ciudad" required style="width:100%;padding:15px;background:#252540;border:1px solid #444;border-radius:10px;color:#fff;font-size:16px;">
+        </div>
+        
+        <div style="margin-bottom:25px;">
+          <label style="display:block;color:#aaa;margin-bottom:8px;">¿Qué servicios ofrecés? (opcional)</label>
+          <textarea name="servicios" rows="3" style="width:100%;padding:15px;background:#252540;border:1px solid #444;border-radius:10px;color:#fff;font-size:16px;resize:vertical;"></textarea>
+        </div>
+        
+        <button type="submit" style="width:100%;padding:18px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:12px;color:#000;font-weight:700;font-size:18px;cursor:pointer;">
+          🚀 Enviar solicitud
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Paso 4: Contacto Humano -->
+  <div id="paso-contacto" class="form-paso" style="display:none;">
+    <div style="max-width:500px;margin:60px auto;padding:40px;background:#1a1a2e;border-radius:20px;text-align:center;">
+      <button onclick="cerrarFormulario()" style="float:right;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;">✕</button>
+      
+      <div style="font-size:60px;margin-bottom:20px;">👨‍💼</div>
+      
+      <h2 style="color:#C9A84C;margin-bottom:20px;">Hablar con un asesor</h2>
+      
+      <p style="color:#aaa;margin-bottom:30px;">Te conectamos con nuestro equipo para atención personalizada</p>
+      
+      <div style="background:#252540;padding:25px;border-radius:12px;margin-bottom:25px;">
+        <p style="color:#fff;margin-bottom:15px;">📱 WhatsApp directo:</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Vi%20el%20demo%20de%20peluqueria%20y%20quiero%20hablar%20con%20un%20asesor" target="_blank" style="display:inline-block;padding:15px 30px;background:#25D366;color:#fff;text-decoration:none;border-radius:50px;font-weight:700;font-size:18px;">
+          💬 Iniciar chat
+        </a>
+      </div>
+      
+      <p style="color:#888;font-size:14px;">⏰ Te respondemos en menos de 24hs</p>
+    </div>
+  </div>
+  
+  <!-- Paso 5: Éxito -->
+  <div id="paso-exito" class="form-paso" style="display:none;">
+    <div style="max-width:500px;margin:60px auto;padding:40px;background:#1a1a2e;border-radius:20px;text-align:center;">
+      <div style="font-size:80px;margin-bottom:20px;">✅</div>
+      
+      <h2 style="color:#10B981;margin-bottom:15px;">¡Solicitud enviada!</h2>
+      
+      <p style="color:#aaa;margin-bottom:30px;">Te contactaremos en menos de 24hs con tu web lista</p>
+      
+      <button onclick="cerrarFormulario()" style="padding:15px 40px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border:none;border-radius:50px;color:#000;font-weight:700;font-size:16px;cursor:pointer;">
+        Perfecto, gracias
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Historial de navegación
+let historial = [];
+let pasoActual = 'bienvenida';
+
+// Mostrar formulario al hacer click en WhatsApp
+document.addEventListener('DOMContentLoaded', function() {
+  // Reemplazar el botón de WhatsApp flotante
+  const waFloat = document.querySelector('.wa-f');
+  if (waFloat) {
+    waFloat.onclick = function(e) {
+      e.preventDefault();
+      abrirFormulario();
+    };
+  }
+  
+  // Reemplazar botón de WhatsApp en hero
+  const heroWa = document.querySelector('.btn-wa');
+  if (heroWa) {
+    heroWa.onclick = function(e) {
+      e.preventDefault();
+      abrirFormulario();
+    };
+  }
+});
+
+function abrirFormulario() {
+  document.getElementById('formulario-inteligente').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  mostrarPaso('bienvenida');
+}
+
+function cerrarFormulario() {
+  document.getElementById('formulario-inteligente').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  historial = [];
+}
+
+function mostrarPaso(paso) {
+  // Guardar en historial
+  if (pasoActual !== paso) {
+    historial.push(pasoActual);
+  }
+  pasoActual = paso;
+  
+  // Ocultar todos los pasos
+  document.querySelectorAll('.form-paso').forEach(p => p.style.display = 'none');
+  
+  // Mostrar paso actual
+  document.getElementById('paso-' + paso).style.display = 'block';
+}
+
+function volverAtras() {
+  if (historial.length > 0) {
+    const pasoAnterior = historial.pop();
+    pasoActual = pasoAnterior;
+    document.querySelectorAll('.form-paso').forEach(p => p.style.display = 'none');
+    document.getElementById('paso-' + pasoAnterior).style.display = 'block';
+  }
+}
+
+function seleccionarPlan(plan) {
+  document.getElementById('plan-seleccionado').value = plan;
+  mostrarPaso('datos');
+}
+
+function enviarFormulario(e) {
+  e.preventDefault();
+  
+  const form = document.getElementById('form-datos');
+  const formData = new FormData(form);
+  
+  // Preparar mensaje para WhatsApp
+  const plan = formData.get('plan');
+  const nombre = formData.get('nombre_negocio');
+  const whatsapp = formData.get('whatsapp');
+  const email = formData.get('email');
+  const ciudad = formData.get('ciudad');
+  const servicios = formData.get('servicios');
+  
+  const mensaje = `🎉 *Nueva Solicitud de Web*%0A%0A` +
+    `*Plan:* ${plan.toUpperCase()}%0A` +
+    `*Negocio:* ${nombre}%0A` +
+    `*WhatsApp:* ${whatsapp}%0A` +
+    `*Email:* ${email || 'No proporcionado'}%0A` +
+    `*Ciudad:* ${ciudad}%0A` +
+    `*Servicios:* ${servicios || 'No especificados'}%0A%0A` +
+    `*Fecha:* ${new Date().toLocaleString()}`;
+  
+  // Enviar a tu WhatsApp
+  window.open(`https://wa.me/5492645304372?text=${mensaje}`, '_blank');
+  
+  // Mostrar pantalla de éxito
+  mostrarPaso('exito');
+}
+</script>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inmobiliaria | San Juan</title>
+  <meta name="description" content="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary:      #003366;
+      --primary-dark: #002244;
+      --primary-mid:  #004488;
+      --accent:       #c9a961;
+      --accent-light: #d4b876;
+      --green:        #10b981;
+      --cream:        #f8f7f3;
+      --white:        #ffffff;
+      --text:         #1f2937;
+      --muted:        #6b7280;
+      --border:       #e5e7eb;
+      --radius:       4px;
+    }
+    *  { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:#fff; line-height:1.65; }
+    h1,h2,h3,h4,.serif { font-family:'Playfair Display',serif; }
+
+    /* ── NAVBAR ──────────────────────────────────── */
+    .navbar { background:#fff; border-bottom:1px solid var(--border); padding:16px 0; transition:all .3s; }
+    .navbar.scrolled { padding:10px 0; box-shadow:0 2px 20px rgba(0,0,0,.06); }
+    .navbar-brand { font-family:'Playfair Display',serif; font-weight:700; font-size:1.5rem; color:var(--primary)!important; letter-spacing:-.02em; }
+    .navbar-brand span { color:var(--accent); }
+    .nav-link { font-weight:500; color:var(--text)!important; margin:0 10px; font-size:.88rem; text-transform:uppercase; letter-spacing:.06em; transition:color .3s; }
+    .nav-link:hover { color:var(--primary)!important; }
+    .btn-nav { background:var(--green); color:#fff; font-weight:600; border-radius:50px; padding:10px 22px; border:none; font-size:.85rem; text-decoration:none; transition:all .3s; }
+    .btn-nav:hover { background:#059669; color:#fff; }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      background:linear-gradient(rgba(0,34,68,.62),rgba(0,34,68,.70)),
+                 url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80') center/cover;
+      min-height:88vh; display:flex; align-items:center; color:#fff; padding:120px 0 80px; position:relative;
+    }
+    .hero-eyebrow { display:inline-block; color:var(--accent); text-transform:uppercase; letter-spacing:.3em; font-size:.78rem; font-weight:600; margin-bottom:18px; border-bottom:1px solid var(--accent); padding-bottom:12px; }
+    .hero-title { font-size:4rem; font-weight:700; line-height:1.08; margin-bottom:20px; max-width:760px; }
+    .hero-title em { font-style:italic; color:var(--accent); }
+    .hero-sub { font-size:1.1rem; opacity:.9; margin-bottom:40px; max-width:560px; font-weight:300; }
+    .hero-stats { display:flex; gap:40px; margin-top:40px; flex-wrap:wrap; }
+    .hero-stat strong { display:block; font-family:'Playfair Display',serif; font-size:2rem; color:var(--accent); line-height:1; }
+    .hero-stat span   { font-size:.72rem; text-transform:uppercase; letter-spacing:.15em; opacity:.75; }
+
+    /* SEARCH BOX */
+    .search-box { background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.22); max-width:940px; margin:0 auto; }
+    .search-tabs { display:flex; background:var(--cream); border-bottom:1px solid var(--border); }
+    .search-tab { flex:1; background:none; border:none; font-weight:600; color:var(--muted); padding:16px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.07em; font-size:.78rem; border-bottom:3px solid transparent; transition:all .25s; }
+    .search-tab:hover { color:var(--primary); }
+    .search-tab.active { color:var(--primary); border-bottom-color:var(--accent); background:#fff; }
+    .search-body { padding:22px 25px; }
+    .search-row { display:flex; gap:12px; align-items:stretch; }
+    .search-input { flex:1; border:none; border-bottom:1px solid var(--border); padding:12px 0; font-size:.98rem; color:var(--text); font-family:'Inter',sans-serif; background:transparent; }
+    .search-input:focus { outline:none; border-bottom-color:var(--accent); }
+    .search-input::placeholder { color:var(--muted); }
+    .search-btn { background:var(--primary); color:#fff; border:none; padding:14px 36px; font-weight:600; text-transform:uppercase; letter-spacing:.1em; font-size:.85rem; border-radius:var(--radius); cursor:pointer; transition:all .3s; white-space:nowrap; }
+    .search-btn:hover { background:var(--accent); }
+
+    /* ── STATS STRIP ─────────────────────────────── */
+    .stats-strip { background:var(--primary); padding:26px 0; border-bottom:3px solid var(--accent); }
+    .stats-strip-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:2.1rem; font-weight:700; color:var(--accent); line-height:1; display:block; }
+    .stat-lbl { color:rgba(255,255,255,.6); font-size:.72rem; text-transform:uppercase; letter-spacing:.15em; margin-top:5px; display:block; }
+
+    /* ── SECTIONS ────────────────────────────────── */
+    .section     { padding:90px 0; }
+    .section-sm  { padding:60px 0; }
+    .section-cream { background:var(--cream); }
+    .section-primary { background:var(--primary); color:#fff; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.3em; font-size:.78rem; font-weight:600; display:block; margin-bottom:14px; }
+    .section-h { font-size:2.8rem; color:var(--primary); margin-bottom:16px; }
+    .section-primary .section-h { color:#fff; }
+    .section-sub { color:var(--muted); font-size:1rem; max-width:640px; margin:0 auto 55px; }
+    .section-primary .section-sub { color:rgba(255,255,255,.75); }
+
+    /* ── CATEGORIES ──────────────────────────────── */
+    .cat-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+    .cat-card { text-align:center; padding:28px 16px; border-radius:var(--radius); background:#fff; border:1px solid var(--border); cursor:pointer; transition:all .3s; }
+    .cat-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,51,102,.1); }
+    .cat-icon { width:58px; height:58px; background:#eff6ff; color:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-size:1.4rem; transition:all .3s; }
+    .cat-card:hover .cat-icon { background:var(--primary); color:var(--accent); }
+    .cat-card h4 { font-family:'Inter',sans-serif; font-size:.88rem; font-weight:600; color:var(--primary); margin-bottom:4px; }
+    .cat-card p  { font-size:.75rem; color:var(--muted); margin:0; }
+
+    /* ── PROPERTY CARDS ──────────────────────────── */
+    .property-card { border-radius:var(--radius); overflow:hidden; background:#fff; border:1px solid var(--border); height:100%; display:flex; flex-direction:column; transition:all .35s; }
+    .property-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,51,102,.12); }
+    .property-img { height:240px; background-size:cover; background-position:center; position:relative; }
+    .property-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.28) 0%,transparent 45%); }
+    .prop-badges { position:absolute; top:14px; left:14px; display:flex; gap:7px; flex-wrap:wrap; z-index:2; }
+    .prop-badge { padding:4px 11px; border-radius:20px; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; }
+    .prop-badge        { background:var(--primary);  color:#fff; }
+    .prop-badge.rent   { background:var(--green);    color:#fff; }
+    .prop-badge.pozo   { background:#7c3aed;          color:#fff; }
+    .prop-badge.mortgage { background:#f59e0b;       color:#fff; }
+    .prop-badge.premium  { background:var(--accent); color:var(--primary); }
+    .prop-fav { position:absolute; top:14px; right:14px; background:rgba(255,255,255,.95); border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; z-index:2; transition:all .3s; color:var(--primary); display:flex; align-items:center; justify-content:center; }
+    .prop-fav:hover,.prop-fav.active { background:var(--accent); color:#fff; }
+    .prop-urgency { position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,.7); color:#fff; padding:5px 11px; border-radius:20px; font-size:.7rem; z-index:2; backdrop-filter:blur(4px); }
+    .property-body { padding:22px; flex:1; display:flex; flex-direction:column; }
+    .property-address { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:7px; }
+    .property-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--primary); margin-bottom:9px; line-height:1.3; }
+    .property-desc { color:var(--muted); font-size:.87rem; margin-bottom:16px; flex:1; }
+    .property-price { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; color:var(--primary); margin-bottom:14px; }
+    .property-price small { font-size:.82rem; font-family:'Inter',sans-serif; font-weight:400; color:var(--muted); }
+    .property-specs { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:.82rem; padding-top:14px; border-top:1px solid var(--border); }
+    .property-specs span i { color:var(--accent); margin-right:4px; }
+
+    /* NO RESULTS */
+    .no-results { text-align:center; padding:80px 20px; }
+    .no-results-icon { font-size:3rem; color:var(--border); margin-bottom:16px; display:block; }
+    .no-results h3 { font-family:'Playfair Display',serif; color:var(--primary); margin-bottom:10px; }
+    .no-results p { color:var(--muted); margin-bottom:24px; }
+    .btn-reset { background:var(--primary); color:#fff; border:none; padding:12px 28px; border-radius:var(--radius); cursor:pointer; font-size:.85rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; }
+
+    /* ── POR QUÉ ELEGIRNOS ───────────────────────── */
+    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .why-card { padding:36px 30px; border:1px solid var(--border); border-radius:var(--radius); background:#fff; transition:all .3s; position:relative; overflow:hidden; }
+    .why-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--accent); transform:scaleX(0); transition:transform .3s; }
+    .why-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,51,102,.08); }
+    .why-card:hover::after { transform:scaleX(1); }
+    .why-icon { width:56px; height:56px; background:#eff6ff; color:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:20px; }
+    .why-card h4 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--primary); margin-bottom:10px; }
+    .why-card p  { font-size:.88rem; color:var(--muted); line-height:1.6; margin:0; }
+
+    /* ── CÓMO FUNCIONA ───────────────────────────── */
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; position:relative; }
+    .steps-grid::before { content:''; position:absolute; top:32px; left:calc(16.66% + 24px); right:calc(16.66% + 24px); height:2px; background:linear-gradient(to right,var(--accent),var(--primary)); }
+    .step { text-align:center; }
+    .step-num { width:64px; height:64px; background:var(--primary); color:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; margin:0 auto 20px; position:relative; z-index:2; border:4px solid #fff; box-shadow:0 4px 16px rgba(0,51,102,.2); }
+    .step h4 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--primary); margin-bottom:10px; }
+    .step p  { font-size:.88rem; color:var(--muted); }
+
+    /* ── CALCULADORA ─────────────────────────────── */
+    .calculator-wrap { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%); border-radius:8px; padding:55px; position:relative; overflow:hidden; }
+    .calculator-wrap::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:var(--accent); opacity:.08; border-radius:50%; }
+    .calc-form { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:16px; align-items:end; margin:30px 0; }
+    .calc-field label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.65); margin-bottom:8px; font-weight:600; }
+    .calc-field input, .calc-field select { width:100%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:14px 16px; border-radius:var(--radius); font-size:.95rem; font-family:'Inter',sans-serif; }
+    .calc-field input::placeholder { color:rgba(255,255,255,.5); }
+    .calc-field input:focus, .calc-field select:focus { outline:none; border-color:var(--accent); background:rgba(255,255,255,.18); }
+    .calc-field select option { background:var(--primary); color:#fff; }
+    .calc-submit { background:var(--accent); color:var(--primary); border:none; padding:14px 28px; border-radius:var(--radius); font-weight:700; font-size:.88rem; text-transform:uppercase; letter-spacing:.1em; cursor:pointer; transition:all .3s; white-space:nowrap; }
+    .calc-submit:hover { background:var(--accent-light); }
+    /* Results */
+    #calcResult { margin-top:24px; }
+    .calc-yes,.calc-no { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:var(--radius); padding:28px; backdrop-filter:blur(8px); }
+    .calc-result-icon { font-size:2rem; margin-bottom:12px; }
+    .calc-yes h3,.calc-no h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.4rem; margin-bottom:18px; }
+    .calc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:22px; }
+    .calc-item { background:rgba(255,255,255,.08); padding:14px 16px; border-radius:var(--radius); }
+    .calc-label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.6); margin-bottom:6px; }
+    .calc-value { display:block; font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--accent); font-weight:700; }
+    .calc-value small { font-size:.8rem; font-family:'Inter',sans-serif; font-weight:400; }
+    .calc-value.warn { color:#fbbf24; }
+    .calc-no ul { color:rgba(255,255,255,.8); font-size:.9rem; padding-left:20px; margin-bottom:20px; }
+    .calc-no ul li { margin-bottom:6px; }
+    .calc-wa-btn { display:inline-flex; align-items:center; justify-content:center; background:#25D366; color:#fff; padding:14px 24px; border-radius:var(--radius); text-decoration:none; font-weight:700; font-size:.88rem; text-transform:uppercase; letter-spacing:.08em; transition:all .3s; width:100%; }
+    .calc-wa-btn:hover { background:#128C7E; color:#fff; }
+    .calc-disclaimer { color:rgba(255,255,255,.5); font-size:.75rem; margin-top:14px; text-align:center; }
+
+    /* ── ALERTA DE PROPIEDADES ───────────────────── */
+    .alert-box { background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%); border:1px solid var(--border); border-radius:var(--radius); padding:48px; }
+    .alert-form { display:grid; grid-template-columns:1fr 1fr 1fr 1fr auto; gap:14px; align-items:end; margin-top:28px; }
+    .alert-field label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--primary); margin-bottom:7px; font-weight:600; }
+    .alert-field input,.alert-field select { width:100%; border:none; border-bottom:1px solid var(--border); padding:10px 0; font-size:.92rem; background:transparent; color:var(--text); font-family:'Inter',sans-serif; }
+    .alert-field input:focus,.alert-field select:focus { outline:none; border-bottom-color:var(--accent); }
+    .alert-submit { background:var(--primary); color:#fff; border:none; padding:12px 24px; border-radius:var(--radius); font-weight:600; font-size:.82rem; text-transform:uppercase; letter-spacing:.08em; cursor:pointer; transition:all .3s; white-space:nowrap; }
+    .alert-submit:hover { background:var(--accent); }
+
+    /* ── PUBLICAR / TASACION FORM ────────────────── */
+    .pub-box { background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 100%); border-radius:var(--radius); padding:55px; }
+    .form-ctrl { width:100%; border:none; border-bottom:1px solid var(--border); padding:12px 0; font-size:.95rem; background:transparent; color:var(--text); font-family:'Inter',sans-serif; margin-bottom:16px; }
+    .form-ctrl:focus { outline:none; border-bottom-color:var(--accent); }
+    .form-label { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--primary); margin-bottom:7px; font-weight:600; }
+    .btn-wa { background:#25D366; color:#fff; border:none; padding:15px; border-radius:var(--radius); width:100%; font-size:.95rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; cursor:pointer; transition:all .3s; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:6px; }
+    .btn-wa:hover { background:#128C7E; }
+    .btn-wa-dark { background:var(--primary); }
+    .btn-wa-dark:hover { background:var(--accent); }
+    .check-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; font-size:.9rem; color:var(--text); }
+    .check-item i { color:var(--green); margin-top:2px; flex-shrink:0; }
+
+    /* ── MORTGAGE BANNER ─────────────────────────── */
+    .mortgage-banner { background:var(--primary); color:#fff; border-radius:var(--radius); padding:44px 48px; display:flex; align-items:center; justify-content:space-between; gap:30px; position:relative; overflow:hidden; }
+    .mortgage-banner::before { content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px; background:var(--accent); opacity:.1; border-radius:50%; }
+    .mortgage-banner h3 { font-family:'Playfair Display',serif; font-size:1.6rem; margin-bottom:8px; }
+    .mortgage-banner p  { opacity:.8; font-size:.92rem; margin:0; }
+    .btn-pill { display:inline-block; background:var(--accent); color:var(--primary); font-weight:700; padding:13px 28px; border-radius:50px; text-decoration:none; font-size:.88rem; text-transform:uppercase; letter-spacing:.08em; transition:all .3s; white-space:nowrap; }
+    .btn-pill:hover { background:var(--accent-light); color:var(--primary); }
+
+    /* ── TESTIMONIALS ────────────────────────────── */
+    .testimonial-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:34px; height:100%; position:relative; }
+    .testimonial-card::before { content:'"'; position:absolute; top:8px; left:22px; font-size:5rem; color:var(--accent); opacity:.2; font-family:'Playfair Display',serif; line-height:1; }
+    .testimonial-stars { color:#fbbf24; margin-bottom:14px; }
+    .testimonial-text { font-style:italic; color:var(--text); margin-bottom:22px; position:relative; z-index:1; font-size:.95rem; line-height:1.65; }
+    .testimonial-author { display:flex; align-items:center; gap:14px; padding-top:18px; border-top:1px solid var(--border); }
+    .testimonial-avatar { width:46px; height:46px; border-radius:50%; background:var(--primary); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; font-family:'Playfair Display',serif; flex-shrink:0; }
+    .testimonial-name { font-weight:600; margin:0; font-size:.92rem; color:var(--primary); }
+    .testimonial-loc  { color:var(--muted); font-size:.8rem; margin:0; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer { background:#111827; color:#9ca3af; padding:64px 0 28px; }
+    footer h5 { color:#fff; font-weight:600; margin-bottom:20px; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; }
+    footer a { color:#9ca3af; text-decoration:none; display:block; margin-bottom:9px; font-size:.88rem; transition:color .3s; }
+    footer a:hover { color:var(--accent); }
+    .footer-brand { font-family:'Playfair Display',serif; font-size:1.8rem; color:#fff; font-weight:700; margin-bottom:14px; display:block; }
+    .footer-brand span { color:var(--accent); }
+    .footer-social { display:flex; gap:12px; margin-top:16px; }
+    .footer-social a { display:flex; align-items:center; justify-content:center; width:38px; height:38px; background:rgba(255,255,255,.08); border-radius:50%; font-size:1rem; color:#9ca3af; transition:all .3s; margin:0; }
+    .footer-social a:hover { background:var(--accent); color:var(--primary); }
+
+    /* ── CHATBOT ─────────────────────────────────── */
+    .chatbot-float { position:fixed; bottom:30px; left:30px; background:var(--primary); color:#fff; height:56px; border-radius:50px; display:flex; align-items:center; padding:0 22px; gap:10px; box-shadow:0 4px 20px rgba(0,51,102,.35); z-index:1000; cursor:pointer; border:none; font-weight:600; font-size:.88rem; text-transform:uppercase; letter-spacing:.06em; animation:pulseBlue 3s infinite; transition:all .3s; }
+    .chatbot-float:hover { background:var(--accent); transform:translateY(-3px); }
+    @keyframes pulseBlue { 0%{box-shadow:0 0 0 0 rgba(0,51,102,.4)} 70%{box-shadow:0 0 0 10px rgba(0,51,102,0)} 100%{box-shadow:0 0 0 0 rgba(0,51,102,0)} }
+    .chatbot-window { position:fixed; bottom:100px; left:30px; width:370px; max-width:calc(100vw - 40px); background:#fff; border-radius:var(--radius); box-shadow:0 16px 50px rgba(0,0,0,.2); z-index:1001; overflow:hidden; display:none; }
+    .chatbot-window.active { display:block; animation:slideUp .3s ease-out; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .chatbot-header { background:var(--primary); color:#fff; padding:18px 22px; display:flex; justify-content:space-between; align-items:center; }
+    .chatbot-header h5 { margin:0; font-family:'Playfair Display',serif; font-size:1rem; font-weight:600; }
+    .chatbot-close { background:none; border:none; color:#fff; font-size:1.1rem; cursor:pointer; opacity:.8; }
+    .chatbot-close:hover { opacity:1; }
+    .chatbot-body { padding:20px; max-height:420px; overflow-y:auto; }
+    .chatbot-message { background:#f3f4f6; padding:14px 16px; border-radius:var(--radius); margin-bottom:16px; font-size:.88rem; line-height:1.55; }
+    .chatbot-options { display:flex; flex-direction:column; gap:9px; }
+    .chatbot-option { background:#fff; border:1px solid var(--border); padding:13px 16px; border-radius:var(--radius); cursor:pointer; font-size:.86rem; text-align:left; color:var(--text); display:flex; align-items:center; transition:all .2s; }
+    .chatbot-option:hover { border-color:var(--primary); background:#eff6ff; transform:translateX(5px); }
+    .chatbot-option i { color:var(--primary); margin-right:12px; width:18px; text-align:center; }
+    .chatbot-back { background:none; border:none; color:var(--primary); font-size:.82rem; font-weight:600; cursor:pointer; margin-bottom:14px; padding:0; }
+    .chatbot-response { background:#eff6ff; padding:16px; border-radius:var(--radius); border-left:3px solid var(--accent); margin-bottom:14px; font-size:.88rem; line-height:1.55; }
+    .chatbot-wa-btn { background:#25D366; color:#fff; border:none; padding:13px; border-radius:var(--radius); width:100%; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; font-size:.85rem; text-transform:uppercase; }
+    .chatbot-wa-btn:hover { background:#128C7E; color:#fff; }
+    .whatsapp-float { position:fixed; bottom:30px; right:30px; background:#25D366; color:#fff; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 4px 20px rgba(37,211,102,.4); z-index:1000; text-decoration:none; transition:transform .3s; }
+    .whatsapp-float:hover { transform:scale(1.1); color:#fff; }
+
+    /* ── MODAL ───────────────────────────────────── */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,34,68,.78); z-index:2000; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+    .modal-overlay.active { display:flex; }
+    .modal-container { background:#fff; border-radius:var(--radius); max-width:920px; width:100%; max-height:88vh; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; position:relative; animation:modalIn .25s ease-out; }
+    @keyframes modalIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
+    .modal-close { position:absolute; top:14px; right:14px; z-index:10; background:#fff; border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:.95rem; color:var(--primary); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,.18); transition:all .2s; }
+    .modal-close:hover { background:var(--accent); color:#fff; }
+    .modal-img-panel { background-size:cover; background-position:center; min-height:380px; position:relative; }
+    .modal-badges-over { position:absolute; top:14px; left:14px; display:flex; gap:7px; flex-wrap:wrap; }
+    .modal-info-panel { padding:32px; overflow-y:auto; max-height:88vh; display:flex; flex-direction:column; }
+    .modal-location { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+    .modal-title { font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--primary); margin-bottom:12px; line-height:1.25; }
+    .modal-price { font-family:'Playfair Display',serif; font-size:1.85rem; font-weight:700; color:var(--primary); margin-bottom:18px; }
+    .modal-specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+    .modal-spec { display:flex; align-items:center; gap:8px; font-size:.84rem; padding:9px 10px; background:var(--cream); border-radius:var(--radius); }
+    .modal-spec i { color:var(--accent); font-size:.9rem; flex-shrink:0; }
+    .modal-divider { height:1px; background:var(--border); margin:12px 0; }
+    .modal-desc { font-size:.88rem; color:var(--muted); line-height:1.65; margin-bottom:14px; }
+    .modal-extras { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
+    .modal-extra { background:var(--cream); border:1px solid var(--border); padding:4px 12px; border-radius:20px; font-size:.75rem; color:var(--primary); }
+    .modal-actions { display:flex; gap:10px; margin-top:auto; padding-top:8px; }
+    .modal-wa-btn { flex:1; background:#25D366; color:#fff; padding:14px; border-radius:var(--radius); text-align:center; text-decoration:none; font-weight:700; font-size:.85rem; text-transform:uppercase; letter-spacing:.07em; display:flex; align-items:center; justify-content:center; transition:all .3s; }
+    .modal-wa-btn:hover { background:#128C7E; color:#fff; }
+    .modal-fav-btn { width:48px; background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer; font-size:1.15rem; color:var(--primary); display:flex; align-items:center; justify-content:center; transition:all .3s; }
+    .modal-fav-btn:hover,.modal-fav-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media(max-width:1100px){
+      .cat-grid{grid-template-columns:repeat(3,1fr);}
+      .calc-form{grid-template-columns:1fr 1fr;}
+      .calc-form .calc-submit{grid-column:1/-1;}
+      .alert-form{grid-template-columns:1fr 1fr;}
+      .alert-form .alert-submit{grid-column:1/-1;}
+    }
+    @media(max-width:900px){
+      .hero-title{font-size:2.6rem;}
+      .why-grid,.steps-grid{grid-template-columns:1fr;}
+      .steps-grid::before{display:none;}
+      .modal-container{grid-template-columns:1fr;max-height:92vh;overflow-y:auto;}
+      .modal-img-panel{min-height:240px;}
+      .modal-info-panel{max-height:none;}
+      .modal-specs-grid{grid-template-columns:1fr;}
+      .calc-grid{grid-template-columns:1fr;}
+      .mortgage-banner{flex-direction:column;text-align:center;}
+    }
+    @media(max-width:768px){
+      .hero{min-height:auto;padding:90px 0 60px;}
+      .hero-title{font-size:2rem;}
+      .stats-strip-grid{grid-template-columns:repeat(2,1fr);}
+      .cat-grid{grid-template-columns:repeat(2,1fr);}
+      .search-tabs{flex-wrap:wrap;}
+      .search-tab{flex:none;font-size:.7rem;padding:12px 10px;}
+      .search-row{flex-direction:column;}
+      .search-btn{width:100%;}
+      .pub-box{padding:30px 20px;}
+      .calculator-wrap{padding:32px 22px;}
+      .calc-form{grid-template-columns:1fr;}
+      .alert-form{grid-template-columns:1fr;}
+      .section{padding:60px 0;}
+      .section-h{font-size:2rem;}
+      .chatbot-float{bottom:20px;left:20px;width:56px;height:56px;padding:0;border-radius:50%;}
+      .chatbot-label{display:none;}
+      .chatbot-window{left:15px;right:15px;width:auto;bottom:88px;}
+      .whatsapp-float{bottom:20px;right:20px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ──────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <span class="brand-name">Grupo Inversa</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#propiedades">Propiedades</a></li>
+        <li class="nav-item"><a class="nav-link" href="#credito">Crédito UVA</a></li>
+        <li class="nav-item"><a class="nav-link" href="#hipotecario">Hipotecario</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tasacion">Tasación</a></li>
+        <li class="nav-item"><a class="nav-link" href="#opiniones">Opiniones</a></li>
+      </ul>
+      <a href="#publicar" class="btn-nav"><i class="fas fa-plus-circle me-2"></i>Publicá tu Propiedad</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <span class="hero-eyebrow">Inmobiliaria en San Juan</span>
+        <h1 class="hero-title">Tu casa en San Juan,<br><em>más cerca de lo que creés.</em></h1>
+        <p class="hero-sub">Especialistas en alquileres, ventas, galpones, terrenos y proyectos en pozo en todo el Gran San Juan. Atención personalizada, sin vueltas.</p>
+
+        <!-- BUSCADOR -->
+        <div class="search-box">
+          <div class="search-tabs">
+            <button class="search-tab active" data-tab="alquiler">Alquilar</button>
+            <button class="search-tab" data-tab="comprar">Comprar</button>
+            <button class="search-tab" data-tab="galpones">Galpones</button>
+            <button class="search-tab" data-tab="terrenos">Terrenos</button>
+            <button class="search-tab" data-tab="pozo">En Pozo</button>
+          </div>
+          <div class="search-body">
+            <div class="search-row">
+              <input id="searchInput" class="search-input" type="text"
+                     placeholder="Zona o barrio: Capital, Rivadavia, Rawson, Caucete...">
+              <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search me-2"></i>Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS HERO -->
+    <div class="hero-stats">
+      <div class="hero-stat"><strong id="counter_props">0</strong><span>Propiedades activas</span></div>
+      <div class="hero-stat"><strong id="counter_años">0</strong><span>Años de experiencia</span></div>
+      <div class="hero-stat"><strong id="counter_ops">0</strong><span>Operaciones cerradas</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS STRIP ─────────────────────────────────────── -->
+<div class="stats-strip d-none d-md-block">
+  <div class="container">
+    <div class="stats-strip-grid">
+      <div><span class="stat-num" id="cfg_props">—</span><span class="stat-lbl">Propiedades activas</span></div>
+      <div><span class="stat-num" id="cfg_años">—</span><span class="stat-lbl">Años en el mercado</span></div>
+      <div><span class="stat-num" id="cfg_ops">—</span><span class="stat-lbl">Operaciones cerradas</span></div>
+      <div><span class="stat-num">24hs</span><span class="stat-lbl">Tasación gratuita</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CATEGORÍAS ──────────────────────────────────────── -->
+<section class="section section-cream" id="categorias">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Explorá por tipo</span>
+      <h2 class="section-h">¿Qué estás buscando?</h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="filtrarCategoria('casas')">
+        <div class="cat-icon"><i class="fas fa-home"></i></div>
+        <h4>Casas</h4>
+        <p>Alquiler y venta</p>
+      </div>
+      <div class="cat-card" onclick="filtrarCategoria('departamentos')">
+        <div class="cat-icon"><i class="fas fa-building"></i></div>
+        <h4>Departamentos</h4>
+        <p>Alquiler y venta</p>
+      </div>
+      <div class="cat-card" onclick="filtrarCategoria('galpones')">
+        <div class="cat-icon"><i class="fas fa-warehouse"></i></div>
+        <h4>Galpones y Locales</h4>
+        <p>Comercial e industrial</p>
+      </div>
+      <div class="cat-card" onclick="filtrarCategoria('terrenos')">
+        <div class="cat-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h4>Terrenos</h4>
+        <p>Para construir e invertir</p>
+      </div>
+      <div class="cat-card" onclick="filtrarCategoria('pozo')">
+        <div class="cat-icon"><i class="fas fa-hard-hat"></i></div>
+        <h4>Proyectos en Pozo</h4>
+        <p>Con financiación en pesos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROPIEDADES ─────────────────────────────────────── -->
+<section class="section" id="propiedades">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Oportunidades del mercado</span>
+      <h2 class="section-h" id="propiedadesTitle">Propiedades destacadas</h2>
+      <p class="section-sub" id="propiedadesSubtitle">Una selección de las mejores oportunidades del mercado hoy.</p>
+    </div>
+    <div class="row g-4" id="propiedadesGrid">
+      <!-- Renderizado por app.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ── POR QUÉ ELEGIRNOS ───────────────────────────────── -->
+<section class="section section-cream">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Nuestra diferencia</span>
+      <h2 class="section-h">¿Por qué elegirnos?</h2>
+      <p class="section-sub">No somos un portal. Somos profesionales que conocen cada barrio de San Juan y te acompañan en cada paso.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h4>Conocemos el mercado local</h4>
+        <p>Operamos en San Juan hace más de <strong id="cfg_años" style="color:var(--primary);">18</strong> años. Conocemos cada barrio, cada precio, cada tendencia. Nada se nos escapa.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-user-tie"></i></div>
+        <h4>Atención de personas reales</h4>
+        <p>No sos un número en una lista. Te atendemos personalmente, te respondemos rápido y te asesoramos de verdad, sin vueltas ni presiones.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-file-contract"></i></div>
+        <h4>Gestión completa y legal</h4>
+        <p>Desde la tasación hasta la escritura. Redactamos contratos, gestionamos el crédito hipotecario y coordinamos todo para que vos no tengas que preocuparte.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-camera"></i></div>
+        <h4>Marketing profesional</h4>
+        <p>Fotos y videos de calidad, publicación en todos los portales y redes sociales. Tu propiedad se ve bien y llega a los compradores correctos.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-chart-line"></i></div>
+        <h4>Tasación real y gratuita</h4>
+        <p>Te damos el valor real de tu propiedad en menos de 24 horas, basado en operaciones recientes de tu zona. Sin compromiso.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-university"></i></div>
+        <h4>Asesoramiento hipotecario</h4>
+        <p>Trabajamos con propiedades aptas para crédito UVA. Te orientamos en qué banco, qué requisitos y cuánto podés acceder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ───────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Simple y transparente</span>
+      <h2 class="section-h">¿Cómo funciona?</h2>
+      <p class="section-sub">Tres pasos para vender, alquilar o encontrar la propiedad que buscás.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Nos contactás</h4>
+        <p>Por WhatsApp, teléfono o el formulario de la web. Te respondemos en minutos, no en días.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Analizamos juntos</h4>
+        <p>Tasamos, buscamos o evaluamos las opciones. Te explicamos todo sin tecnicismos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Cerramos la operación</h4>
+        <p>Gestionamos contratos, escrituras y todo el papeleo. Vos firmás tranquilo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CALCULADORA DE CRÉDITO ──────────────────────────── -->
+<section class="section section-cream" id="credito">
+  <div class="container">
+    <div class="calculator-wrap">
+      <div class="row">
+        <div class="col-lg-8">
+          <span class="eyebrow" style="color:var(--accent-light);">Crédito Hipotecario UVA</span>
+          <h2 class="section-h" style="color:#fff;font-size:2.2rem;">
+            ¿Podés comprarte una casa<br>con crédito hoy?
+          </h2>
+          <p style="color:rgba(255,255,255,.75);font-size:.95rem;margin-bottom:8px;">
+            Calculá en segundos si tu ingreso familiar te alcanza para acceder a un crédito hipotecario UVA. Completamente gratis y sin datos personales.
+          </p>
+        </div>
+      </div>
+      <div class="calc-form">
+        <div class="calc-field">
+          <label>Precio de la propiedad (ARS)</label>
+          <input id="calc_precio" type="number" placeholder="ej: 120000000">
+        </div>
+        <div class="calc-field">
+          <label>Ingreso familiar mensual (ARS)</label>
+          <input id="calc_ingreso" type="number" placeholder="ej: 3000000">
+        </div>
+        <div class="calc-field">
+          <label>Plazo del crédito</label>
+          <select id="calc_plazo">
+            <option value="240">20 años</option>
+            <option value="300" selected>25 años</option>
+            <option value="360">30 años</option>
+          </select>
+        </div>
+        <button class="calc-submit" onclick="calcularCredito()">
+          <i class="fas fa-calculator me-2"></i>Calcular
+        </button>
+      </div>
+      <div id="calcResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ALERTAS DE PROPIEDADES ──────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="alert-box">
+      <div class="row align-items-center mb-2">
+        <div class="col-lg-5">
+          <span class="eyebrow">Servicio gratuito</span>
+          <h2 class="section-h" style="font-size:2rem;">Recibí alertas de propiedades</h2>
+          <p style="color:var(--muted);font-size:.92rem;">¿No encontrás lo que buscás? Dejanos tu criterio y te avisamos por WhatsApp cuando entre algo que coincida. Sin spam, sin suscripciones.</p>
+        </div>
+        <div class="col-lg-7">
+          <form onsubmit="enviarAlerta(event)">
+            <div class="alert-form">
+              <div class="alert-field">
+                <label>Zona</label>
+                <input id="alerta_zona" type="text" placeholder="Capital, Rivadavia...">
+              </div>
+              <div class="alert-field">
+                <label>Tipo</label>
+                <select id="alerta_tipo">
+                  <option value="">Cualquiera</option>
+                  <option>Casa</option>
+                  <option>Departamento</option>
+                  <option>Galpón</option>
+                  <option>Terreno</option>
+                  <option>Proyecto en pozo</option>
+                </select>
+              </div>
+              <div class="alert-field">
+                <label>Precio máximo</label>
+                <input id="alerta_precio" type="text" placeholder="ej: USD 120.000">
+              </div>
+              <div class="alert-field">
+                <label>Tu WhatsApp</label>
+                <input id="alerta_wa" type="tel" placeholder="+54 9 264..." required>
+              </div>
+              <button type="submit" class="alert-submit">
+                <i class="fas fa-bell me-2"></i>Activar alerta
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PUBLICAR ─────────────────────────────────────────── -->
+<section class="section section-cream" id="publicar">
+  <div class="container">
+    <div class="pub-box">
+      <div class="row align-items-start">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <span class="eyebrow">Para propietarios</span>
+          <h2 class="section-h" style="font-size:2.1rem;">¿Tenés una propiedad y querés publicarla?</h2>
+          <p style="color:var(--muted);margin-bottom:24px;font-size:.92rem;">Nos encargamos de todo. Publicamos en portales y redes, hacemos la tasación, sacamos fotos profesionales y te asesoramos legalmente.</p>
+          <div class="check-item"><i class="fas fa-check-circle"></i> Tasación comercial gratuita en 24hs</div>
+          <div class="check-item"><i class="fas fa-check-circle"></i> Fotografía y video profesional</div>
+          <div class="check-item"><i class="fas fa-check-circle"></i> Publicación en todos los portales</div>
+          <div class="check-item"><i class="fas fa-check-circle"></i> Contratos y asesoramiento legal</div>
+          <div class="check-item"><i class="fas fa-check-circle"></i> Aceptamos propiedades apta crédito UVA</div>
+        </div>
+        <div class="col-lg-7">
+          <form onsubmit="enviarPublicar(event)">
+            <h4 class="serif mb-4" style="color:var(--primary);">Cargá los datos de tu propiedad</h4>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Tu nombre</label>
+                <input id="pub_nombre" class="form-ctrl" type="text" required placeholder="Nombre completo">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tu WhatsApp</label>
+                <input id="pub_telefono" class="form-ctrl" type="tel" required placeholder="+54 9 264...">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tipo de propiedad</label>
+                <select id="pub_tipo" class="form-ctrl" required>
+                  <option value="">Seleccioná...</option>
+                  <option>Casa</option>
+                  <option>Departamento</option>
+                  <option>PH</option>
+                  <option>Terreno</option>
+                  <option>Galpón / Local</option>
+                  <option>Proyecto en Pozo</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">¿Qué querés hacer?</label>
+                <select id="pub_operacion" class="form-ctrl" required>
+                  <option value="">Seleccioná...</option>
+                  <option>Alquilar</option>
+                  <option>Vender</option>
+                  <option>Vender (Apto Crédito UVA)</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Ubicación</label>
+                <input id="pub_ubicacion" class="form-ctrl" type="text" required placeholder="Barrio o localidad">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Detalles adicionales</label>
+                <textarea id="pub_mensaje" class="form-ctrl" rows="3" placeholder="Ambientes, metros cuadrados, características..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn-wa mt-2">
+              <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HIPOTECARIO ─────────────────────────────────────── -->
+<section class="section-sm" id="hipotecario">
+  <div class="container">
+    <div class="mortgage-banner">
+      <div>
+        <h3><i class="fas fa-university me-3"></i>Aceptamos propiedades para Crédito Hipotecario</h3>
+        <p>Si tu propiedad cumple con los requisitos bancarios, te ayudamos a gestionarla para que el comprador acceda a los mejores planes UVA del mercado.</p>
+      </div>
+      <a href="#publicar" class="btn-pill">Consultar ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TASACIÓN ────────────────────────────────────────── -->
+<section class="section section-cream" id="tasacion">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center mb-5">
+        <span class="eyebrow">Servicio gratuito</span>
+        <h2 class="section-h">¿Cuánto vale tu propiedad?</h2>
+        <p style="color:var(--muted);">Te enviamos una tasación orientativa en menos de 24 horas. Gratis, sin compromiso y basada en operaciones reales de tu zona.</p>
+      </div>
+      <div class="col-lg-5">
+        <form onsubmit="enviarTasacion(event)">
+          <label class="form-label">Tu nombre</label>
+          <input id="tas_nombre" class="form-ctrl" type="text" required placeholder="Nombre completo">
+          <label class="form-label">Tu WhatsApp</label>
+          <input id="tas_telefono" class="form-ctrl" type="tel" required placeholder="+54 9 264...">
+          <label class="form-label">Dirección o barrio</label>
+          <input id="tas_direccion" class="form-ctrl" type="text" required placeholder="Barrio o localidad de la propiedad">
+          <label class="form-label">Tipo de propiedad</label>
+          <select id="tas_tipo" class="form-ctrl" required>
+            <option value="">Seleccioná...</option>
+            <option>Casa</option>
+            <option>Departamento</option>
+            <option>PH</option>
+            <option>Terreno</option>
+            <option>Galpón</option>
+            <option>Local comercial</option>
+          </select>
+          <button type="submit" class="btn-wa btn-wa-dark mt-2">
+            <i class="fas fa-chart-line"></i> Pedir tasación gratis
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OPINIONES ───────────────────────────────────────── -->
+<section class="section" id="opiniones">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Lo que dicen nuestros clientes</span>
+      <h2 class="section-h">Clientes que confiaron</h2>
+      <p class="section-sub">Más de <strong id="cfg_ops" style="color:var(--primary);">300</strong> operaciones cerradas en San Juan. La experiencia nos respalda.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"Vendí mi departamento en el centro en 3 semanas y al mejor precio. El equipo es profesional, honesto y siempre disponible. La experiencia fue excelente de principio a fin."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">V</div>
+            <div><p class="testimonial-name">Verónica M.</p><p class="testimonial-loc">Capital, San Juan</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"Buscamos casa por meses y con ellos la encontramos en 2 semanas. Nos acompañaron en cada paso, desde la visita hasta la escritura. 100% recomendados."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div><p class="testimonial-name">Roberto y Cecilia F.</p><p class="testimonial-loc">Rivadavia, San Juan</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"La tasación online me dio el valor real en 24hs sin visitas molestas. Después los contraté para vender mi galpón y la operación salió perfecta. Muy profesionales."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">D</div>
+            <div><p class="testimonial-name">Diego A.</p><p class="testimonial-loc">Chimbas, San Juan</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <span class="footer-brand brand-name">Grupo <span>Inversa</span></span>
+        <p id="cfg_slogan" style="font-size:.88rem;">Especialistas en propiedades en San Juan.</p>
+        <p style="margin-top:14px;font-size:.85rem;">
+          <i class="fas fa-phone me-2" style="color:var(--accent);"></i><span id="cfg_telefono"></span><br>
+          <i class="fas fa-envelope me-2 mt-2" style="color:var(--accent);"></i><span id="cfg_email"></span><br>
+          <i class="fas fa-map-marker-alt me-2 mt-2" style="color:var(--accent);"></i><span id="cfg_direccion"></span><br>
+          <i class="fas fa-clock me-2 mt-2" style="color:var(--accent);"></i><span id="cfg_horario"></span>
+        </p>
+        <div class="footer-social">
+          <a href="#" id="socialIG" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" id="socialFB" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" id="waFloat" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <h5>Propiedades</h5>
+        <a href="#propiedades">Alquileres</a>
+        <a href="#propiedades">Ventas</a>
+        <a href="#propiedades">Galpones</a>
+        <a href="#propiedades">Terrenos</a>
+        <a href="#propiedades">Proyectos en Pozo</a>
+      </div>
+      <div class="col-lg-2">
+        <h5>Zonas</h5>
+        <div id="footerZonas"></div>
+      </div>
+      <div class="col-lg-2">
+        <h5>Servicios</h5>
+        <a href="#publicar">Publicar propiedad</a>
+        <a href="#tasacion">Tasación gratuita</a>
+        <a href="#hipotecario">Crédito Hipotecario</a>
+        <a href="#credito">Calculadora UVA</a>
+      </div>
+      <div class="col-lg-2">
+        <h5>Contacto rápido</h5>
+        <a href="#" id="waFloat2">
+          <i class="fab fa-whatsapp me-2" style="color:#25D366;"></i>WhatsApp
+        </a>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,.1);margin:40px 0 20px;">
+    <div class="text-center" style="font-size:.8rem;">
+      &copy; 2026 <span class="brand-name">Grupo Inversa</span> &nbsp;&middot;&nbsp; San Juan, Argentina &nbsp;&middot;&nbsp;
+      Portal desarrollado por <a href="https://grupoinversa.com.ar" style="color:var(--accent);display:inline;">Grupo Inversa</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── CHATBOT ─────────────────────────────────────────── -->
+<button class="chatbot-float" onclick="toggleChatbot()">
+  <i class="fas fa-comment-dots"></i>
+  <span class="chatbot-label">Asistente Virtual</span>
+</button>
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <h5><i class="fas fa-concierge-bell me-2"></i>Asistente Virtual</h5>
+    <button class="chatbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chatbot-body" id="chatbotBody"></div>
+</div>
+
+<!-- ── WHATSAPP FLOAT ──────────────────────────────────── -->
+<a href="#" class="whatsapp-float" id="waFloat" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ── MODAL DE PROPIEDAD ─────────────────────────────── -->
+<div class="modal-overlay" id="propModal" onclick="closeModalOverlay(event)">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closePropModal()"><i class="fas fa-times"></i></button>
+
+    <!-- Imagen -->
+    <div class="modal-img-panel" id="modalImg">
+      <div class="modal-badges-over" id="modalBadges"></div>
+    </div>
+
+    <!-- Info -->
+    <div class="modal-info-panel">
+      <div class="modal-location" id="modalLocation"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-specs-grid" id="modalSpecs"></div>
+      <div class="modal-divider"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-extras" id="modalExtras"></div>
+      <div class="modal-actions">
+        <a href="#" class="modal-wa-btn" id="modalWaBtn" target="_blank">
+          <i class="fab fa-whatsapp me-2"></i>Consultar por WhatsApp
+        </a>
+        <button class="modal-fav-btn" id="modalFavBtn">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCRIPTS ─────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="config.js"></script>
+<script src="data/propiedades.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Fix segundo link de WA en footer
+  document.addEventListener('DOMContentLoaded', () => {
+    const wa2 = document.getElementById('waFloat2');
+    if (wa2 && window.AGENCIA_CONFIG?.whatsapp) {
+      wa2.href = `https://wa.me/${window.AGENCIA_CONFIG.whatsapp}`;
+    }
+  });
+</script>
+</body>
+</html>

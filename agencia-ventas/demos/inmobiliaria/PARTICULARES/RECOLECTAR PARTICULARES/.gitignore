@@ -1,0 +1,38 @@
+# ─── Cloudflare Wrangler ───────────────────
+.wrangler/
+.dev.vars          # ⚠️  Contiene API keys — NUNCA subir a Git
+
+# ─── Variables de entorno ──────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── Node (si usás wrangler CLI localmente) ─
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+
+# ─── Editores ──────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── Sistema operativo ─────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ─── Logs ──────────────────────────────────
+*.log
+logs/

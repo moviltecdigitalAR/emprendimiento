@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sabores de Casa | Viandas Caseras - San Juan</title>
+<meta name="description" content="Pedí tus viandas caseras online. Entrega hoy al mediodía en San Juan.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   VARIABLES & RESET
+   =========================== */
+:root{
+  --primary:#F97316;
+  --primary2:#FB923C;
+  --dark:#0f0f0f;
+  --card:#1a1a1a;
+  --card2:#242424;
+  --card3:#2a2a2a;
+  --text:#fff;
+  --gray:#999;
+  --gray2:#666;
+  --green:#25D366;
+  --radius:14px;
+  --radius-sm:10px;
+  --trans:.2s ease;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{font-family:'DM Sans',sans-serif;cursor:pointer}
+img{display:block}
+
+/* ===========================
+   NAV
+   =========================== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(15,15,15,.95);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:13px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:900;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+.nav-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.nav-badge{
+  font-size:.62rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#000;padding:4px 10px;border-radius:20px;white-space:nowrap;
+}
+.nav-cta{
+  font-size:.82rem;font-weight:700;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#000;padding:8px 18px;border-radius:50px;border:none;
+  transition:transform var(--trans),box-shadow var(--trans);
+  box-shadow:0 4px 18px rgba(249,115,22,.25);
+  white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(249,115,22,.38)}
+
+/* ===========================
+   PLAN BADGE FIXED
+   =========================== */
+.plan-badge-fixed{
+  position:fixed;top:68px;right:14px;z-index:999;
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:#fff;font-size:.6rem;font-weight:800;letter-spacing:.8px;
+  text-transform:uppercase;padding:5px 11px;border-radius:20px;
+  box-shadow:0 4px 14px rgba(124,58,237,.4);
+}
+
+/* ===========================
+   HERO
+   =========================== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:120px 24px 80px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-40%;right:-25%;
+  width:650px;height:650px;
+  background:radial-gradient(circle,rgba(249,115,22,.13),transparent 68%);
+  border-radius:50%;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-25%;left:-15%;
+  width:480px;height:480px;
+  background:radial-gradient(circle,rgba(251,146,60,.08),transparent 68%);
+  border-radius:50%;pointer-events:none;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);
+  border-radius:50px;padding:7px 16px;font-size:.8rem;font-weight:600;
+  color:var(--primary2);margin-bottom:24px;position:relative;z-index:1;
+}
+.hero-tag .dot{
+  width:7px;height:7px;background:var(--green);border-radius:50%;
+  animation:pulse 2s infinite;flex-shrink:0;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,7.5vw,4.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-2px;
+  margin-bottom:20px;max-width:720px;
+  position:relative;z-index:1;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero p{
+  font-size:1.08rem;color:var(--gray);max-width:500px;line-height:1.7;
+  margin-bottom:36px;position:relative;z-index:1;
+}
+.hero-btns{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  position:relative;z-index:1;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#000;padding:16px 32px;border-radius:50px;font-weight:700;font-size:.95rem;
+  display:inline-flex;align-items:center;gap:8px;transition:all var(--trans);
+  box-shadow:0 8px 28px rgba(249,115,22,.3);border:none;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(249,115,22,.42)}
+.btn-outline{
+  border:1.5px solid rgba(255,255,255,.18);color:#fff;
+  padding:16px 28px;border-radius:50px;font-weight:600;font-size:.95rem;
+  transition:all var(--trans);background:transparent;
+}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+
+/* ===========================
+   SECTIONS
+   =========================== */
+.sec{padding:80px 24px}
+.ctr{max-width:1140px;margin:0 auto}
+.stitle{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,5vw,2.7rem);font-weight:900;
+  text-align:center;margin-bottom:10px;letter-spacing:-1px;
+}
+.ssub{
+  text-align:center;color:var(--gray);font-size:.98rem;
+  margin-bottom:48px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.65;
+}
+
+/* ===========================
+   CATALOG GRID
+   =========================== */
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px;
+}
+.catalog-card{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.05);
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans);
+  overflow:hidden;position:relative;
+}
+.catalog-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 44px rgba(249,115,22,.12);
+  border-color:rgba(249,115,22,.18);
+}
+.catalog-card.has-items{border-color:rgba(249,115,22,.4)}
+.card-icon-wrap{
+  height:130px;
+  background:linear-gradient(135deg,var(--card2),#221a0e);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.card-icon-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));
+  pointer-events:none;
+}
+.card-emoji{font-size:3rem;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+.qty-badge{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:var(--primary);color:#000;
+  font-size:.7rem;font-weight:800;
+  width:22px;height:22px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;
+}
+.qty-badge.show{display:flex}
+.card-body{padding:16px 16px 18px}
+.card-name{font-weight:700;font-size:1rem;margin-bottom:5px;line-height:1.25}
+.card-desc{font-size:.8rem;color:var(--gray);line-height:1.5;margin-bottom:12px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-price{font-size:1.25rem;font-weight:800;color:var(--primary)}
+.card-price span{font-size:.72rem;font-weight:500;color:var(--gray2);margin-left:3px}
+.qty-controls{display:flex;align-items:center;gap:0}
+.qty-btn{
+  width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(249,115,22,.4);
+  background:transparent;color:var(--primary);font-size:1.15rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--trans);flex-shrink:0;line-height:1;
+}
+.qty-btn:hover{background:var(--primary);color:#000;border-color:var(--primary)}
+.qty-btn.minus:disabled{opacity:.3;cursor:not-allowed}
+.qty-num{
+  min-width:30px;text-align:center;font-weight:700;font-size:.95rem;
+  color:var(--text);
+}
+
+/* ===========================
+   STICKY CART BAR
+   =========================== */
+#cart-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:800;
+  background:linear-gradient(135deg,#1c1008,#1a1a1a);
+  border-top:1px solid rgba(249,115,22,.3);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 -6px 30px rgba(0,0,0,.5);
+}
+#cart-bar.visible{transform:translateY(0)}
+.cart-bar-info{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.cart-bar-icon{
+  width:40px;height:40px;background:linear-gradient(135deg,var(--primary),var(--primary2));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  position:relative;
+}
+.cart-bar-icon svg{width:20px;height:20px;fill:#000}
+.cart-bar-count{
+  position:absolute;top:-4px;right:-4px;
+  background:#fff;color:#000;font-size:.58rem;font-weight:800;
+  width:16px;height:16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.cart-bar-text{min-width:0}
+.cart-bar-items{font-size:.8rem;color:var(--gray);font-weight:500}
+.cart-bar-total{font-size:1.1rem;font-weight:800;color:var(--text);white-space:nowrap}
+.cart-bar-btn{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#000;padding:11px 22px;border-radius:50px;font-weight:700;font-size:.88rem;
+  border:none;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 4px 18px rgba(249,115,22,.35);
+  transition:transform var(--trans),box-shadow var(--trans);
+}
+.cart-bar-btn:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(249,115,22,.48)}
+
+/* ===========================
+   CART MODAL
+   =========================== */
+.modal-overlay{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.75);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .28s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-drawer{
+  width:100%;max-width:560px;
+  background:var(--card);
+  border-radius:20px 20px 0 0;
+  padding:0 0 env(safe-area-inset-bottom,16px);
+  max-height:92vh;overflow-y:auto;
+  transform:translateY(40px);
+  transition:transform .32s cubic-bezier(.34,1.2,.64,1);
+  position:relative;
+}
+.modal-overlay.open .modal-drawer{transform:translateY(0)}
+.drawer-handle{
+  width:40px;height:4px;background:rgba(255,255,255,.15);
+  border-radius:2px;margin:14px auto 0;
+}
+.drawer-header{
+  padding:18px 22px 16px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.drawer-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900}
+.drawer-close{
+  width:34px;height:34px;border-radius:50%;background:var(--card2);border:none;
+  color:var(--gray);font-size:1.3rem;display:flex;align-items:center;justify-content:center;
+  line-height:1;transition:background var(--trans),color var(--trans);
+}
+.drawer-close:hover{background:var(--card3);color:#fff}
+.drawer-body{padding:18px 22px}
+
+/* Cart items */
+.cart-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.cart-item:last-child{border-bottom:none}
+.ci-emoji{font-size:1.6rem;flex-shrink:0;width:36px;text-align:center}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-qty{font-size:.78rem;color:var(--gray);margin-top:2px}
+.ci-sub{font-weight:700;color:var(--primary);font-size:.95rem;flex-shrink:0}
+.ci-remove{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,60,60,.1);border:none;
+  color:#ff6060;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--trans);flex-shrink:0;
+}
+.ci-remove:hover{background:rgba(255,60,60,.25)}
+
+.cart-empty{
+  text-align:center;padding:40px 0;color:var(--gray);
+}
+.cart-empty-icon{font-size:3rem;margin-bottom:10px}
+.cart-empty p{font-size:.9rem}
+
+/* Total row */
+.cart-total-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0 6px;border-top:1px solid rgba(255,255,255,.08);
+  margin-top:6px;
+}
+.cart-total-label{font-weight:700;font-size:1rem}
+.cart-total-value{
+  font-weight:900;font-size:1.4rem;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* Order form */
+.order-form{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.form-label{font-size:.8rem;font-weight:600;color:var(--gray);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:.6px}
+.form-input{
+  width:100%;padding:13px 16px;
+  background:var(--card2);border:1.5px solid rgba(255,255,255,.08);
+  border-radius:var(--radius-sm);color:#fff;font-size:.95rem;font-family:'DM Sans',sans-serif;
+  transition:border-color var(--trans);outline:none;
+}
+.form-input:focus{border-color:var(--primary)}
+.form-input::placeholder{color:var(--gray2)}
+.form-group{display:flex;flex-direction:column}
+
+.confirm-btn{
+  width:100%;padding:16px;margin-top:8px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#000;border:none;border-radius:50px;
+  font-weight:800;font-size:1rem;
+  box-shadow:0 8px 28px rgba(249,115,22,.32);
+  transition:transform var(--trans),box-shadow var(--trans);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.confirm-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(249,115,22,.44)}
+.confirm-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ===========================
+   CONFIRMATION SCREEN
+   =========================== */
+#confirm-screen{display:none}
+.confirm-success-icon{
+  width:68px;height:68px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+  box-shadow:0 8px 28px rgba(249,115,22,.38);
+}
+.confirm-success-icon svg{width:34px;height:34px;fill:#000}
+.confirm-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:4px}
+.confirm-sub{text-align:center;color:var(--gray);font-size:.88rem;margin-bottom:20px}
+.confirm-summary{
+  background:var(--card2);border-radius:var(--radius-sm);
+  padding:16px;margin-bottom:16px;
+  border-left:3px solid var(--primary);
+}
+.cs-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;font-size:.88rem}
+.cs-row:last-child{margin-bottom:0}
+.cs-label{color:var(--gray);flex-shrink:0}
+.cs-val{font-weight:600;text-align:right;word-break:break-all}
+.confirm-actions{display:flex;flex-direction:column;gap:10px}
+.btn-wa{
+  width:100%;padding:15px;background:#25D366;color:#fff;border:none;
+  border-radius:50px;font-weight:700;font-size:.95rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 6px 20px rgba(37,211,102,.3);
+  transition:transform var(--trans),box-shadow var(--trans);
+}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.42)}
+.btn-mp{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,#009ee3,#0070c0);
+  color:#fff;border:none;border-radius:50px;font-weight:700;font-size:.95rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 6px 20px rgba(0,158,227,.28);
+  transition:transform var(--trans),box-shadow var(--trans);
+}
+.btn-mp:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,158,227,.42)}
+.btn-close-confirm{
+  width:100%;padding:12px;background:transparent;
+  color:var(--gray);border:1.5px solid rgba(255,255,255,.1);
+  border-radius:50px;font-weight:600;font-size:.88rem;
+  transition:border-color var(--trans),color var(--trans);
+}
+.btn-close-confirm:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.sheets-note{
+  text-align:center;font-size:.72rem;color:var(--gray2);
+  margin-top:8px;padding:8px;
+  background:rgba(255,255,255,.03);border-radius:8px;
+}
+
+/* ===========================
+   LOADING SPINNER
+   =========================== */
+.spinner{
+  width:18px;height:18px;border:2px solid rgba(0,0,0,.2);
+  border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===========================
+   FEATURES STRIP
+   =========================== */
+.features-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;
+  margin-top:60px;
+}
+.feat-card{
+  background:var(--card);border-radius:var(--radius);padding:22px;
+  border:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:flex-start;gap:14px;
+  transition:transform var(--trans),border-color var(--trans);
+}
+.feat-card:hover{transform:translateY(-3px);border-color:rgba(249,115,22,.15)}
+.feat-icon{
+  width:44px;height:44px;background:linear-gradient(135deg,var(--primary),var(--primary2));
+  border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.feat-icon svg{width:22px;height:22px;fill:#000}
+.feat-text h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.feat-text p{font-size:.8rem;color:var(--gray);line-height:1.5}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer{
+  background:var(--card);
+  border-top:1px solid rgba(255,255,255,.05);
+  padding:44px 24px;text-align:center;
+}
+.footer-brand{
+  font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:6px;
+}
+footer p{color:var(--gray);font-size:.82rem;margin-top:6px;line-height:1.6}
+footer .footer-credit{margin-top:18px;font-size:.72rem;color:#555}
+footer .footer-credit a{color:var(--primary);transition:opacity var(--trans)}
+footer .footer-credit a:hover{opacity:.75}
+
+/* ===========================
+   WA FLOAT
+   =========================== */
+.wa-float{
+  position:fixed;bottom:28px;right:22px;z-index:799;
+  width:56px;height:56px;background:var(--green);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:none;box-shadow:0 4px 22px rgba(37,211,102,.48);
+  transition:transform var(--trans);animation:bounce 4s infinite;
+}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+#cart-bar.visible~.wa-float,body.cart-open .wa-float{bottom:96px}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes bounce{0%,100%{transform:translateY(0)}12%{transform:translateY(-7px)}24%{transform:translateY(0)}}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeSlideIn .4s ease both}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media(max-width:640px){
+  .hero h1{font-size:2.1rem;letter-spacing:-1px}
+  .catalog-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card-icon-wrap{height:100px}
+  .card-emoji{font-size:2.2rem}
+  .card-body{padding:12px 12px 14px}
+  .card-price{font-size:1.05rem}
+  .qty-btn{width:28px;height:28px;font-size:1rem}
+  .hero-btns{flex-direction:column;align-items:center}
+  nav{padding:12px 16px}
+  .nav-badge{display:none}
+}
+@media(max-width:400px){
+  .catalog-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================
+     NAV
+     ============================ -->
+<nav>
+  <div class="nav-brand">Sabores de Casa</div>
+  <div class="nav-right">
+    <div class="nav-badge">Plan Ventas Automáticas</div>
+    <button class="nav-cta" onclick="openCart()">Armar mi pedido</button>
+  </div>
+</nav>
+
+<div class="plan-badge-fixed">Plan Ventas Automáticas</div>
+
+<!-- ============================
+     HERO
+     ============================ -->
+<section class="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    Pedidos abiertos · Entrega hoy al mediodía
+  </div>
+  <h1>Comida casera <em>todos los días</em> en tu mesa</h1>
+  <p>Elegí tus viandas, sumá al carrito y pagá online. Entrega hoy en San Juan. Sabor casero garantizado.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H4.99L3 1 1.41 2.59 3.58 4.76A2 2 0 003 6v12c0 1.1.9 2 2 2h14a2 2 0 002-2V6c0-.47-.17-.9-.44-1.24L22.59 3 21 1.41 19 3zM5 18V8h14l.01 10H5z"/></svg>
+      Armar mi pedido
+    </button>
+    <button class="btn-outline" onclick="openCart()">Ver carrito</button>
+  </div>
+</section>
+
+<!-- ============================
+     CATALOG
+     ============================ -->
+<section class="sec" id="catalogo">
+  <div class="ctr">
+    <h2 class="stitle">Menú del día</h2>
+    <p class="ssub">Sumá lo que quieras. El carrito se actualiza en tiempo real. Entrega <strong style="color:var(--primary)">HOY al mediodía</strong>.</p>
+
+    <div class="catalog-grid" id="catalog-grid">
+      <!-- Cards rendered by JS -->
+    </div>
+
+    <div class="features-strip">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 002 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        </div>
+        <div class="feat-text">
+          <h4>Entrega al mediodía</h4>
+          <p>Tu vianda llega calentita entre las 12:00 y 13:30hs a tu domicilio.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+        </div>
+        <div class="feat-text">
+          <h4>Pagá con MercadoPago</h4>
+          <p>Tarjeta, débito o dinero en cuenta. Rápido y seguro.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        </div>
+        <div class="feat-text">
+          <h4>Cocina habilitada</h4>
+          <p>Cumplimos con bromatología. Ingredientes frescos todos los días.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     STICKY CART BAR
+     ============================ -->
+<div id="cart-bar">
+  <div class="cart-bar-info">
+    <div class="cart-bar-icon">
+      <svg viewBox="0 0 24 24"><path d="M17 18c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.9 18 9 18h12v-2H9.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.45 5H5.21l-.94-2H1zm8 16c-1.1 0-1.99.9-1.99 2S7.9 22 9 22s2-.9 2-2-.9-2-2-2z"/></svg>
+      <span class="cart-bar-count" id="cart-bar-count">0</span>
+    </div>
+    <div class="cart-bar-text">
+      <div class="cart-bar-items" id="cart-bar-items">0 productos</div>
+      <div class="cart-bar-total" id="cart-bar-total">$0</div>
+    </div>
+  </div>
+  <button class="cart-bar-btn" onclick="openCart()">Ver pedido →</button>
+</div>
+
+<!-- ============================
+     CART MODAL / DRAWER
+     ============================ -->
+<div class="modal-overlay" id="cart-modal" onclick="handleOverlayClick(event)">
+  <div class="modal-drawer">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header">
+      <span class="drawer-title">Tu pedido</span>
+      <button class="drawer-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="drawer-body">
+
+      <!-- ORDER STEP -->
+      <div id="order-step">
+        <div id="cart-items-list"></div>
+
+        <div id="cart-total-section" style="display:none">
+          <div class="cart-total-row">
+            <span class="cart-total-label">Total</span>
+            <span class="cart-total-value" id="cart-total-value">$0</span>
+          </div>
+
+          <div class="order-form">
+            <p style="font-size:.82rem;color:var(--gray);margin-bottom:4px;line-height:1.5">
+              Completá tus datos para confirmar el pedido.
+            </p>
+            <div class="form-group">
+              <label class="form-label" for="inp-nombre">Nombre completo</label>
+              <input class="form-input" id="inp-nombre" type="text" placeholder="Ej: María González" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inp-wa">WhatsApp</label>
+              <input class="form-input" id="inp-wa" type="tel" placeholder="Ej: 2645551234" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inp-dir">Dirección de entrega</label>
+              <input class="form-input" id="inp-dir" type="text" placeholder="Calle, número, barrio" autocomplete="street-address">
+            </div>
+            <button class="confirm-btn" id="confirm-btn" onclick="confirmOrder()">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Confirmar pedido
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIRMATION STEP -->
+      <div id="confirm-screen">
+        <div style="text-align:center;padding:10px 0 6px">
+          <div class="confirm-success-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          <div class="confirm-title">¡Pedido registrado!</div>
+          <div class="confirm-sub">Tu pedido fue anotado. Confirmá por WhatsApp para asegurar tu lugar.</div>
+        </div>
+
+        <div class="confirm-summary" id="confirm-summary"></div>
+
+        <div class="confirm-actions">
+          <a id="btn-wa" href="#" target="_blank" rel="noopener" class="btn-wa">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.072-1.108l-.292-.175-3.028.794.808-2.953-.192-.304A8 8 0 1112 20z"/></svg>
+            Confirmar envío por WhatsApp
+          </a>
+          <a id="btn-mp" href="https://www.mercadopago.com.ar" target="_blank" rel="noopener" class="btn-mp">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+            Pagar con MercadoPago
+          </a>
+          <button class="btn-close-confirm" onclick="closeCartAndReset()">Cerrar</button>
+        </div>
+
+        <!-- Note about Google Sheets -->
+        <div class="sheets-note" id="sheets-note"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     FOOTER
+     ============================ -->
+<footer>
+  <div class="footer-brand">Sabores de Casa</div>
+  <p>San Juan, Argentina · Viandas caseras con entrega al mediodía</p>
+  <p class="footer-credit">
+    Demo creado por <a href="https://moviltecdigital.com.ar" target="_blank">Moviltec Digital</a> · Plan Ventas Automáticas
+  </p>
+</footer>
+
+<!-- ============================
+     WA FLOAT BUTTON
+     ============================ -->
+<button class="wa-float" id="wa-float" onclick="openCart()" aria-label="Armar pedido">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.072-1.108l-.292-.175-3.028.794.808-2.953-.192-.304A8 8 0 1112 20z"/></svg>
+</button>
+
+<!-- ============================
+     JAVASCRIPT
+     ============================ -->
+<script>
+/* =====================================================
+   CATALOG DATA
+   ===================================================== */
+const MENU = [
+  { id:0,  emoji:'🍗', name:'Pollo al horno',         desc:'Pollo dorado con papas rústicas y especias',             price:3500 },
+  { id:1,  emoji:'🥩', name:'Milanesa napolitana',     desc:'Con jamón, queso y salsa. Acompañada de puré',           price:4200 },
+  { id:2,  emoji:'🍝', name:'Fideos con tuco',          desc:'Tallarines al huevo con salsa de tomate y carne',        price:3200 },
+  { id:3,  emoji:'🫕', name:'Guiso de lentejas',        desc:'Con chorizo colorado, verduras y arroz',                 price:3000 },
+  { id:4,  emoji:'🥘', name:'Estofado de carne',        desc:'Carne tierna con papas, zanahorias y arvejas',           price:3800 },
+  { id:5,  emoji:'🌮', name:'Empanadas x3',             desc:'Carne cortada a cuchillo, jugosas y crocantes',          price:2800 },
+  { id:6,  emoji:'🍖', name:'Bondiola al verdeo',       desc:'Con salsa de cebolla de verdeo y arroz blanco',          price:4500 },
+  { id:7,  emoji:'🥗', name:'Tarta de verduras',        desc:'Espinaca, calabaza, cebolla y queso. Con ensalada',      price:3100 },
+  { id:8,  emoji:'🍲', name:'Canelones de verdura',     desc:'Rellenos de ricota y espinaca con salsa blanca',         price:3600 },
+  { id:9,  emoji:'🐟', name:'Merluza al limón',         desc:'Filete grillado con ensalada fresca y arroz',            price:4000 },
+  { id:10, emoji:'🍛', name:'Arroz con pollo',          desc:'Arroz cremoso con pollo desmenuzado y vegetales',        price:3400 },
+  { id:11, emoji:'🫔', name:'Pastel de papa',           desc:'Carne picada especiada con puré gratinado',              price:3300 },
+];
+
+/* =====================================================
+   CART STATE
+   ===================================================== */
+// cart[i] = quantity of MENU[i]
+const cart = new Array(MENU.length).fill(0);
+
+function cartTotal() {
+  return cart.reduce((sum, qty, i) => sum + qty * MENU[i].price, 0);
+}
+function cartCount() {
+  return cart.reduce((sum, qty) => sum + qty, 0);
+}
+function cartItems() {
+  return MENU.filter((_, i) => cart[i] > 0).map(item => ({...item, qty: cart[item.id]}));
+}
+
+function fmtPrice(n) {
+  return '$' + n.toLocaleString('es-AR');
+}
+
+/* =====================================================
+   RENDER CATALOG
+   ===================================================== */
+function renderCatalog() {
+  const grid = document.getElementById('catalog-grid');
+  grid.innerHTML = MENU.map(item => `
+    <div class="catalog-card" id="card-${item.id}">
+      <div class="card-icon-wrap">
+        <span class="card-emoji">${item.emoji}</span>
+        <span class="qty-badge" id="qbadge-${item.id}">${cart[item.id]}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${item.name}</div>
+        <div class="card-desc">${item.desc}</div>
+        <div class="card-footer">
+          <div class="card-price">${fmtPrice(item.price)}<span>c/u</span></div>
+          <div class="qty-controls">
+            <button class="qty-btn minus" id="btn-minus-${item.id}"
+              onclick="removeItem(${item.id})" ${cart[item.id]===0?'disabled':''} aria-label="Quitar">−</button>
+            <span class="qty-num" id="qty-num-${item.id}">${cart[item.id]}</span>
+            <button class="qty-btn plus" onclick="addItem(${item.id})" aria-label="Agregar">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =====================================================
+   ADD / REMOVE ITEM
+   ===================================================== */
+function addItem(id) {
+  cart[id]++;
+  updateCardUI(id);
+  updateCartUI();
+}
+
+function removeItem(id) {
+  if (cart[id] > 0) {
+    cart[id]--;
+    updateCardUI(id);
+    updateCartUI();
+  }
+}
+
+function updateCardUI(id) {
+  const qty = cart[id];
+  // qty number
+  document.getElementById('qty-num-' + id).textContent = qty;
+  // minus button
+  const minusBtn = document.getElementById('btn-minus-' + id);
+  minusBtn.disabled = qty === 0;
+  // badge
+  const badge = document.getElementById('qbadge-' + id);
+  badge.textContent = qty;
+  badge.classList.toggle('show', qty > 0);
+  // card highlight
+  document.getElementById('card-' + id).classList.toggle('has-items', qty > 0);
+}
+
+/* =====================================================
+   UPDATE CART UI (sticky bar + modal list)
+   ===================================================== */
+function updateCartUI() {
+  const count = cartCount();
+  const total = cartTotal();
+
+  // Sticky bar
+  const bar = document.getElementById('cart-bar');
+  if (count > 0) {
+    bar.classList.add('visible');
+    // Move WA float up
+    document.getElementById('wa-float').style.bottom = '90px';
+  } else {
+    bar.classList.remove('visible');
+    document.getElementById('wa-float').style.bottom = '';
+  }
+  document.getElementById('cart-bar-count').textContent = count;
+  document.getElementById('cart-bar-items').textContent = count === 1 ? '1 producto' : count + ' productos';
+  document.getElementById('cart-bar-total').textContent = fmtPrice(total);
+
+  // Modal list
+  renderCartList();
+}
+
+function renderCartList() {
+  const list = document.getElementById('cart-items-list');
+  const totalSection = document.getElementById('cart-total-section');
+  const items = cartItems();
+
+  if (items.length === 0) {
+    list.innerHTML = `
+      <div class="cart-empty fade-in">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Tu carrito está vacío.<br>Agregá viandas desde el menú.</p>
+      </div>`;
+    totalSection.style.display = 'none';
+  } else {
+    list.innerHTML = items.map(item => `
+      <div class="cart-item fade-in">
+        <span class="ci-emoji">${item.emoji}</span>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-qty">${item.qty} × ${fmtPrice(item.price)}</div>
+        </div>
+        <span class="ci-sub">${fmtPrice(item.qty * item.price)}</span>
+        <button class="ci-remove" onclick="clearItem(${item.id})" aria-label="Eliminar">✕</button>
+      </div>
+    `).join('');
+    document.getElementById('cart-total-value').textContent = fmtPrice(cartTotal());
+    totalSection.style.display = 'block';
+  }
+}
+
+function clearItem(id) {
+  cart[id] = 0;
+  updateCardUI(id);
+  updateCartUI();
+}
+
+/* =====================================================
+   OPEN / CLOSE CART
+   ===================================================== */
+function openCart() {
+  renderCartList();
+  // Reset to order step
+  document.getElementById('order-step').style.display = 'block';
+  document.getElementById('confirm-screen').style.display = 'none';
+  document.getElementById('cart-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cart-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeCartAndReset() {
+  closeCart();
+  // Reset confirm screen for next time
+  setTimeout(() => {
+    document.getElementById('order-step').style.display = 'block';
+    document.getElementById('confirm-screen').style.display = 'none';
+  }, 300);
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('cart-modal')) closeCart();
+}
+
+/* =====================================================
+   CONFIRM ORDER
+   - Validates form
+   - Sends to Google Sheets via fetch (POST)
+   - Shows confirmation screen with WA + MercadoPago buttons
+   ===================================================== */
+
+/*
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  GOOGLE SHEETS INTEGRATION                                       │
+  │  Replace SHEETS_WEBHOOK_URL with your real Google Apps Script    │
+  │  Web App URL. Deploy it as: "Execute as Me", "Anyone" access.    │
+  │  The script receives a POST with JSON body and appends a row.    │
+  └──────────────────────────────────────────────────────────────────┘
+*/
+const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/DEMO_ID/exec';
+
+const WA_NUMBER = '5492645304372';
+
+function confirmOrder() {
+  const nombre = document.getElementById('inp-nombre').value.trim();
+  const wa     = document.getElementById('inp-wa').value.trim();
+  const dir    = document.getElementById('inp-dir').value.trim();
+
+  if (!nombre || !wa || !dir) {
+    shakeInputs();
+    return;
+  }
+  if (cartCount() === 0) {
+    alert('Tu carrito está vacío. Agregá al menos una vianda.');
+    return;
+  }
+
+  const btn = document.getElementById('confirm-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Procesando...';
+
+  const items = cartItems();
+  const total = cartTotal();
+  const timestamp = new Date().toLocaleString('es-AR', {timeZone:'America/Argentina/San_Juan'});
+
+  // Build payload for Google Sheets
+  const payload = {
+    timestamp,
+    nombre,
+    whatsapp: wa,
+    direccion: dir,
+    items: items.map(i => `${i.name} x${i.qty}`).join(' | '),
+    total: total,
+    notas: 'Entrega hoy al mediodía'
+  };
+
+  // POST to Google Sheets Apps Script
+  // No-cors mode used because Apps Script doesn't send CORS headers on redirect.
+  // The fetch fires (registers the order) even if we can't read the response.
+  fetch(SHEETS_WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  })
+  .catch(() => {/* Silently ignore network errors in demo mode */})
+  .finally(() => {
+    showConfirmation({nombre, wa, dir, items, total, timestamp});
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Confirmar pedido';
+  });
+}
+
+function shakeInputs() {
+  ['inp-nombre','inp-wa','inp-dir'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#ff4444';
+      el.style.animation = 'none';
+      setTimeout(() => { el.style.borderColor = ''; }, 2000);
+    }
+  });
+}
+
+/* =====================================================
+   SHOW CONFIRMATION
+   ===================================================== */
+function showConfirmation({nombre, wa, dir, items, total, timestamp}) {
+  // Build summary HTML
+  const itemLines = items.map(i =>
+    `<div class="cs-row">
+       <span class="cs-label">${i.emoji} ${i.name} ×${i.qty}</span>
+       <span class="cs-val">${fmtPrice(i.qty * i.price)}</span>
+     </div>`
+  ).join('');
+
+  document.getElementById('confirm-summary').innerHTML = `
+    ${itemLines}
+    <div class="cs-row" style="border-top:1px solid rgba(255,255,255,.07);padding-top:10px;margin-top:8px">
+      <span class="cs-label" style="font-weight:700;color:#fff">Total</span>
+      <span class="cs-val" style="color:var(--primary);font-size:1.05rem">${fmtPrice(total)}</span>
+    </div>
+    <div class="cs-row" style="margin-top:10px">
+      <span class="cs-label">Nombre</span>
+      <span class="cs-val">${nombre}</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-label">WhatsApp</span>
+      <span class="cs-val">${wa}</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-label">Dirección</span>
+      <span class="cs-val">${dir}</span>
+    </div>
+    <div class="cs-row">
+      <span class="cs-label">Entrega</span>
+      <span class="cs-val" style="color:var(--primary)">Hoy al mediodía</span>
+    </div>
+  `;
+
+  // Build WhatsApp message
+  const waLines = [
+    '*🍽 Nuevo pedido — Sabores de Casa*',
+    '',
+    `*Cliente:* ${nombre}`,
+    `*WhatsApp:* ${wa}`,
+    `*Dirección:* ${dir}`,
+    '',
+    '*Detalle del pedido:*',
+    ...items.map(i => `• ${i.emoji} ${i.name} ×${i.qty} — ${fmtPrice(i.qty * i.price)}`),
+    '',
+    `*Total: ${fmtPrice(total)}*`,
+    '',
+    '🕐 _Entrega hoy al mediodía_',
+    '_Pedido realizado desde moviltecdigital.com.ar_'
+  ];
+  document.getElementById('btn-wa').href =
+    'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(waLines.join('\n'));
+
+  // MercadoPago link — replace with real payment link when available
+  document.getElementById('btn-mp').href = 'https://www.mercadopago.com.ar';
+
+  // Sheets note
+  document.getElementById('sheets-note').textContent =
+    '✓ Pedido enviado a Google Sheets · ' + timestamp;
+
+  // Switch screens
+  document.getElementById('order-step').style.display = 'none';
+  document.getElementById('confirm-screen').style.display = 'block';
+  document.getElementById('confirm-screen').classList.add('fade-in');
+
+  // Reset form
+  document.getElementById('inp-nombre').value = '';
+  document.getElementById('inp-wa').value = '';
+  document.getElementById('inp-dir').value = '';
+}
+
+/* =====================================================
+   INIT
+   ===================================================== */
+renderCatalog();
+updateCartUI();
+</script>
+
+</body>
+</html>

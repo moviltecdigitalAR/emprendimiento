@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particulares San Juan — Publicá Gratis tu Propiedad o Equipo | Grupo Inversa</title>
+  <meta name="description" content="Publicá gratis tu casa, departamento, galpón, terreno o equipo minero en San Juan. Sin comisión, sin intermediarios, sin vencimiento. Solo particulares.">
+  <meta property="og:title" content="Publicá Gratis en San Juan | Grupo Inversa Particulares">
+  <meta property="og:description" content="Tus avisos en Instagram duran 24hs. Los nuestros duran hasta que vendés. 100% gratis para particulares de San Juan.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================
+       VARIABLES & BASE
+    =========================== */
+    :root {
+      --brand-blue:   #003366;
+      --brand-blue2:  #0055aa;
+      --brand-green:  #10b981;
+      --brand-dark:   #0a1628;
+      --free-green:   #059669;
+      --free-light:   #d1fae5;
+      --mine-gold:    #d97706;
+      --mine-dark:    #92400e;
+      --mine-light:   #fef3c7;
+      --pain-red:     #ef4444;
+      --text-dark:    #111827;
+      --text-mid:     #374151;
+      --text-muted:   #6b7280;
+      --border:       #e5e7eb;
+      --surface:      #f9fafb;
+      --white:        #ffffff;
+      --radius-sm:    8px;
+      --radius-md:    14px;
+      --radius-lg:    22px;
+      --shadow-sm:    0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md:    0 6px 24px rgba(0,0,0,0.09);
+      --shadow-lg:    0 16px 48px rgba(0,0,0,0.13);
+      --ff-head:      'Sora', sans-serif;
+      --ff-body:      'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      color: var(--text-dark);
+      background: var(--white);
+      font-size: 1rem;
+      line-height: 1.6;
+      padding-bottom: 80px; /* space for mobile sticky */
+    }
+
+    h1,h2,h3,h4,h5,h6 { font-family: var(--ff-head); line-height: 1.2; }
+
+    img { max-width: 100%; }
+
+    a { text-decoration: none; }
+
+    /* ===========================
+       ANNOUNCEMENT BAR
+    =========================== */
+    .ann-bar {
+      background: var(--free-green);
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      font-family: var(--ff-head);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .ann-bar .ann-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .ann-bar .ann-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .ann-bar .ann-item i { opacity: 0.85; }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    .navbar {
+      background: var(--brand-dark);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .navbar-brand {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: white !important;
+      letter-spacing: -0.5px;
+    }
+    .navbar-brand span { color: var(--brand-green); }
+    .navbar-breadcrumb {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      font-family: var(--ff-body);
+    }
+    .navbar-breadcrumb strong {
+      color: var(--free-green);
+      font-weight: 700;
+    }
+    .btn-nav-back {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav-back:hover {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+    .navbar-toggler {
+      border: none;
+      color: white;
+      padding: 4px 8px;
+    }
+    .navbar-toggler:focus { box-shadow: none; }
+    .navbar-collapse { background: var(--brand-dark); }
+
+    /* ===========================
+       HERO SECTION
+    =========================== */
+    .hero-particulares {
+      background: linear-gradient(135deg, var(--brand-dark) 0%, #003366 55%, #004d8c 100%);
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+    .hero-particulares::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=50&auto=format') center/cover no-repeat;
+      opacity: 0.07;
+    }
+    .hero-particulares::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.35);
+      color: var(--brand-green);
+      font-family: var(--ff-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 22px;
+    }
+    .hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero-title .highlight {
+      color: var(--brand-green);
+      position: relative;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 580px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .btn-hero-free {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--free-green);
+      color: white;
+      padding: 16px 32px;
+      border-radius: var(--radius-md);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 8px 24px rgba(5,150,105,0.4);
+    }
+    .btn-hero-free:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(5,150,105,0.5);
+      background: #048a5c;
+      color: white;
+    }
+    .btn-hero-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-family: var(--ff-head);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 2px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-hero-outline:hover {
+      border-color: rgba(255,255,255,0.6);
+      color: white;
+      background: rgba(255,255,255,0.07);
+    }
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+    }
+    .hero-trust-item i { color: var(--brand-green); font-size: 0.9rem; }
+
+    /* GRATIS SEAL */
+    .gratis-seal {
+      width: 180px;
+      height: 180px;
+      background: var(--free-green);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: 0 0 0 8px rgba(16,185,129,0.15), 0 0 0 16px rgba(16,185,129,0.08);
+      animation: sealPulse 3s ease-in-out infinite;
+    }
+    @keyframes sealPulse {
+      0%, 100% { box-shadow: 0 0 0 8px rgba(16,185,129,0.15), 0 0 0 16px rgba(16,185,129,0.08); }
+      50% { box-shadow: 0 0 0 12px rgba(16,185,129,0.2), 0 0 0 24px rgba(16,185,129,0.06); }
+    }
+    .gratis-seal .seal-label {
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .gratis-seal .seal-word {
+      font-family: var(--ff-head);
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+    }
+    .gratis-seal .seal-sub {
+      font-family: var(--ff-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      max-width: 120px;
+    }
+    .gratis-seal::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255,255,255,0.35);
+      animation: rotateDash 20s linear infinite;
+    }
+    @keyframes rotateDash {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===========================
+       SECTION LABEL
+    =========================== */
+    .section-label {
+      display: inline-block;
+      background: var(--free-light);
+      color: var(--free-green);
+      font-family: var(--ff-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+    .section-label.mine {
+      background: var(--mine-light);
+      color: var(--mine-gold);
+    }
+    .section-label.blue {
+      background: #eff6ff;
+      color: var(--brand-blue);
+    }
+
+    /* ===========================
+       STATS STRIP
+    =========================== */
+    .stats-strip {
+      background: var(--brand-blue);
+      padding: 28px 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 10px;
+    }
+    .stat-num {
+      font-family: var(--ff-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--brand-green);
+      line-height: 1;
+      display: block;
+    }
+    .stat-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+    }
+    .stat-divider {
+      border-left: 1px solid rgba(255,255,255,0.12);
+      height: 60px;
+      margin: auto 0;
+    }
+
+    /* ===========================
+       PAIN SECTION
+    =========================== */
+    .pain-section {
+      background: #0f172a;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .pain-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pain-red), var(--mine-gold), var(--free-green));
+    }
+    .pain-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .pain-subtitle { color: rgba(255,255,255,0.55); font-size: 1rem; margin-bottom: 50px; }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    @media (max-width: 768px) { .pain-grid { grid-template-columns: 1fr; } }
+    .pain-before {
+      background: #1e1e2e;
+      padding: 36px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .pain-after {
+      background: #0d2818;
+      padding: 36px;
+    }
+    .pain-col-title {
+      font-family: var(--ff-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .pain-col-title.bad { color: var(--pain-red); }
+    .pain-col-title.good { color: var(--free-green); }
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+    .pain-item:last-child { margin-bottom: 0; }
+    .pain-item i { margin-top: 3px; flex-shrink: 0; font-size: 1rem; }
+    .pain-item.bad { color: rgba(255,255,255,0.55); }
+    .pain-item.bad i { color: var(--pain-red); }
+    .pain-item.good { color: rgba(255,255,255,0.85); }
+    .pain-item.good i { color: var(--free-green); }
+    .pain-platform-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+    .tag-instagram { background: rgba(220,80,128,0.2); color: #f472b6; }
+    .tag-inversa { background: rgba(16,185,129,0.2); color: var(--brand-green); }
+
+    /* ===========================
+       HOW IT WORKS
+    =========================== */
+    .howitworks { padding: 80px 0; background: var(--surface); }
+    .step-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      height: 100%;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--free-light);
+      color: var(--free-green);
+      border-radius: 50%;
+      font-family: var(--ff-head);
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .step-card h5 {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .step-card .step-time {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--free-green);
+      background: var(--free-light);
+      padding: 3px 12px;
+      border-radius: 50px;
+    }
+    .step-connector {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: var(--brand-green);
+      z-index: 10;
+    }
+    @media (max-width: 768px) { .step-connector { display: none; } }
+
+    /* ===========================
+       CATEGORIES
+    =========================== */
+    .categories-section { padding: 80px 0; background: white; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 992px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 576px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+    .cat-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card:hover {
+      border-color: var(--brand-blue);
+      background: #eff6ff;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .cat-card.mining {
+      border-color: rgba(217,119,6,0.3);
+      background: var(--mine-light);
+    }
+    .cat-card.mining:hover {
+      border-color: var(--mine-gold);
+      background: #fde68a33;
+    }
+    .cat-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 14px;
+    }
+    .cat-icon-wrap.blue { background: #dbeafe; color: var(--brand-blue); }
+    .cat-icon-wrap.gold { background: var(--mine-light); color: var(--mine-gold); }
+    .cat-icon-wrap.green { background: var(--free-light); color: var(--free-green); }
+    .cat-card h6 {
+      font-family: var(--ff-head);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0;
+    }
+    .cat-card .cat-count {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .cat-card .cat-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: var(--mine-gold);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 50px;
+    }
+
+    /* MINING CALLOUT */
+    .mining-callout {
+      background: linear-gradient(135deg, #92400e 0%, #d97706 60%, #f59e0b 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px 48px;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mining-callout::before {
+      content: '⛏';
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8rem;
+      opacity: 0.1;
+      line-height: 1;
+    }
+    .mining-callout h3 {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      color: white;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      margin-bottom: 10px;
+    }
+    .mining-callout p {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.95rem;
+      margin: 0;
+      max-width: 600px;
+    }
+    .mining-callout .badge-exclusive {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* ===========================
+       SAMPLE LISTINGS
+    =========================== */
+    .sample-listings { padding: 80px 0; background: var(--surface); }
+    .listing-card {
+      background: white;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .listing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .listing-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .listing-body { padding: 20px; }
+    .listing-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .listing-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .listing-tag.particular {
+      background: var(--free-light);
+      color: var(--free-green);
+    }
+    .listing-tag.mining-tag {
+      background: var(--mine-light);
+      color: var(--mine-gold);
+    }
+    .listing-title {
+      font-family: var(--ff-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .listing-location {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .listing-location i { margin-right: 5px; }
+    .listing-price {
+      font-family: var(--ff-head);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      margin-bottom: 16px;
+    }
+    .listing-price .currency {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .btn-listing-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      background: var(--brand-blue);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-listing-contact:hover { background: var(--brand-blue2); }
+    .listing-demo-badge {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ===========================
+       WHY US SECTION
+    =========================== */
+    .whyus-section { padding: 80px 0; background: white; }
+    .benefit-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      height: 100%;
+      transition: all 0.3s;
+    }
+    .benefit-card:hover {
+      border-color: var(--free-green);
+      background: #f0fdf9;
+      box-shadow: var(--shadow-sm);
+    }
+    .benefit-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--free-light);
+      color: var(--free-green);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .benefit-card.mine .benefit-icon {
+      background: var(--mine-light);
+      color: var(--mine-gold);
+    }
+    .benefit-card.blue .benefit-icon {
+      background: #dbeafe;
+      color: var(--brand-blue);
+    }
+    .benefit-content h5 {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .benefit-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ===========================
+       TESTIMONIALS (mini)
+    =========================== */
+    .testimonials-mini { padding: 60px 0; background: var(--brand-dark); }
+    .testi-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      height: 100%;
+    }
+    .testi-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 12px; }
+    .testi-text {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+    .testi-author { font-size: 0.82rem; font-weight: 700; color: var(--brand-green); }
+    .testi-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+    /* ===========================
+       PUBLICATION FORM
+    =========================== */
+    .form-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--brand-dark) 0%, #003366 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-section::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+    }
+    .form-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 576px) { .form-card { padding: 28px 20px; } }
+    .form-section-header {
+      color: white;
+      margin-bottom: 40px;
+    }
+    .form-section-header h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .form-section-header p { color: rgba(255,255,255,0.65); font-size: 1rem; }
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+    .step-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: white;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .step-dot.active {
+      border-color: var(--free-green);
+      background: var(--free-green);
+      color: white;
+    }
+    .step-dot.done {
+      border-color: var(--free-green);
+      background: var(--free-light);
+      color: var(--free-green);
+    }
+    .step-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 0 8px;
+      white-space: nowrap;
+    }
+    .step-label.active { color: var(--free-green); font-weight: 700; }
+    .step-line {
+      height: 2px;
+      flex: 1;
+      background: var(--border);
+      min-width: 20px;
+    }
+    .step-line.done { background: var(--free-green); }
+    /* Form inputs */
+    .form-label {
+      font-family: var(--ff-head);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      margin-bottom: 6px;
+    }
+    .form-control, .form-select {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: var(--ff-body);
+      font-size: 0.93rem;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--free-green);
+      box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+      outline: none;
+    }
+    .char-counter {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 3px;
+    }
+    /* Photo upload */
+    .photo-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--surface);
+    }
+    .photo-upload-area:hover {
+      border-color: var(--free-green);
+      background: var(--free-light);
+    }
+    .photo-upload-area i { font-size: 2rem; color: var(--text-muted); margin-bottom: 10px; }
+    .photo-upload-area p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .photo-upload-area small {
+      font-size: 0.75rem;
+      color: var(--brand-green);
+      font-weight: 600;
+    }
+    .photo-previews {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .photo-preview-item {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      border: 2px solid var(--border);
+    }
+    .photo-preview-item img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-preview-item .remove-photo {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.65rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Submit button */
+    .btn-submit-free {
+      width: 100%;
+      padding: 18px;
+      background: var(--free-green);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(5,150,105,0.35);
+    }
+    .btn-submit-free:hover {
+      background: #048a5c;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(5,150,105,0.45);
+    }
+    .btn-submit-free:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-back-step {
+      background: none;
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-head);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-back-step:hover { border-color: var(--text-mid); color: var(--text-mid); }
+    .btn-next-step {
+      background: var(--brand-blue);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-next-step:hover { background: var(--brand-blue2); transform: translateX(3px); }
+    /* Form success */
+    .form-success {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .form-success .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--free-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--free-green);
+      margin: 0 auto 24px;
+    }
+    .form-success h4 {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .form-success p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ===========================
+       FAQ
+    =========================== */
+    .faq-section { padding: 80px 0; background: var(--surface); }
+    .faq-section .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm) !important;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-section .accordion-button {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.93rem;
+      color: var(--text-dark);
+      background: white;
+      padding: 18px 22px;
+    }
+    .faq-section .accordion-button:not(.collapsed) {
+      color: var(--free-green);
+      background: var(--free-light);
+      box-shadow: none;
+    }
+    .faq-section .accordion-button:focus { box-shadow: none; }
+    .faq-section .accordion-button::after {
+      filter: hue-rotate(120deg) saturate(1.5);
+    }
+    .faq-section .accordion-body {
+      padding: 16px 22px 22px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      background: white;
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    .footer {
+      background: var(--brand-dark);
+      padding: 48px 0 24px;
+      color: rgba(255,255,255,0.55);
+    }
+    .footer-brand {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .footer-brand span { color: var(--brand-green); }
+    .footer-sub { font-size: 0.82rem; margin-bottom: 20px; }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      margin-right: 8px;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover { background: var(--brand-green); color: white; }
+    .footer-link {
+      display: block;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--brand-green); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 40px;
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-bottom .gratis-footer {
+      background: var(--free-green);
+      color: white;
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+
+    /* ===========================
+       FLOATING ELEMENTS
+    =========================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      z-index: 900;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: all 0.25s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+
+    /* ===========================
+       MOBILE STICKY BAR
+    =========================== */
+    .mobile-sticky {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    }
+    .mobile-sticky-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 13px 8px;
+      border-radius: var(--radius-sm);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .mobile-sticky-btn.primary {
+      background: var(--free-green);
+      color: white;
+    }
+    .mobile-sticky-btn.secondary {
+      background: var(--brand-dark);
+      color: white;
+    }
+    @media (min-width: 992px) {
+      .mobile-sticky { display: none !important; }
+    }
+
+    /* ===========================
+       EXIT POPUP
+    =========================== */
+    .exit-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .exit-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      max-width: 460px;
+      width: 100%;
+      position: relative;
+      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .exit-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .exit-close:hover { background: var(--surface); }
+    .exit-card h4 {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .exit-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+    .exit-dismiss {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .exit-dismiss:hover { color: var(--pain-red); }
+
+    /* ===========================
+       UTILITIES
+    =========================== */
+    .text-green { color: var(--free-green); }
+    .text-gold { color: var(--mine-gold); }
+    .text-brand { color: var(--brand-blue); }
+    .fw-800 { font-weight: 800; }
+    .section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 50px;
+    }
+    .hidden { display: none !important; }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .gratis-seal { width: 140px; height: 140px; }
+      .gratis-seal .seal-word { font-size: 2.2rem; }
+    }
+    @media (max-width: 768px) {
+      body { padding-bottom: 90px; }
+      .form-card { padding: 28px 20px; }
+      .pain-before, .pain-after { padding: 24px 20px; }
+      .hero-particulares { padding: 60px 0; }
+      .mining-callout { padding: 28px 24px; }
+      .step-indicator { overflow-x: auto; }
+      .gratis-seal { width: 120px; height: 120px; margin-bottom: 30px; }
+      .gratis-seal .seal-word { font-size: 1.8rem; }
+      .whatsapp-float { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===========================
+     ANNOUNCEMENT BAR
+=========================== -->
+<div class="ann-bar">
+  <div class="ann-items">
+    <div class="ann-item"><i class="fas fa-check-circle"></i> 100% GRATUITO — sin costos ocultos</div>
+    <div class="ann-item d-none d-md-flex"><i class="fas fa-clock"></i> Tu aviso publicado en menos de 24hs</div>
+    <div class="ann-item"><i class="fas fa-star"></i> Solo para particulares de San Juan</div>
+  </div>
+</div>
+
+<!-- ===========================
+     NAVBAR
+=========================== -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      GRUPO<span> INVERSA</span>
+    </a>
+    <div class="d-none d-md-flex align-items-center ms-3">
+      <span class="navbar-breadcrumb">/ <strong>Particulares</strong></span>
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <a href="index.html" class="btn-nav-back d-none d-md-inline-block">
+        <i class="fas fa-arrow-left me-1"></i> Sitio principal
+      </a>
+      <a href="#publicar" class="btn-hero-free" style="padding: 10px 22px; font-size: 0.88rem;">
+        <i class="fas fa-plus-circle"></i> Publicar gratis
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<section class="hero-particulares">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fas fa-fire"></i> La plataforma gratuita de San Juan para particulares
+          </div>
+          <h1 class="hero-title">
+            Tu aviso en Instagram<br>
+            dura <span class="highlight">24 horas.</span><br>
+            El nuestro dura hasta<br>
+            que <span class="highlight">vendés.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Publicá tu propiedad, equipo minero o herramienta en el único lugar de San Juan donde los particulares aparecen organizados, con ficha completa y visibles en Google. Sin pagar nada. Nunca.
+          </p>
+          <div class="hero-ctas">
+            <a href="#publicar" class="btn-hero-free">
+              <i class="fas fa-plus-circle"></i> Publicar mi aviso gratis
+            </a>
+            <a href="#avisos" class="btn-hero-outline">
+              <i class="fas fa-th-large"></i> Ver avisos publicados
+            </a>
+          </div>
+          <div class="hero-trust">
+            <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Sin registro complicado</div>
+            <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Tus fotos y datos completos</div>
+            <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Contacto directo por WhatsApp</div>
+            <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Aparecés en Google</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="gratis-seal">
+          <span class="seal-label">siempre</span>
+          <span class="seal-word">GRATIS</span>
+          <span class="seal-sub">Sin comisión ni intermediarios</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     STATS STRIP
+=========================== -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-0 align-items-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <span class="stat-num" data-counter="0" data-target="0">Gratis</span>
+          <span class="stat-desc">Siempre y para siempre</span>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="stat-divider"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <span class="stat-num"><span id="cnt1">0</span>hs</span>
+          <span class="stat-desc">Tu aviso publicado en menos de</span>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="stat-divider"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <span class="stat-num"><span id="cnt2">0</span></span>
+          <span class="stat-desc">Categorías para publicar</span>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="stat-divider"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <span class="stat-num"><span id="cnt3">0</span>%</span>
+          <span class="stat-desc">Sin comisión al vender</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     PAIN SECTION
+=========================== -->
+<section class="pain-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="pain-title">¿Seguís publicando en Instagram?</h2>
+      <p class="pain-subtitle">Mirá la diferencia entre lo que tenés y lo que podrías tener. Gratis.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-before">
+        <div class="pain-platform-tag tag-instagram">
+          <i class="fab fa-instagram me-1"></i> Instagram / Facebook
+        </div>
+        <div class="pain-col-title bad">
+          <i class="fas fa-times-circle me-2"></i> Lo que te pasa ahora
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span>Tu publicación se pierde en el feed en <strong>24 horas</strong> y nadie la vuelve a ver</span>
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span>Solo la ven tus <strong>seguidores</strong>. Los compradores serios no están ahí</span>
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span>Sin categorías ni organización. Tu propiedad <strong>compite con fotos de comida</strong></span>
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span>Comentarios mezclados, DMs perdidos. El interesado <strong>no sabe cómo contactarte</strong> bien</span>
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span><strong>No aparecés en Google.</strong> Si alguien busca "casa en alquiler San Juan" vos no existís</span>
+        </div>
+        <div class="pain-item bad">
+          <i class="fas fa-times-circle"></i>
+          <span>Tu aviso parece <strong>poco profesional</strong> y genera desconfianza en el comprador</span>
+        </div>
+      </div>
+      <div class="pain-after">
+        <div class="pain-platform-tag tag-inversa">
+          <i class="fas fa-check-circle me-1"></i> Grupo Inversa — Particulares
+        </div>
+        <div class="pain-col-title good">
+          <i class="fas fa-check-circle me-2"></i> Lo que obtenés acá
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>Tu aviso <strong>sin fecha de vencimiento</strong>. Visible hasta que vendés o te avisamos</span>
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>Lo ve <strong>cualquiera que busca en internet</strong> o en Google lo que vos tenés</span>
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>Organizado en <strong>categorías claras</strong>: propiedades, equipos mineros, vehículos y más</span>
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>El comprador te contacta <strong>directo por WhatsApp</strong> con toda la info lista</span>
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>Tu aviso <strong>aparece en Google</strong> cuando buscan lo que vos tenés en San Juan</span>
+        </div>
+        <div class="pain-item good">
+          <i class="fas fa-check-circle"></i>
+          <span>Ficha <strong>profesional y completa</strong>: fotos, descripción, precio y contacto organizado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     HOW IT WORKS
+=========================== -->
+<section class="howitworks">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-label">Simple y rápido</span>
+      <h2 class="section-title">¿Cómo funciona?</h2>
+      <p class="section-subtitle">Publicar tarda menos de 5 minutos. No necesitás cuenta, ni tarjeta, ni nada.</p>
+    </div>
+    <div class="row g-4 position-relative">
+      <div class="col-md-4 position-relative">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h5>Completás el formulario</h5>
+          <p>Tu nombre, WhatsApp, categoría, descripción y hasta 5 fotos de lo que querés vender o alquilar. Todo desde tu celular.</p>
+          <span class="step-time"><i class="fas fa-clock me-1"></i> 5 minutos</span>
+        </div>
+        <div class="step-connector d-none d-md-flex">→</div>
+      </div>
+      <div class="col-md-4 position-relative">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h5>Revisamos y publicamos</h5>
+          <p>Nuestro equipo revisa tu aviso, lo mejora si hace falta (sin cambiar nada sin tu permiso) y lo publica en la plataforma.</p>
+          <span class="step-time"><i class="fas fa-check me-1"></i> Menos de 24hs</span>
+        </div>
+        <div class="step-connector d-none d-md-flex">→</div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h5>Te contactan directamente</h5>
+          <p>Los interesados te escriben por WhatsApp con toda la información ya vista. Vos decidís con quién avanzar.</p>
+          <span class="step-time"><i class="fas fa-star me-1"></i> Sin intermediarios</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="#publicar" class="btn-hero-free" style="display: inline-flex;">
+        <i class="fas fa-plus-circle"></i> Empezar ahora — es gratis
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     CATEGORIES
+=========================== -->
+<section class="categories-section" id="avisos">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-label">Todas las categorías</span>
+      <h2 class="section-title">¿Qué podés publicar?</h2>
+      <p class="section-subtitle">Dos mundos en una sola plataforma. Propiedades y sector minero, juntos por primera vez en San Juan.</p>
+    </div>
+
+    <div class="row g-2 mb-3">
+      <div class="col-12"><p class="fw-700 mb-2" style="font-family: var(--ff-head); color: var(--brand-blue); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;"><i class="fas fa-home me-2"></i>Propiedades e inmuebles</p></div>
+    </div>
+    <div class="cat-grid mb-5">
+      <a href="#publicar" class="cat-card" onclick="selectCategory('Casas')">
+        <div class="cat-icon-wrap blue"><i class="fas fa-home"></i></div>
+        <h6>Casas</h6>
+        <span class="cat-count">Venta · Alquiler</span>
+      </a>
+      <a href="#publicar" class="cat-card" onclick="selectCategory('Departamentos')">
+        <div class="cat-icon-wrap blue"><i class="fas fa-building"></i></div>
+        <h6>Departamentos</h6>
+        <span class="cat-count">Venta · Alquiler</span>
+      </a>
+      <a href="#publicar" class="cat-card" onclick="selectCategory('Terrenos')">
+        <div class="cat-icon-wrap green"><i class="fas fa-map"></i></div>
+        <h6>Terrenos</h6>
+        <span class="cat-count">Venta · Subdivisión</span>
+      </a>
+      <a href="#publicar" class="cat-card" onclick="selectCategory('Galpones y Depósitos')">
+        <div class="cat-icon-wrap blue"><i class="fas fa-warehouse"></i></div>
+        <h6>Galpones y depósitos</h6>
+        <span class="cat-count">Venta · Alquiler</span>
+      </a>
+    </div>
+
+    <div class="row g-2 mb-3">
+      <div class="col-12"><p class="fw-700 mb-2" style="font-family: var(--ff-head); color: var(--mine-gold); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;"><i class="fas fa-hammer me-2"></i>Sector minero — exclusivo San Juan</p></div>
+    </div>
+    <div class="cat-grid">
+      <a href="#publicar" class="cat-card mining" onclick="selectCategory('Equipos y Maquinaria Minera')">
+        <div class="cat-badge">ÚNICO</div>
+        <div class="cat-icon-wrap gold"><i class="fas fa-cogs"></i></div>
+        <h6>Equipos y maquinaria</h6>
+        <span class="cat-count">Venta · Alquiler</span>
+      </a>
+      <a href="#publicar" class="cat-card mining" onclick="selectCategory('Herramientas Mineras')">
+        <div class="cat-badge">ÚNICO</div>
+        <div class="cat-icon-wrap gold"><i class="fas fa-wrench"></i></div>
+        <h6>Herramientas especiales</h6>
+        <span class="cat-count">Venta · Alquiler</span>
+      </a>
+      <a href="#publicar" class="cat-card mining" onclick="selectCategory('Vehículos y Logística Minera')">
+        <div class="cat-badge">ÚNICO</div>
+        <div class="cat-icon-wrap gold"><i class="fas fa-truck"></i></div>
+        <h6>Vehículos y logística</h6>
+        <span class="cat-count">Camiones · 4×4</span>
+      </a>
+      <a href="#publicar" class="cat-card mining" onclick="selectCategory('Insumos y Materiales Mineros')">
+        <div class="cat-badge">ÚNICO</div>
+        <div class="cat-icon-wrap gold"><i class="fas fa-boxes"></i></div>
+        <h6>Insumos y materiales</h6>
+        <span class="cat-count">Venta · Lote</span>
+      </a>
+    </div>
+
+    <!-- Mining callout -->
+    <div class="mining-callout">
+      <div>
+        <span class="badge-exclusive"><i class="fas fa-map-marker-alt me-1"></i> Exclusivo San Juan</span>
+        <h3>¿Tenés equipos mineros que ya no usás?</h3>
+        <p>San Juan es la capital minera de Argentina. Pero si no sos proveedor registrado, tus herramientas y equipos no tienen dónde aparecer. Acá sí. Llegás directamente a quien los necesita, sin intermediarios y sin pagar nada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     SAMPLE LISTINGS
+=========================== -->
+<section class="sample-listings">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-label blue">Así queda tu aviso</span>
+      <h2 class="section-title">Ejemplos de publicaciones</h2>
+      <p class="section-subtitle">Profesional, completo y con toda la info para que el comprador te contacte directo.</p>
+    </div>
+    <div class="row g-4">
+      <!-- Listing 1 -->
+      <div class="col-md-4">
+        <div class="listing-card">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" class="listing-img" alt="Casa Rivadavia" loading="lazy">
+          <div class="listing-body">
+            <div class="listing-header">
+              <span class="listing-tag particular"><i class="fas fa-user-check"></i> PARTICULAR</span>
+              <span class="listing-tag" style="background:#dbeafe;color:var(--brand-blue);">VENTA</span>
+            </div>
+            <h4 class="listing-title">Casa 3 amb. — Rivadavia</h4>
+            <p class="listing-location"><i class="fas fa-map-marker-alt" style="color:var(--brand-blue);"></i> Rivadavia, San Juan</p>
+            <div class="listing-price"><span class="currency">USD </span>95.000</div>
+            <button class="btn-listing-contact" onclick="contactarParticular('Casa 3 ambientes en Rivadavia')">
+              <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </button>
+            <p class="listing-demo-badge">* Ejemplo de aviso publicado</p>
+          </div>
+        </div>
+      </div>
+      <!-- Listing 2 - Mining -->
+      <div class="col-md-4">
+        <div class="listing-card">
+          <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600&q=80" class="listing-img" alt="Camión minero" loading="lazy">
+          <div class="listing-body">
+            <div class="listing-header">
+              <span class="listing-tag mining-tag"><i class="fas fa-hammer"></i> MINERÍA</span>
+              <span class="listing-tag" style="background:#dbeafe;color:var(--brand-blue);">VENTA</span>
+            </div>
+            <h4 class="listing-title">Camión Isuzu 4×4 — 2019</h4>
+            <p class="listing-location"><i class="fas fa-map-marker-alt" style="color:var(--mine-gold);"></i> Jáchal, San Juan</p>
+            <div class="listing-price" style="color:var(--mine-gold);"><span class="currency">USD </span>48.000</div>
+            <button class="btn-listing-contact" style="background:var(--mine-gold);" onclick="contactarParticular('Camión Isuzu 4x4 2019 en Jáchal')">
+              <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </button>
+            <p class="listing-demo-badge">* Ejemplo de aviso publicado</p>
+          </div>
+        </div>
+      </div>
+      <!-- Listing 3 -->
+      <div class="col-md-4">
+        <div class="listing-card">
+          <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=80" class="listing-img" alt="Departamento Capital" loading="lazy">
+          <div class="listing-body">
+            <div class="listing-header">
+              <span class="listing-tag particular"><i class="fas fa-user-check"></i> PARTICULAR</span>
+              <span class="listing-tag" style="background:#d1fae5;color:var(--free-green);">ALQUILER</span>
+            </div>
+            <h4 class="listing-title">Depto 2 amb. — Capital</h4>
+            <p class="listing-location"><i class="fas fa-map-marker-alt" style="color:var(--brand-blue);"></i> Capital, San Juan</p>
+            <div class="listing-price">$<span class="currency">ARS </span>250.000/mes</div>
+            <button class="btn-listing-contact" onclick="contactarParticular('Departamento 2 ambientes Capital')">
+              <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </button>
+            <p class="listing-demo-badge">* Ejemplo de aviso publicado</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     WHY US
+=========================== -->
+<section class="whyus-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-label">5 razones</span>
+      <h2 class="section-title">¿Por qué publicar acá y no en otro lado?</h2>
+      <p class="section-subtitle">Hay clasificados genéricos. Lo nuestro es diferente.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-search"></i></div>
+          <div class="benefit-content">
+            <h5>Aparecer en Google</h5>
+            <p>A diferencia de tus posts en redes, tus avisos acá son indexados por Google. Si alguien busca "casa en alquiler San Juan", podés aparecer.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-infinity"></i></div>
+          <div class="benefit-content">
+            <h5>Sin vencimiento</h5>
+            <p>Tu aviso no desaparece en 24 horas. Sigue publicado hasta que vendés, alquilás, o nos avisás. Sin que tengas que hacer nada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card mine">
+          <div class="benefit-icon"><i class="fas fa-hammer"></i></div>
+          <div class="benefit-content">
+            <h5>El único lugar para equipos mineros</h5>
+            <p>En toda Argentina no hay un espacio específico para particulares que venden herramientas o equipos del sector minero de San Juan. Este es.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card blue">
+          <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="benefit-content">
+            <h5>Respaldado por una inmobiliaria</h5>
+            <p>No es un clasificado anónimo. Grupo Inversa revisa y respalda cada aviso. Eso genera confianza en el comprador y más contactos para vos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-bullhorn"></i></div>
+          <div class="benefit-content">
+            <h5>Difusión en nuestras redes</h5>
+            <p>Compartimos los mejores avisos en nuestro Instagram y WhatsApp. Llegás a miles de seguidores activos del sector inmobiliario sanjuanino.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-card">
+          <div class="benefit-icon"><i class="fas fa-money-bill-slash"></i></div>
+          <div class="benefit-content">
+            <h5>Cero costos, ahora y siempre</h5>
+            <p>No cobramos por publicar. No cobramos comisión cuando vendés. El comprador te contacta a vos directamente. El dinero es tuyo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     TESTIMONIALS
+=========================== -->
+<section class="testimonials-mini">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title" style="color:white;">Lo que dicen quienes ya publicaron</h2>
+      <p style="color:rgba(255,255,255,0.5);">Experiencias reales de particulares de San Juan.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testi-text">"Tenía una casa para alquilar que publiqué mil veces en Instagram. Acá me contactaron 3 familias serias en una semana. La alquilé sin comisión."</p>
+          <div class="testi-author">— María G.</div>
+          <div class="testi-role">Capital, San Juan · Casa en alquiler</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testi-text">"Tenía herramientas mineras de un proyecto que terminó. Nadie en el rubro las necesitaba según yo... acá aparecieron 4 compradores. Vendí todo en 12 días."</p>
+          <div class="testi-author">— Roberto M.</div>
+          <div class="testi-role">Jáchal, San Juan · Herramientas mineras</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testi-text">"Publiqué mi terreno acá porque no quería pagar comisión a una inmobiliaria. Me llamaron directamente. Cerré la venta yo solo con el comprador. Perfecto."</p>
+          <div class="testi-author">— Carlos P.</div>
+          <div class="testi-role">Rivadavia, San Juan · Terreno en venta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     PUBLICATION FORM
+=========================== -->
+<section class="form-section" id="publicar">
+  <div class="container">
+    <div class="row align-items-start g-5">
+      <!-- Left: copy -->
+      <div class="col-lg-4">
+        <div class="form-section-header">
+          <span class="section-label">Es gratis</span>
+          <h2>Publicá tu aviso ahora</h2>
+          <p>Completá el formulario y en menos de 24hs tu aviso está online, visible en Google y listo para recibir consultas.</p>
+          <div class="mt-4 d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div style="width:36px;height:36px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-check" style="color:var(--brand-green);font-size:0.85rem;"></i>
+              </div>
+              <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Sin costo. Ni ahora, ni cuando lo vendés.</div>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+              <div style="width:36px;height:36px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-check" style="color:var(--brand-green);font-size:0.85rem;"></i>
+              </div>
+              <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Subí hasta 5 fotos de tu propiedad o equipo.</div>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+              <div style="width:36px;height:36px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-check" style="color:var(--brand-green);font-size:0.85rem;"></i>
+              </div>
+              <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">Te avisamos por WhatsApp cuando tu aviso esté online.</div>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+              <div style="width:36px;height:36px;background:rgba(217,119,6,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-hammer" style="color:var(--mine-gold);font-size:0.85rem;"></i>
+              </div>
+              <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;">¿Tenés equipos mineros? También publicamos eso. Primeros en San Juan.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="col-lg-8">
+        <div class="form-card" id="formContainer">
+          <!-- Step indicator -->
+          <div class="step-indicator mb-4">
+            <div class="step-dot active" id="sd1">1</div>
+            <span class="step-label active" id="sl1">Tu información</span>
+            <div class="step-line" id="sline1"></div>
+            <div class="step-dot" id="sd2">2</div>
+            <span class="step-label" id="sl2">Detalles del aviso</span>
+          </div>
+
+          <!-- STEP 1 -->
+          <div id="step1">
+            <h4 class="fw-800 mb-4" style="font-family: var(--ff-head);">¿Quién publicás?</h4>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nombre y apellido *</label>
+                <input type="text" id="pub_nombre" class="form-control" placeholder="Juan García" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">WhatsApp de contacto *</label>
+                <div class="input-group">
+                  <span class="input-group-text" style="border:2px solid var(--border);border-right:none;border-radius:var(--radius-sm) 0 0 var(--radius-sm);">+54</span>
+                  <input type="tel" id="pub_telefono" class="form-control" placeholder="264 5555555" required style="border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Categoría *</label>
+                <select id="pub_categoria" class="form-select" required>
+                  <option value="">Elegí una categoría</option>
+                  <optgroup label="🏠 Inmuebles">
+                    <option value="Casas">Casas</option>
+                    <option value="Departamentos">Departamentos</option>
+                    <option value="Terrenos">Terrenos</option>
+                    <option value="Galpones y Depósitos">Galpones y depósitos</option>
+                    <option value="Quintas y Fincas">Quintas y fincas</option>
+                    <option value="Locales y Oficinas">Locales y oficinas</option>
+                  </optgroup>
+                  <optgroup label="⛏️ Sector Minero">
+                    <option value="Equipos y Maquinaria Minera">Equipos y maquinaria minera</option>
+                    <option value="Herramientas Mineras">Herramientas mineras</option>
+                    <option value="Vehículos y Logística Minera">Vehículos y logística minera</option>
+                    <option value="Insumos y Materiales Mineros">Insumos y materiales mineros</option>
+                    <option value="Propiedades con Concesión Minera">Propiedades con concesión minera</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tipo de operación *</label>
+                <select id="pub_operacion" class="form-select" required>
+                  <option value="">¿Qué querés hacer?</option>
+                  <option value="Venta">Vender</option>
+                  <option value="Alquiler">Alquilar</option>
+                  <option value="Busco">Busco / Necesito</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Título del aviso *</label>
+                <input type="text" id="pub_titulo" class="form-control" placeholder="Ej: Casa 3 ambientes en Rivadavia con patio" maxlength="80" required>
+                <div class="char-counter"><span id="titulo_count">0</span>/80 caracteres</div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn-next-step" onclick="goToStep2()">
+                Siguiente: Detalles del aviso <i class="fas fa-arrow-right ms-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="step2" class="hidden">
+            <h4 class="fw-800 mb-4" style="font-family: var(--ff-head);">Contanos sobre lo que publicás</h4>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Precio</label>
+                <input type="number" id="pub_precio" class="form-control" placeholder="0" min="0">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Moneda</label>
+                <select id="pub_moneda" class="form-select">
+                  <option value="ARS">Pesos (ARS)</option>
+                  <option value="USD">Dólares (USD)</option>
+                  <option value="Consultar">A consultar</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Zona / Ubicación *</label>
+                <select id="pub_zona" class="form-select" required>
+                  <option value="">Elegí zona</option>
+                  <option value="Capital">Capital</option>
+                  <option value="Rivadavia">Rivadavia</option>
+                  <option value="Rawson">Rawson</option>
+                  <option value="Chimbas">Chimbas</option>
+                  <option value="Santa Lucía">Santa Lucía</option>
+                  <option value="Caucete">Caucete</option>
+                  <option value="Jáchal">Jáchal</option>
+                  <option value="Valle Fértil">Valle Fértil</option>
+                  <option value="Iglesia">Iglesia</option>
+                  <option value="Otra zona">Otra zona</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Descripción completa *</label>
+                <textarea id="pub_descripcion" class="form-control" rows="5"
+                  placeholder="Describí bien lo que publicás: características, estado, medidas, año, marca (para equipos), lo que considerés importante para el comprador..."
+                  maxlength="1000" required></textarea>
+                <div class="char-counter"><span id="desc_count">0</span>/1000 caracteres</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Fotos (hasta 5)</label>
+                <input type="file" id="pub_fotos" accept="image/*" multiple style="display:none;" onchange="previewPhotos(this)">
+                <div class="photo-upload-area" onclick="document.getElementById('pub_fotos').click()">
+                  <i class="fas fa-camera d-block"></i>
+                  <p>Tocá para agregar fotos</p>
+                  <small>JPG, PNG — Máx. 5 fotos · 5MB cada una</small>
+                </div>
+                <div class="photo-previews" id="photoPreviews"></div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="pub_acepto" required>
+                  <label class="form-check-label" for="pub_acepto" style="font-size:0.85rem;">
+                    Acepto que Grupo Inversa publique mi aviso en su plataforma. Confirmo que soy el propietario o tengo autorización para publicar este artículo.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-3 mt-4 flex-wrap">
+              <button class="btn-back-step" onclick="goToStep1()">
+                <i class="fas fa-arrow-left me-2"></i> Volver
+              </button>
+              <button class="btn-submit-free flex-fill" id="submitBtn" onclick="submitParticular()">
+                <i class="fas fa-paper-plane me-2"></i> Publicar mi aviso gratis
+              </button>
+            </div>
+          </div>
+
+          <!-- SUCCESS STATE (hidden until submitted) -->
+          <div id="formSuccess" class="hidden form-success">
+            <div class="success-icon"><i class="fas fa-check"></i></div>
+            <h4>¡Tu aviso fue enviado!</h4>
+            <p class="mb-4">Lo revisamos en las próximas <strong>24 horas</strong> y te escribimos por WhatsApp para confirmarte cuando esté publicado.</p>
+            <div class="p-3 rounded" style="background:var(--surface);border:1px solid var(--border);">
+              <p class="mb-2" style="font-size:0.85rem;color:var(--text-muted);">¿Querés acelerar el proceso? Escribinos directamente:</p>
+              <a id="waSuccessLink" href="https://wa.me/5492645304372" target="_blank"
+                 style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;padding:12px 24px;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;">
+                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+              </a>
+            </div>
+            <button onclick="resetForm()" class="btn-back-step mt-4">
+              <i class="fas fa-plus me-2"></i> Publicar otro aviso
+            </button>
+          </div>
+
+        </div><!-- /form-card -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FAQ
+=========================== -->
+<section class="faq-section">
+  <div class="container">
+    <div class="col-lg-8 mx-auto">
+      <div class="text-center mb-5">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Todo lo que querés saber</h2>
+        <p class="section-subtitle">Si tenés más dudas, escribinos por WhatsApp.</p>
+      </div>
+      <div class="accordion" id="faqAcc">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              ¿Publicar es realmente gratis? ¿Hay algo que cobren?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              Sí, 100% gratuito. No pagás para publicar. No pagás comisión cuando vendés. No hay suscripción mensual. El comprador o inquilino te contacta directamente a vos por WhatsApp. El dinero de la operación es íntegramente tuyo. Grupo Inversa no cobra nada de esta sección.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              ¿Necesito estar registrado o tener cuenta para publicar?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              No. Solamente llenás el formulario con tus datos básicos (nombre y WhatsApp) y los datos de lo que querés publicar. Sin crear cuenta, sin contraseña, sin verificación de email. En menos de 24 horas tu aviso está online y te avisamos por WhatsApp.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+              ¿Cuánto tiempo dura publicado mi aviso?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              Sin fecha de vencimiento. Tu aviso queda publicado hasta que vos nos avisés que ya lo vendiste, alquilaste, o ya no querés que aparezca. Cada 60 días te preguntamos si sigue disponible, para mantener la plataforma actualizada.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+              ¿Puedo publicar equipos o herramientas mineras?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              Sí, y es uno de nuestros fuertes. San Juan es la principal provincia minera de Argentina y no existía un lugar específico donde los particulares pudieran publicar sus equipos, herramientas, vehículos o insumos del sector. Acá sí podés hacerlo. Lo revisamos, lo publicamos en la categoría correcta, y lo llegamos a difundir en grupos y canales del sector.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+              ¿Qué diferencia hay con publicar en MercadoLibre o Facebook?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              MercadoLibre cobra comisión cuando vendés. Facebook Marketplace es genérico y sin categorías específicas para el sector minero ni inmobiliario de San Juan. Acá no cobramos nada, somos locales (conocemos el mercado), y estamos especializados en propiedades y sector minero de San Juan. Además, tu aviso está respaldado por la credibilidad de una inmobiliaria establecida.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+              ¿Cómo me contactan los interesados?
+            </button>
+          </h2>
+          <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body">
+              Directamente a vos, por WhatsApp. En tu aviso aparece un botón que dice "Consultar por WhatsApp" y los lleva a tu número. No hay mensajes intermedios ni "gestiones" de nuestra parte. La negociación es entre vos y el comprador.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="footer-brand">GRUPO <span>INVERSA</span></div>
+        <p class="footer-sub">Inmobiliaria en San Juan. Ahora también la plataforma gratuita para particulares.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/grupoinversa" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/5492645304372" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-700 mb-3" style="font-family:var(--ff-head);font-size:0.85rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">Categorías</p>
+        <a href="#avisos" class="footer-link">Casas</a>
+        <a href="#avisos" class="footer-link">Departamentos</a>
+        <a href="#avisos" class="footer-link">Terrenos</a>
+        <a href="#avisos" class="footer-link">Galpones</a>
+        <a href="#avisos" class="footer-link">Equipos mineros</a>
+        <a href="#avisos" class="footer-link">Herramientas</a>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-700 mb-3" style="font-family:var(--ff-head);font-size:0.85rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">Plataforma</p>
+        <a href="#publicar" class="footer-link">Publicar aviso</a>
+        <a href="index.html" class="footer-link">Inmobiliaria</a>
+        <a href="index.html#tasacion" class="footer-link">Tasación gratis</a>
+        <a href="index.html#calculadora" class="footer-link">Calcular cuota</a>
+      </div>
+      <div class="col-md-4">
+        <p class="fw-700 mb-3" style="font-family:var(--ff-head);font-size:0.85rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">¿Dudas?</p>
+        <p style="font-size:0.88rem;margin-bottom:14px;">Escribinos directamente. Respondemos en menos de 1 hora.</p>
+        <a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20publicar%20en%20la%20sección%20de%20particulares." target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;padding:12px 22px;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+          <i class="fab fa-whatsapp"></i> Escribirnos por WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Grupo Inversa · San Juan, Argentina</span>
+      <span class="gratis-footer"><i class="fas fa-check me-1"></i> Publicar es GRATIS</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===========================
+     FLOATING WHATSAPP
+=========================== -->
+<a href="https://wa.me/5492645304372?text=Hola!%20Quiero%20publicar%20en%20la%20sección%20de%20particulares." target="_blank" class="whatsapp-float d-none d-lg-flex" title="Consultar por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ===========================
+     MOBILE STICKY BAR
+=========================== -->
+<div class="mobile-sticky d-lg-none">
+  <a href="#publicar" class="mobile-sticky-btn primary">
+    <i class="fas fa-plus-circle"></i> Publicar gratis
+  </a>
+  <a href="https://wa.me/5492645304372?text=Hola!%20Tengo%20algo%20para%20publicar%20en%20la%20sección%20de%20particulares." target="_blank" class="mobile-sticky-btn secondary">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+</div>
+
+<!-- ===========================
+     EXIT POPUP
+=========================== -->
+<div class="exit-overlay hidden" id="exitPopup">
+  <div class="exit-card">
+    <button class="exit-close" onclick="closeExit()">×</button>
+    <div style="width:60px;height:60px;background:var(--free-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--free-green);margin:0 auto 20px;">
+      <i class="fas fa-bullhorn"></i>
+    </div>
+    <h4 style="text-align:center;margin-bottom:8px;">¿Tenés algo para vender o alquilar?</h4>
+    <p style="text-align:center;">Publicalo gratis en el sitio. 5 minutos y tu aviso está en internet, visible para quienes realmente buscan lo que vos tenés.</p>
+    <a href="#publicar" class="btn-hero-free w-100 justify-content-center mb-3" onclick="closeExit()">
+      <i class="fas fa-plus-circle"></i> Publicar mi aviso ahora
+    </a>
+    <p class="exit-dismiss" onclick="closeExit()">No gracias, prefiero que me pierdan entre los posts de Instagram</p>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  /* ===========================
+     CONSTANTS
+  =========================== */
+  const WA_NUMBER = '5492645304372';
+
+  /* ===========================
+     COUNTER ANIMATION
+  =========================== */
+  const counters = [
+    { el: 'cnt1', target: 24, suffix: '', prefix: '' },
+    { el: 'cnt2', target: 8, suffix: '', prefix: '' },
+    { el: 'cnt3', target: 0, suffix: '', prefix: '' }, // "0%" stays
+  ];
+
+  function animateCount(el, target, duration = 1800) {
+    const start = performance.now();
+    function update(ts) {
+      const progress = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if (progress < 1) requestAnimationFrame(update);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      document.getElementById('cnt1') && animateCount(document.getElementById('cnt1'), 24);
+      document.getElementById('cnt2') && animateCount(document.getElementById('cnt2'), 8);
+      document.getElementById('cnt3') && animateCount(document.getElementById('cnt3'), 0);
+      statsObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+
+  const statsStrip = document.querySelector('.stats-strip');
+  if (statsStrip) statsObs.observe(statsStrip);
+
+  /* ===========================
+     CHAR COUNTERS
+  =========================== */
+  document.getElementById('pub_titulo')?.addEventListener('input', function() {
+    document.getElementById('titulo_count').textContent = this.value.length;
+  });
+  document.getElementById('pub_descripcion')?.addEventListener('input', function() {
+    document.getElementById('desc_count').textContent = this.value.length;
+  });
+
+  /* ===========================
+     CATEGORY QUICK-SELECT
+  =========================== */
+  function selectCategory(cat) {
+    const el = document.getElementById('pub_categoria');
+    if (el) {
+      for (let i = 0; i < el.options.length; i++) {
+        if (el.options[i].value === cat) { el.selectedIndex = i; break; }
+      }
+    }
+  }
+
+  /* ===========================
+     FORM WIZARD
+  =========================== */
+  function goToStep2() {
+    // Validate step 1
+    const nombre = document.getElementById('pub_nombre').value.trim();
+    const telefono = document.getElementById('pub_telefono').value.trim();
+    const categoria = document.getElementById('pub_categoria').value;
+    const operacion = document.getElementById('pub_operacion').value;
+    const titulo = document.getElementById('pub_titulo').value.trim();
+
+    if (!nombre) return alert('Por favor ingresá tu nombre.');
+    if (!telefono || telefono.length < 8) return alert('Por favor ingresá un WhatsApp válido.');
+    if (!categoria) return alert('Por favor seleccioná una categoría.');
+    if (!operacion) return alert('Por favor seleccioná el tipo de operación.');
+    if (!titulo || titulo.length < 10) return alert('El título debe tener al menos 10 caracteres.');
+
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+
+    // Update indicators
+    document.getElementById('sd1').className = 'step-dot done';
+    document.getElementById('sd1').innerHTML = '<i class="fas fa-check"></i>';
+    document.getElementById('sl1').className = 'step-label';
+    document.getElementById('sline1').className = 'step-line done';
+    document.getElementById('sd2').className = 'step-dot active';
+    document.getElementById('sl2').className = 'step-label active';
+
+    window.scrollTo({ top: document.getElementById('publicar').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  function goToStep1() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step1').classList.remove('hidden');
+
+    document.getElementById('sd1').className = 'step-dot active';
+    document.getElementById('sd1').textContent = '1';
+    document.getElementById('sl1').className = 'step-label active';
+    document.getElementById('sline1').className = 'step-line';
+    document.getElementById('sd2').className = 'step-dot';
+    document.getElementById('sl2').className = 'step-label';
+  }
+
+  /* ===========================
+     PHOTO PREVIEW
+  =========================== */
+  let selectedFiles = [];
+
+  function previewPhotos(input) {
+    const files = Array.from(input.files).slice(0, 5);
+    selectedFiles = files;
+    const container = document.getElementById('photoPreviews');
+    container.innerHTML = '';
+
+    files.forEach((file, index) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const item = document.createElement('div');
+        item.className = 'photo-preview-item';
+        item.innerHTML = `
+          <img src="${e.target.result}" alt="Foto ${index + 1}">
+          <button class="remove-photo" onclick="removePhoto(${index})">×</button>
+        `;
+        container.appendChild(item);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function removePhoto(index) {
+    selectedFiles.splice(index, 1);
+    const dt = new DataTransfer();
+    selectedFiles.forEach(f => dt.items.add(f));
+    document.getElementById('pub_fotos').files = dt.files;
+    previewPhotos({ files: selectedFiles });
+  }
+
+  /* ===========================
+     FORM SUBMISSION
+  =========================== */
+  async function submitParticular() {
+    const zona = document.getElementById('pub_zona').value;
+    const descripcion = document.getElementById('pub_descripcion').value.trim();
+    const acepto = document.getElementById('pub_acepto').checked;
+
+    if (!zona) return alert('Por favor seleccioná la zona.');
+    if (!descripcion || descripcion.length < 20) return alert('La descripción debe tener al menos 20 caracteres.');
+    if (!acepto) return alert('Debés aceptar los términos para publicar.');
+
+    const formData = {
+      nombre: document.getElementById('pub_nombre').value.trim(),
+      telefono: '+54' + document.getElementById('pub_telefono').value.trim(),
+      categoria: document.getElementById('pub_categoria').value,
+      operacion: document.getElementById('pub_operacion').value,
+      titulo: document.getElementById('pub_titulo').value.trim(),
+      precio: document.getElementById('pub_precio').value || 'A consultar',
+      moneda: document.getElementById('pub_moneda').value,
+      zona,
+      descripcion,
+      formTipo: 'particular',
+      fotos: selectedFiles.length + ' foto(s) adjuntadas'
+    };
+
+    const btn = document.getElementById('submitBtn');
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Enviando tu aviso...';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const json = await res.json();
+
+      if (json.success || res.ok) {
+        showSuccess(formData);
+      } else {
+        throw new Error('API error');
+      }
+    } catch (err) {
+      // Fallback: WhatsApp
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+      const msg = buildWAMessage(formData);
+      const proceed = confirm('Hubo un error al enviar. ¿Querés enviarnos el aviso por WhatsApp directamente?');
+      if (proceed) window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+    }
+  }
+
+  function showSuccess(data) {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('formSuccess').classList.remove('hidden');
+    document.querySelector('.step-indicator').style.display = 'none';
+
+    const waMsg = buildWAMessage(data);
+    document.getElementById('waSuccessLink').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
+  }
+
+  function buildWAMessage(data) {
+    const msg = `Hola! Acabo de enviar un aviso para publicar en la sección de Particulares.\n\n` +
+      `📋 *Datos del aviso:*\n` +
+      `• Nombre: ${data.nombre}\n` +
+      `• Categoría: ${data.categoria}\n` +
+      `• Operación: ${data.operacion}\n` +
+      `• Título: ${data.titulo}\n` +
+      `• Precio: ${data.precio} ${data.moneda}\n` +
+      `• Zona: ${data.zona}\n\n` +
+      `¿Cuándo lo publican?`;
+    return encodeURIComponent(msg);
+  }
+
+  function resetForm() {
+    document.getElementById('formSuccess').classList.add('hidden');
+    document.getElementById('step1').classList.remove('hidden');
+    document.querySelector('.step-indicator').style.display = '';
+    document.getElementById('formContainer').querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+    document.getElementById('photoPreviews').innerHTML = '';
+    selectedFiles = [];
+    document.getElementById('titulo_count').textContent = '0';
+    document.getElementById('desc_count').textContent = '0';
+    goToStep1();
+  }
+
+  /* ===========================
+     CONTACT PARTICULAR (sample listings)
+  =========================== */
+  function contactarParticular(propName) {
+    const msg = encodeURIComponent(`Hola! Vi el aviso de "${propName}" en la sección de Particulares del sitio de Grupo Inversa. ¿Está disponible?`);
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+  }
+
+  /* ===========================
+     EXIT POPUP
+  =========================== */
+  let exitShown = false;
+  let exitTimer = setTimeout(() => {
+    if (!exitShown) showExit();
+  }, 40000); // 40 seconds
+
+  // Desktop: detect mouse leave from top
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY < 10 && !exitShown) showExit();
+  });
+
+  function showExit() {
+    if (exitShown) return;
+    exitShown = true;
+    clearTimeout(exitTimer);
+    document.getElementById('exitPopup').classList.remove('hidden');
+  }
+
+  function closeExit() {
+    document.getElementById('exitPopup').classList.add('hidden');
+  }
+
+  /* ===========================
+     SMOOTH SCROLL & INIT
+  =========================== */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ===========================
+     INTERSECTION OBSERVER ANIMATIONS
+  =========================== */
+  const animEls = document.querySelectorAll('.step-card, .benefit-card, .cat-card, .testi-card, .listing-card');
+  const appearObs = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(20px)';
+        entry.target.style.transition = `opacity 0.5s ease ${i * 0.06}s, transform 0.5s ease ${i * 0.06}s`;
+        requestAnimationFrame(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        });
+        appearObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  animEls.forEach(el => appearObs.observe(el));
+</script>
+
+</body>
+</html>

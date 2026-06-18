@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root { --primary:#003366; --accent:#c9a961; --muted:#6b7280; --border:#e5e7eb; --cream:#f8f7f3; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:var(--cream); min-height:100vh; display:flex; flex-direction:column; }
+    .nav { background:#fff; border-bottom:1px solid var(--border); padding:16px 32px; display:flex; justify-content:space-between; align-items:center; }
+    .brand { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:var(--primary); text-decoration:none; }
+    .brand span { color:var(--accent); }
+    .main { flex:1; display:flex; align-items:center; justify-content:center; padding:60px 20px; }
+    .card { background:#fff; border:1px solid var(--border); border-radius:4px; padding:64px 56px; max-width:660px; width:100%; text-align:center; position:relative; overflow:hidden; }
+    .card::before { content:'404'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Playfair Display',serif; font-size:26rem; font-weight:800; color:rgba(201,169,97,.05); line-height:1; pointer-events:none; }
+    .num { font-family:'Playfair Display',serif; font-size:7rem; font-weight:800; color:var(--accent); line-height:1; }
+    .line { width:56px; height:2px; background:var(--accent); margin:14px auto 26px; }
+    h1 { font-family:'Playfair Display',serif; font-size:1.9rem; color:var(--primary); margin-bottom:14px; }
+    p { color:var(--muted); font-size:.95rem; max-width:420px; margin:0 auto 36px; line-height:1.65; }
+    .btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn-p { background:var(--primary); color:#fff; padding:13px 30px; border-radius:4px; text-decoration:none; font-size:.84rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; transition:background .3s; display:inline-flex; align-items:center; gap:7px; }
+    .btn-p:hover { background:var(--accent); color:#fff; }
+    .btn-s { background:transparent; color:var(--primary); padding:13px 30px; border-radius:4px; text-decoration:none; font-size:.84rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; border:1px solid var(--primary); transition:all .3s; display:inline-flex; align-items:center; gap:7px; }
+    .btn-s:hover { background:var(--primary); color:#fff; }
+    .sugs { margin-top:44px; padding-top:36px; border-top:1px solid var(--border); }
+    .sugs-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.2em; color:var(--muted); font-weight:600; margin-bottom:16px; }
+    .chips { display:flex; gap:9px; justify-content:center; flex-wrap:wrap; }
+    .chip { background:var(--cream); border:1px solid var(--border); color:var(--primary); padding:7px 16px; border-radius:20px; text-decoration:none; font-size:.82rem; font-weight:500; transition:all .2s; display:inline-flex; align-items:center; gap:6px; }
+    .chip i { color:var(--accent); font-size:.78rem; }
+    .chip:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .chip:hover i { color:var(--accent); }
+    footer { background:#111827; padding:18px 32px; text-align:center; color:rgba(255,255,255,.4); font-size:.78rem; }
+    footer a { color:var(--accent); text-decoration:none; }
+    @media(max-width:600px){ .card{padding:44px 22px;} .num{font-size:5rem;} h1{font-size:1.5rem;} .card::before{font-size:14rem;} }
+  </style>
+  <script>
+    // Cargar el nombre de la agencia desde config.js si existe
+    document.addEventListener('DOMContentLoaded',()=>{
+      const cfg = window.AGENCIA_CONFIG;
+      if (cfg?.nombre) {
+        document.querySelectorAll('.brand-name').forEach(el => el.textContent = cfg.nombre);
+      }
+    });
+  </script>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="brand"><span class="brand-name">Grupo Inversa</span></a>
+  <a href="/" class="btn-p" style="font-size:.78rem;padding:10px 18px;"><i class="fas fa-home"></i> Ir al inicio</a>
+</nav>
+
+<main class="main">
+  <div class="card">
+    <div class="num">404</div>
+    <div class="line"></div>
+    <h1>Página no encontrada</h1>
+    <p>Esta propiedad o sección ya no está disponible en esta dirección. El enlace puede estar desactualizado o la página fue movida.</p>
+    <div class="btns">
+      <a href="/" class="btn-p"><i class="fas fa-search"></i> Ver propiedades</a>
+      <a href="javascript:history.back()" class="btn-s"><i class="fas fa-arrow-left"></i> Volver</a>
+    </div>
+    <div class="sugs">
+      <div class="sugs-label">¿Qué estabas buscando?</div>
+      <div class="chips">
+        <a href="/#propiedades" class="chip"><i class="fas fa-home"></i> Casas en alquiler</a>
+        <a href="/#propiedades" class="chip"><i class="fas fa-building"></i> Departamentos</a>
+        <a href="/#credito" class="chip"><i class="fas fa-university"></i> Calculadora crédito</a>
+        <a href="/#tasacion" class="chip"><i class="fas fa-chart-line"></i> Tasación gratis</a>
+        <a href="/#publicar" class="chip"><i class="fas fa-bullhorn"></i> Publicar propiedad</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 <a href="/"><span class="brand-name">Grupo Inversa</span></a> &nbsp;&middot;&nbsp; San Juan, Argentina
+</footer>
+
+<script src="config.js"></script>
+</body>
+</html>
