@@ -1325,6 +1325,108 @@
       .gratis-seal .seal-word { font-size: 1.8rem; }
       .whatsapp-float { display: none; }
     }
+
+    /* ===========================
+       CARRUSEL DE FOTOS
+    =========================== */
+    .listing-carousel {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #e5e7eb;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .carousel-slide.active { opacity: 1; pointer-events: auto; }
+    .car-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.42);
+      color: white;
+      border: none;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.15rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+    .car-btn:hover { background: rgba(0,0,0,0.72); }
+    .car-prev { left: 8px; }
+    .car-next { right: 8px; }
+    .car-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 4px; z-index: 5;
+    }
+    .car-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .car-dot.active { background: white; width: 16px; border-radius: 3px; }
+
+    /* ===========================
+       SECCIÓN AVISOS REALES
+    =========================== */
+    .real-listings-section { padding: 80px 0; background: white; }
+    .filter-bar-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .filter-chip {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-family: var(--ff-head);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-chip:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+    .filter-chip.active { background: var(--brand-blue); border-color: var(--brand-blue); color: white; }
+    .listings-state {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .listings-state i { font-size: 2.8rem; color: #cbd5e1; margin-bottom: 16px; display: block; }
+    .listings-placeholder {
+      background: var(--surface);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .listings-placeholder i { font-size: 2.4rem; color: #94a3b8; margin-bottom: 14px; display: block; }
+    .listings-count-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--free-light);
+      color: var(--free-green);
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
   </style>
 </head>
 <body>
@@ -1386,7 +1488,7 @@
             <a href="#publicar" class="btn-hero-free">
               <i class="fas fa-plus-circle"></i> Publicar mi aviso gratis
             </a>
-            <a href="#avisos" class="btn-hero-outline">
+            <a href="#avisos-publicados" class="btn-hero-outline">
               <i class="fas fa-th-large"></i> Ver avisos publicados
             </a>
           </div>
@@ -1716,6 +1818,61 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     REAL LISTINGS
+=========================== -->
+<section class="real-listings-section" id="avisos-publicados">
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="section-label" style="color:var(--free-green);">En vivo</span>
+      <h2 class="section-title">Avisos publicados ahora</h2>
+      <p class="section-subtitle">Propiedades y equipos reales de particulares de San Juan. Contacto directo con el dueño — sin intermediarios.</p>
+    </div>
+    <!-- Filtros -->
+    <div class="filter-bar-wrap" id="filterBar">
+      <button class="filter-chip active" onclick="filterListings(null,this)">Todos</button>
+      <button class="filter-chip" onclick="filterListings('Casas',this)">🏠 Casas</button>
+      <button class="filter-chip" onclick="filterListings('Departamentos',this)">🏢 Deptos</button>
+      <button class="filter-chip" onclick="filterListings('Terrenos',this)">🗺 Terrenos</button>
+      <button class="filter-chip" onclick="filterListings('Galpones y Depósitos',this)">🏭 Galpones</button>
+      <button class="filter-chip" onclick="filterListings('Equipos y Maquinaria Minera',this)">⚙️ Equipos mineros</button>
+      <button class="filter-chip" onclick="filterListings('Vehículos y Logística Minera',this)">🚛 Vehículos</button>
+    </div>
+    <!-- Estado: cargando -->
+    <div class="listings-state" id="listingsLoading">
+      <div class="spinner-border text-success mb-3" role="status" style="width:2.5rem;height:2.5rem;border-width:3px;"></div>
+      <p class="text-muted">Cargando avisos...</p>
+    </div>
+    <!-- Estado: Supabase no configurado -->
+    <div class="listings-placeholder hidden" id="listingsPlaceholder">
+      <i class="fas fa-plug"></i>
+      <h5 class="fw-bold mb-2">Conectá Supabase para activar esta sección</h5>
+      <p class="text-muted mb-3" style="max-width:440px;margin:0 auto 20px;">Una vez que configurés tu base de datos (es gratis y tarda 15 minutos), los avisos reales van a aparecer aquí con el mismo formato que los ejemplos de arriba.</p>
+      <a href="guia-supabase.html" target="_blank" class="btn-hero-free" style="display:inline-flex;">
+        <i class="fas fa-book-open me-2"></i> Ver guía de configuración
+      </a>
+    </div>
+    <!-- Estado: sin avisos -->
+    <div class="listings-state hidden" id="listingsEmpty">
+      <i class="fas fa-folder-open"></i>
+      <h5 class="fw-bold">Todavía no hay avisos publicados</h5>
+      <p class="text-muted">¡Sé el primero! Publicar es gratis y tarda 5 minutos.</p>
+      <a href="#publicar" class="btn-hero-free mt-3" style="display:inline-flex;">
+        <i class="fas fa-plus-circle me-2"></i> Publicar ahora
+      </a>
+    </div>
+    <!-- Grilla de tarjetas -->
+    <div class="row g-4" id="listingsGrid"></div>
+    <!-- CTA después de los avisos -->
+    <div class="text-center mt-5 hidden" id="listingsCta">
+      <p class="text-muted mb-3">¿Tenés algo para publicar?</p>
+      <a href="#publicar" class="btn-hero-free" style="display:inline-flex;">
+        <i class="fas fa-plus-circle me-2"></i> Publicar mi aviso gratis
+      </a>
     </div>
   </div>
 </section>
@@ -2204,8 +2361,21 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Supabase JS (base de datos + storage) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <script>
+  /* ===========================
+     SUPABASE CONFIG
+     Reemplazá los dos valores de abajo con los
+     de tu proyecto en supabase.com
+  =========================== */
+  const SUPABASE_URL      = 'TU_SUPABASE_URL';       // ej: https://abcdef.supabase.co
+  const SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY';  // clave pública (anon/public)
+  const sb = (SUPABASE_URL !== 'TU_SUPABASE_URL' && window.supabase)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
   /* ===========================
      CONSTANTS
   =========================== */
@@ -2344,56 +2514,66 @@
   }
 
   /* ===========================
-     FORM SUBMISSION
+     FORM SUBMISSION (con Supabase)
   =========================== */
   async function submitParticular() {
-    const zona = document.getElementById('pub_zona').value;
+    const zona        = document.getElementById('pub_zona').value;
     const descripcion = document.getElementById('pub_descripcion').value.trim();
-    const acepto = document.getElementById('pub_acepto').checked;
+    const acepto      = document.getElementById('pub_acepto').checked;
 
-    if (!zona) return alert('Por favor seleccioná la zona.');
+    if (!zona)                                   return alert('Por favor seleccioná la zona.');
     if (!descripcion || descripcion.length < 20) return alert('La descripción debe tener al menos 20 caracteres.');
-    if (!acepto) return alert('Debés aceptar los términos para publicar.');
+    if (!acepto)                                 return alert('Debés aceptar los términos para publicar.');
 
     const formData = {
-      nombre: document.getElementById('pub_nombre').value.trim(),
-      telefono: '+54' + document.getElementById('pub_telefono').value.trim(),
+      nombre:    document.getElementById('pub_nombre').value.trim(),
+      telefono:  '+54' + document.getElementById('pub_telefono').value.trim(),
       categoria: document.getElementById('pub_categoria').value,
       operacion: document.getElementById('pub_operacion').value,
-      titulo: document.getElementById('pub_titulo').value.trim(),
-      precio: document.getElementById('pub_precio').value || 'A consultar',
-      moneda: document.getElementById('pub_moneda').value,
+      titulo:    document.getElementById('pub_titulo').value.trim(),
+      precio:    document.getElementById('pub_precio').value || 'A consultar',
+      moneda:    document.getElementById('pub_moneda').value,
       zona,
       descripcion,
-      formTipo: 'particular',
-      fotos: selectedFiles.length + ' foto(s) adjuntadas'
     };
 
     const btn = document.getElementById('submitBtn');
-    const originalHTML = btn.innerHTML;
+    const origHTML = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Enviando tu aviso...';
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      const json = await res.json();
-
-      if (json.success || res.ok) {
-        showSuccess(formData);
-      } else {
-        throw new Error('API error');
+      // 1. Subir fotos a Supabase Storage
+      let fotoUrls = [];
+      if (selectedFiles.length > 0) {
+        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status"></span>Subiendo ${selectedFiles.length} foto(s)...`;
+        fotoUrls = await uploadPhotos(selectedFiles);
       }
-    } catch (err) {
-      // Fallback: WhatsApp
+
+      // 2. Guardar aviso en Supabase DB
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Guardando tu aviso...';
+      if (sb) {
+        const { error } = await sb.from('listings').insert([{
+          nombre: formData.nombre, telefono: formData.telefono,
+          categoria: formData.categoria, operacion: formData.operacion,
+          titulo: formData.titulo, precio: formData.precio,
+          moneda: formData.moneda, zona: formData.zona,
+          descripcion: formData.descripcion, fotos: fotoUrls, status: 'pendiente'
+        }]);
+        if (error) throw error;
+      }
+
+      // 3. Éxito + notificar admin por WhatsApp
+      showSuccess({ ...formData, fotoCount: fotoUrls.length });
+      const msg = buildWAMessage({ ...formData, fotoCount: fotoUrls.length });
+      setTimeout(() => window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank'), 1000);
+
+    } catch(err) {
+      console.error('Error al publicar:', err);
       btn.disabled = false;
-      btn.innerHTML = originalHTML;
-      const msg = buildWAMessage(formData);
-      const proceed = confirm('Hubo un error al enviar. ¿Querés enviarnos el aviso por WhatsApp directamente?');
-      if (proceed) window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+      btn.innerHTML = origHTML;
+      const msg = buildWAMessage({ ...formData, fotoCount: 0 });
+      const ok = confirm('Hubo un error al guardar. ¿Querés enviarnos el aviso por WhatsApp directamente?');
+      if (ok) window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
     }
   }
 
@@ -2401,21 +2581,22 @@
     document.getElementById('step2').classList.add('hidden');
     document.getElementById('formSuccess').classList.remove('hidden');
     document.querySelector('.step-indicator').style.display = 'none';
-
     const waMsg = buildWAMessage(data);
     document.getElementById('waSuccessLink').href = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
   }
 
   function buildWAMessage(data) {
-    const msg = `Hola! Acabo de enviar un aviso para publicar en la sección de Particulares.\n\n` +
-      `📋 *Datos del aviso:*\n` +
-      `• Nombre: ${data.nombre}\n` +
-      `• Categoría: ${data.categoria}\n` +
-      `• Operación: ${data.operacion}\n` +
-      `• Título: ${data.titulo}\n` +
-      `• Precio: ${data.precio} ${data.moneda}\n` +
-      `• Zona: ${data.zona}\n\n` +
-      `¿Cuándo lo publican?`;
+    const msg =
+      `*Nuevo aviso — Grupo Inversa Particulares*\n\n` +
+      `👤 *Nombre:* ${data.nombre}\n` +
+      `📱 *WhatsApp:* ${data.telefono}\n` +
+      `📂 *Categoría:* ${data.categoria}\n` +
+      `🔖 *Operación:* ${data.operacion}\n` +
+      `📌 *Título:* ${data.titulo}\n` +
+      `💰 *Precio:* ${data.precio} ${data.moneda || ''}\n` +
+      `📍 *Zona:* ${data.zona}\n` +
+      `🖼 *Fotos subidas:* ${data.fotoCount || 0}\n\n` +
+      `_Ingresá a Supabase y aprobá el aviso para que aparezca en el sitio._`;
     return encodeURIComponent(msg);
   }
 
@@ -2496,6 +2677,179 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   animEls.forEach(el => appearObs.observe(el));
+
+  /* ===========================
+     SUPABASE: SUBIR FOTOS
+  =========================== */
+  async function uploadPhotos(files) {
+    if (!sb) return [];
+    const urls = [];
+    for (const file of files) {
+      try {
+        const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const name = `${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`;
+        const { error } = await sb.storage.from('listing-photos').upload(name, file, {
+          cacheControl: '31536000', upsert: false
+        });
+        if (!error) {
+          const { data: { publicUrl } } = sb.storage.from('listing-photos').getPublicUrl(name);
+          urls.push(publicUrl);
+        }
+      } catch(e) { /* omitir foto con error */ }
+    }
+    return urls;
+  }
+
+  /* ===========================
+     SUPABASE: CARGAR AVISOS
+  =========================== */
+  let allListings = [];
+
+  async function loadListings() {
+    const elLoading     = document.getElementById('listingsLoading');
+    const elPlaceholder = document.getElementById('listingsPlaceholder');
+    const elEmpty       = document.getElementById('listingsEmpty');
+    const elGrid        = document.getElementById('listingsGrid');
+    if (!elGrid) return;
+
+    if (!sb) {
+      elLoading?.classList.add('hidden');
+      elPlaceholder?.classList.remove('hidden');
+      return;
+    }
+    try {
+      const { data, error } = await sb.from('listings')
+        .select('*').eq('status', 'aprobado')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      allListings = data || [];
+      elLoading?.classList.add('hidden');
+      renderListings(allListings);
+    } catch(err) {
+      elLoading?.classList.add('hidden');
+      elEmpty?.classList.remove('hidden');
+    }
+  }
+
+  function filterListings(categoria, btn) {
+    document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtered = categoria ? allListings.filter(l => l.categoria === categoria) : allListings;
+    renderListings(filtered);
+  }
+
+  function renderListings(list) {
+    const elEmpty = document.getElementById('listingsEmpty');
+    const elGrid  = document.getElementById('listingsGrid');
+    const elCta   = document.getElementById('listingsCta');
+    if (!elGrid) return;
+    if (!list || list.length === 0) {
+      elEmpty?.classList.remove('hidden');
+      elGrid.innerHTML = '';
+      elCta?.classList.add('hidden');
+      return;
+    }
+    elEmpty?.classList.add('hidden');
+    elGrid.innerHTML = list.map(renderCard).join('');
+    if (list.length > 0) elCta?.classList.remove('hidden');
+  }
+
+  /* ===========================
+     RENDERIZAR TARJETA
+  =========================== */
+  const DEFAULT_IMGS = {
+    'Casas':                        'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+    'Departamentos':                 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80',
+    'Terrenos':                      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    'Galpones y Depósitos':          'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80',
+    'Quintas y Fincas':              'https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800&q=80',
+    'Locales y Oficinas':            'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    'Equipos y Maquinaria Minera':   'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=800&q=80',
+    'Herramientas Mineras':          'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80',
+    'Vehículos y Logística Minera':  'https://images.unsplash.com/photo-1586953208270-b559e0a2e6af?w=800&q=80',
+    'Insumos y Materiales Mineros':  'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80',
+    '_default':                      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80'
+  };
+
+  function escH(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderCard(l) {
+    const fotos  = (l.fotos && l.fotos.length) ? l.fotos : [DEFAULT_IMGS[l.categoria] || DEFAULT_IMGS['_default']];
+    const carId  = 'c' + String(l.id).replace(/[^a-z0-9]/gi,'').slice(0,14);
+    const tel    = (l.telefono || '').replace(/\D/g,'');
+    const waMsg  = encodeURIComponent(`Hola! Vi tu aviso "${l.titulo}" en Grupo Inversa Particulares. ¿Está disponible?`);
+    const isMine = /miner|veh[ií]c|insumo|herramienta/i.test(l.categoria || '');
+    const pColor = isMine ? 'var(--mine-gold)' : 'var(--brand-blue)';
+    const tClass = isMine ? 'mining-tag' : 'particular';
+    const tIcon  = isMine ? 'fa-hammer' : 'fa-user-check';
+    const tText  = isMine ? 'MINERÍA' : 'PARTICULAR';
+    const opMap  = { 'Venta':'background:#dbeafe;color:var(--brand-blue)', 'Alquiler':'background:#d1fae5;color:var(--free-green)', 'Busco / Necesito':'background:#fef3c7;color:#92400e' };
+    const opSty  = opMap[l.operacion] || 'background:#f3f4f6;color:var(--text-mid)';
+    const pNum   = parseFloat(l.precio);
+    const pStr   = (!l.precio || l.precio==='A consultar' || isNaN(pNum))
+      ? 'A consultar'
+      : (l.moneda==='USD' ? 'USD ' : l.moneda==='ARS' ? '$ ' : '') + pNum.toLocaleString('es-AR');
+    const fecha  = l.created_at ? new Date(l.created_at).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) : '';
+
+    const slides = fotos.map((f,i) =>
+      `<img src="${escH(f)}" class="listing-img carousel-slide${i===0?' active':''}" loading="lazy" alt="Foto ${i+1}">`
+    ).join('');
+    const nav = fotos.length > 1 ? `
+      <button class="car-btn car-prev" onclick="slideCarousel('${carId}',-1)" aria-label="anterior">&#8249;</button>
+      <button class="car-btn car-next" onclick="slideCarousel('${carId}',1)"  aria-label="siguiente">&#8250;</button>
+      <div class="car-dots">${fotos.map((_,i)=>`<span class="car-dot${i===0?' active':''}" onclick="goToSlide('${carId}',${i})"></span>`).join('')}</div>
+    ` : '';
+
+    return `
+      <div class="col-md-6 col-lg-4">
+        <div class="listing-card">
+          <div class="listing-carousel" id="${carId}" data-idx="0" data-total="${fotos.length}">
+            ${slides}${nav}
+          </div>
+          <div class="listing-body">
+            <div class="listing-header">
+              <span class="listing-tag ${tClass}"><i class="fas ${tIcon}"></i> ${tText}</span>
+              <span class="listing-tag" style="${opSty}">${escH(l.operacion)}</span>
+            </div>
+            <h4 class="listing-title">${escH(l.titulo)}</h4>
+            <p class="listing-location"><i class="fas fa-map-marker-alt" style="color:${pColor}"></i> ${escH(l.zona)}, San Juan</p>
+            <div class="listing-price" style="color:${pColor}">${escH(pStr)}</div>
+            <a href="https://wa.me/${tel}?text=${waMsg}" target="_blank" rel="noopener"
+               class="btn-listing-contact" style="${isMine ? 'background:var(--mine-gold);' : ''}">
+              <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
+            ${fecha ? `<p class="listing-demo-badge"><i class="fas fa-calendar-alt me-1"></i> Publicado el ${fecha}</p>` : ''}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  /* ===========================
+     CARRUSEL
+  =========================== */
+  function slideCarousel(carId, dir) {
+    const car = document.getElementById(carId);
+    if (!car) return;
+    const total = parseInt(car.dataset.total) || 1;
+    const idx   = ((parseInt(car.dataset.idx) || 0) + dir + total) % total;
+    goToSlide(carId, idx);
+  }
+
+  function goToSlide(carId, idx) {
+    const car = document.getElementById(carId);
+    if (!car) return;
+    car.dataset.idx = idx;
+    car.querySelectorAll('.carousel-slide').forEach((s,i) => s.classList.toggle('active', i===idx));
+    car.querySelectorAll('.car-dot').forEach((d,i)       => d.classList.toggle('active', i===idx));
+  }
+
+  /* ===========================
+     INIT
+  =========================== */
+  loadListings();
 </script>
 
 </body>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de configuración — Grupo Inversa Particulares</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family:'Inter',sans-serif; background:#f8fafc; color:#1f2937; }
+  .guide-header { background:#003366; color:white; padding:48px 0 32px; }
+  .guide-header h1 { font-size:2rem; font-weight:700; }
+  .guide-header p  { opacity:.85; }
+  .step-card {
+    background:white; border-radius:14px; padding:32px; margin-bottom:24px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05); border:1px solid #f1f5f9;
+  }
+  .step-num {
+    width:48px; height:48px; border-radius:50%; background:#003366; color:white;
+    font-weight:700; font-size:1.2rem; display:inline-flex; align-items:center;
+    justify-content:center; margin-bottom:16px;
+  }
+  .step-card h3 { font-size:1.15rem; font-weight:700; color:#003366; margin-bottom:8px; }
+  .step-card p, .step-card li { color:#4b5563; line-height:1.7; }
+  code, .code-block {
+    background:#1e293b; color:#e2e8f0; border-radius:8px;
+    font-family:monospace; font-size:.88rem;
+  }
+  code { padding:2px 8px; }
+  .code-block { padding:20px 24px; display:block; white-space:pre; overflow-x:auto; margin:12px 0; line-height:1.6; }
+  .tip { background:#f0fdf4; border-left:4px solid #10b981; padding:14px 18px; border-radius:0 8px 8px 0; margin:14px 0; color:#065f46; }
+  .warn { background:#fffbeb; border-left:4px solid #f59e0b; padding:14px 18px; border-radius:0 8px 8px 0; margin:14px 0; color:#92400e; }
+  .badge-done { background:#dcfce7; color:#166534; font-weight:600; padding:3px 10px; border-radius:20px; font-size:.78rem; }
+  .btn-primary-custom { background:#003366; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:600; display:inline-block; }
+  .btn-primary-custom:hover { background:#002244; color:white; }
+  img.screenshot { border-radius:8px; border:1px solid #e2e8f0; max-width:100%; margin:12px 0; }
+  .final-card { background:linear-gradient(135deg,#003366,#0052a3); color:white; border-radius:16px; padding:40px; text-align:center; }
+  .final-card h2 { font-weight:700; margin-bottom:12px; }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="container">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <a href="index.html" style="color:rgba(255,255,255,.7);text-decoration:none;"><i class="fas fa-arrow-left me-1"></i> Volver al sitio</a>
+    </div>
+    <h1><i class="fas fa-plug me-2"></i>Guía de configuración — Supabase</h1>
+    <p class="mt-2">Seguí estos 5 pasos y en 15 minutos los avisos van a aparecer automáticamente en el sitio.</p>
+    <div class="mt-3 d-flex gap-3 flex-wrap">
+      <span class="badge-done"><i class="fas fa-clock me-1"></i>~15 minutos</span>
+      <span class="badge-done"><i class="fas fa-dollar-sign me-1"></i>100% gratis</span>
+      <span class="badge-done"><i class="fas fa-code me-1"></i>Sin conocimiento técnico</span>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5" style="max-width:780px;">
+
+  <!-- PASO 1 -->
+  <div class="step-card">
+    <div class="step-num">1</div>
+    <h3>Crear cuenta gratuita en Supabase</h3>
+    <p>Entrá a <a href="https://supabase.com" target="_blank">supabase.com</a> y hacé clic en <strong>"Start your project"</strong>. Podés registrarte con tu cuenta de GitHub o con email.</p>
+    <div class="tip"><i class="fas fa-info-circle me-2"></i>El plan gratis incluye base de datos, almacenamiento de fotos y API. No te van a pedir tarjeta de crédito.</div>
+  </div>
+
+  <!-- PASO 2 -->
+  <div class="step-card">
+    <div class="step-num">2</div>
+    <h3>Crear un nuevo proyecto</h3>
+    <ol>
+      <li>Hacé clic en <strong>"New Project"</strong></li>
+      <li>Nombre del proyecto: <code>grupo-inversa-particulares</code></li>
+      <li>Elegí una contraseña para la base de datos (guardala en un lugar seguro)</li>
+      <li>Región: <strong>South America (São Paulo)</strong> — la más cerca a San Juan</li>
+      <li>Hacé clic en <strong>"Create new project"</strong></li>
+    </ol>
+    <p>Esperá unos segundos mientras Supabase crea el proyecto.</p>
+  </div>
+
+  <!-- PASO 3 -->
+  <div class="step-card">
+    <div class="step-num">3</div>
+    <h3>Crear la tabla de avisos (SQL)</h3>
+    <ol>
+      <li>En el menú izquierdo hacé clic en <strong>"SQL Editor"</strong></li>
+      <li>Hacé clic en <strong>"New query"</strong></li>
+      <li>Copiá y pegá todo el siguiente código:</li>
+    </ol>
+    <code class="code-block">-- Tabla de avisos
+create table public.listings (
+  id          uuid        default gen_random_uuid() primary key,
+  nombre      text        not null,
+  telefono    text        not null,
+  categoria   text        not null,
+  operacion   text        not null,
+  titulo      text        not null,
+  precio      text,
+  moneda      text        default 'ARS',
+  zona        text        not null,
+  descripcion text        not null,
+  fotos       text[]      default '{}',
+  status      text        default 'pendiente',
+  created_at  timestamptz default now()
+);
+
+-- Seguridad
+alter table public.listings enable row level security;
+
+-- Cualquiera puede VER los avisos aprobados
+create policy "ver_aprobados"
+  on public.listings for select
+  using ( status = 'aprobado' );
+
+-- Cualquiera puede PUBLICAR un aviso nuevo
+create policy "insertar_aviso"
+  on public.listings for insert
+  with check ( true );
+
+-- Índices para velocidad
+create index on public.listings (status);
+create index on public.listings (categoria);
+create index on public.listings (created_at desc);</code>
+    <ol start="4">
+      <li>Hacé clic en <strong>"Run"</strong> (botón verde)</li>
+      <li>Deberías ver el mensaje <em>"Success. No rows returned"</em></li>
+    </ol>
+    <div class="tip"><i class="fas fa-check-circle me-2"></i>También podés abrir el archivo <code>supabase-setup.sql</code> que está en la carpeta del proyecto y pegar todo su contenido.</div>
+  </div>
+
+  <!-- PASO 4 -->
+  <div class="step-card">
+    <div class="step-num">4</div>
+    <h3>Crear el bucket de fotos (Storage)</h3>
+    <ol>
+      <li>En el menú izquierdo hacé clic en <strong>"Storage"</strong></li>
+      <li>Hacé clic en <strong>"New bucket"</strong></li>
+      <li>Nombre: <code>listing-photos</code></li>
+      <li>Tildá la opción <strong>"Public bucket"</strong></li>
+      <li>Hacé clic en <strong>"Save"</strong></li>
+      <li>Ahora hacé clic en el bucket que se creó (<em>listing-photos</em>)</li>
+      <li>Andá a la pestaña <strong>"Policies"</strong></li>
+      <li>Hacé clic en <strong>"New policy"</strong> > <strong>"For full customization"</strong></li>
+      <li>Policy name: <code>upload_publico</code> | Operation: <strong>INSERT</strong> | Expression: <code>true</code></li>
+      <li>Guardá</li>
+    </ol>
+    <div class="warn"><i class="fas fa-exclamation-triangle me-2"></i>Sin este paso las fotos de los usuarios no se van a poder subir.</div>
+  </div>
+
+  <!-- PASO 5 -->
+  <div class="step-card">
+    <div class="step-num">5</div>
+    <h3>Conectar el sitio con Supabase</h3>
+    <p>Necesitás copiar dos valores de tu proyecto y pegarlos en el <code>index.html</code>.</p>
+    <p><strong>¿Dónde están esos valores?</strong></p>
+    <ol>
+      <li>En el menú de Supabase andá a <strong>"Settings"</strong> &rarr; <strong>"API"</strong></li>
+      <li>Copiá el valor de <strong>"Project URL"</strong></li>
+      <li>Copiá el valor de <strong>"anon public"</strong> (en la sección "Project API Keys")</li>
+    </ol>
+    <p><strong>¿Dónde los pego?</strong></p>
+    <p>Abrí el archivo <code>index.html</code> con cualquier editor de texto (Bloc de Notas, VS Code, etc.) y buscá estas dos líneas al inicio del script (al final del archivo):</p>
+    <code class="code-block">const SUPABASE_URL      = 'TU_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY';</code>
+    <p>Reemplazá <code>TU_SUPABASE_URL</code> con tu Project URL y <code>TU_SUPABASE_ANON_KEY</code> con tu clave anon. Ejemplo:</p>
+    <code class="code-block">const SUPABASE_URL      = 'https://abcdefghij.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';</code>
+    <p>Guardá el archivo.</p>
+    <div class="tip"><i class="fas fa-shield-alt me-2"></i>La clave <strong>anon</strong> es pública por diseño. Podés usarla en el HTML sin problema. <strong>Nunca</strong> uses la clave <em>service_role</em> en el front-end.</div>
+  </div>
+
+  <!-- CÓMO APROBAR AVISOS -->
+  <div class="step-card" style="border-left:4px solid #10b981;">
+    <div class="step-num" style="background:#10b981;">✓</div>
+    <h3>¿Cómo aprobás los avisos que llegan?</h3>
+    <p>Cada vez que alguien publica en tu sitio:</p>
+    <ol>
+      <li><strong>Te llega un mensaje por WhatsApp</strong> con todos los datos del aviso</li>
+      <li>Entrás a <a href="https://supabase.com" target="_blank">supabase.com</a> → tu proyecto → <strong>"Table Editor"</strong> → tabla <strong>"listings"</strong></li>
+      <li>Buscás el aviso nuevo (va a tener <code>status = pendiente</code>)</li>
+      <li>Hacés doble clic en el campo <code>status</code> y lo cambiás a <code>aprobado</code></li>
+      <li>Hacés clic en <strong>"Save"</strong></li>
+    </ol>
+    <p><strong>Al instante</strong> ese aviso aparece en el sitio con su tarjeta, fotos y botón de WhatsApp.</p>
+    <div class="tip"><i class="fas fa-rocket me-2"></i>Más adelante podemos agregar un panel de administración dentro del mismo sitio para que puedas aprobar avisos con un clic, sin entrar a Supabase.</div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="final-card mt-4">
+    <h2><i class="fas fa-check-circle me-2"></i>¡Listo para funcionar!</h2>
+    <p class="mb-4" style="opacity:.9;">Una vez que completaste los 5 pasos, tu sitio va a recibir avisos reales, subir las fotos y mostrarlas en tarjetas automáticamente.</p>
+    <a href="index.html" class="btn-primary-custom" style="background:white;color:#003366;">
+      <i class="fas fa-home me-2"></i>Ir al sitio
+    </a>
+  </div>
+
+</div>
+
+<footer style="background:#111827;color:#6b7280;text-align:center;padding:24px;margin-top:60px;font-size:.85rem;">
+  Grupo Inversa — Particulares &middot; Moviltec Digital &middot; 2026
+</footer>
+
+</body>
+</html>
