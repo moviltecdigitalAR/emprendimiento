@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admin — Grupo Inversa</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family:'Inter',sans-serif; background:#f1f5f9; margin:0; }
+  .topbar { background:#003366; color:white; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; }
+  .topbar h1 { font-size:1.1rem; font-weight:700; margin:0; }
+  .topbar a { color:rgba(255,255,255,.7); text-decoration:none; font-size:.85rem; }
+  .topbar a:hover { color:white; }
+  /* LOGIN */
+  .login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#f1f5f9; }
+  .login-card { background:white; border-radius:16px; padding:40px; width:100%; max-width:360px; box-shadow:0 8px 32px rgba(0,0,0,.1); text-align:center; }
+  .login-card h2 { color:#003366; font-weight:700; margin-bottom:8px; }
+  .login-card p  { color:#6b7280; margin-bottom:24px; font-size:.9rem; }
+  .login-card input { border-radius:8px; padding:10px 14px; }
+  .btn-login { background:#003366; color:white; border:none; border-radius:8px; padding:12px; width:100%; font-weight:600; font-size:1rem; cursor:pointer; }
+  .btn-login:hover { background:#002244; }
+  .login-error { color:#ef4444; font-size:.85rem; margin-top:8px; display:none; }
+  /* PANEL */
+  .panel-wrap { padding:24px; max-width:1100px; margin:0 auto; }
+  .stats-row { display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+  .stat-card { background:white; border-radius:12px; padding:20px 24px; flex:1; min-width:140px; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+  .stat-card .num { font-size:2rem; font-weight:700; color:#003366; }
+  .stat-card .lbl { color:#6b7280; font-size:.85rem; }
+  .listing-row { background:white; border-radius:12px; padding:20px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.05); display:flex; gap:16px; align-items:flex-start; }
+  .listing-row img { width:80px; height:60px; object-fit:cover; border-radius:8px; flex-shrink:0; }
+  .listing-info { flex:1; min-width:0; }
+  .listing-info h4 { font-size:.95rem; font-weight:700; color:#1f2937; margin:0 0 4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .listing-info p  { color:#6b7280; font-size:.82rem; margin:0 0 4px; }
+  .badge-cat { background:#dbeafe; color:#1d4ed8; border-radius:20px; padding:2px 10px; font-size:.75rem; font-weight:600; }
+  .badge-op  { background:#d1fae5; color:#065f46; border-radius:20px; padding:2px 10px; font-size:.75rem; font-weight:600; }
+  .btn-delete { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; border-radius:8px; padding:8px 16px; font-size:.85rem; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0; }
+  .btn-delete:hover { background:#fee2e2; }
+  .empty-state { text-align:center; padding:60px 20px; color:#9ca3af; }
+  .empty-state i { font-size:3rem; margin-bottom:12px; display:block; }
+  .loading-state { text-align:center; padding:60px 20px; color:#6b7280; }
+  .filter-bar { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; align-items:center; }
+  .filter-bar select { border-radius:8px; padding:8px 12px; border:1px solid #e5e7eb; font-size:.9rem; }
+  .filter-bar input  { border-radius:8px; padding:8px 12px; border:1px solid #e5e7eb; font-size:.9rem; flex:1; min-width:180px; }
+  .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:9999; }
+  .confirm-card { background:white; border-radius:14px; padding:32px; max-width:340px; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,.2); }
+  .confirm-card h3 { font-weight:700; color:#1f2937; margin-bottom:8px; }
+  .confirm-card p  { color:#6b7280; margin-bottom:24px; font-size:.9rem; }
+  .confirm-btns { display:flex; gap:10px; justify-content:center; }
+  .btn-confirm-yes { background:#dc2626; color:white; border:none; border-radius:8px; padding:10px 24px; font-weight:600; cursor:pointer; }
+  .btn-confirm-no  { background:#f3f4f6; color:#374151; border:none; border-radius:8px; padding:10px 24px; font-weight:600; cursor:pointer; }
+  #loginSection { display:flex; }
+  #adminSection { display:none; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginSection">
+  <div class="login-wrap">
+    <div class="login-card">
+      <i class="fas fa-shield-halved" style="font-size:2.5rem;color:#003366;margin-bottom:16px;"></i>
+      <h2>Panel Admin</h2>
+      <p>Grupo Inversa Particulares</p>
+      <input type="password" id="pwInput" class="form-control mb-2" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="btn-login" onclick="doLogin()"><i class="fas fa-lock-open me-2"></i>Ingresar</button>
+      <p class="login-error" id="loginError">Contraseña incorrecta</p>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="adminSection">
+  <div class="topbar">
+    <h1><i class="fas fa-gauge-high me-2"></i>Panel Admin — Grupo Inversa</h1>
+    <div class="d-flex align-items-center gap-3">
+      <a href="index.html" target="_blank"><i class="fas fa-external-link me-1"></i>Ver sitio</a>
+      <a href="#" onclick="doLogout()"><i class="fas fa-sign-out-alt me-1"></i>Salir</a>
+    </div>
+  </div>
+
+  <div class="panel-wrap">
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card"><div class="num" id="statTotal">—</div><div class="lbl">Avisos totales</div></div>
+      <div class="stat-card"><div class="num" id="statHoy">—</div><div class="lbl">Publicados hoy</div></div>
+      <div class="stat-card"><div class="num" id="statSemana">—</div><div class="lbl">Esta semana</div></div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Buscar por nombre, título, zona..." oninput="applyFilter()">
+      <select id="catFilter" onchange="applyFilter()">
+        <option value="">Todas las categorías</option>
+        <option>Casas</option>
+        <option>Departamentos</option>
+        <option>Terrenos</option>
+        <option>Galpones y Depósitos</option>
+        <option>Quintas y Fincas</option>
+        <option>Locales y Oficinas</option>
+        <option>Equipos y Maquinaria Minera</option>
+        <option>Herramientas Mineras</option>
+        <option>Vehículos y Logística Minera</option>
+        <option>Insumos y Materiales Mineros</option>
+      </select>
+    </div>
+
+    <!-- Lista -->
+    <div id="listContainer">
+      <div class="loading-state"><i class="fas fa-spinner fa-spin" style="font-size:2rem;margin-bottom:8px;display:block;"></i>Cargando avisos...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm dialog -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-card">
+    <i class="fas fa-trash-can" style="font-size:2rem;color:#dc2626;margin-bottom:12px;"></i>
+    <h3>Eliminar aviso</h3>
+    <p id="confirmMsg">¿Estás seguro que querés eliminar este aviso? Esta acción no se puede deshacer.</p>
+    <div class="confirm-btns">
+      <button class="btn-confirm-no"  onclick="cancelDelete()">Cancelar</button>
+      <button class="btn-confirm-yes" onclick="confirmDelete()">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+  /* ===========================
+     CONFIGURACIÓN
+     Mismo SUPABASE_URL y SUPABASE_ANON_KEY que en index.html
+  =========================== */
+  const SUPABASE_URL      = 'https://hcdgwlvnpkduabgufnit.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_O24KM-peZRdDo2SENY-uEg_g-Y_cJt5';
+
+  // Contraseña del panel admin — cambiala por una que prefieras
+  const ADMIN_PASSWORD = 'inversa2026';
+
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let allListings = [];
+  let deleteTarget = null;
+
+  /* --- LOGIN --- */
+  function doLogin() {
+    const pw = document.getElementById('pwInput').value;
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_ok', '1');
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('adminSection').style.display = 'block';
+      loadAll();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem('admin_ok');
+    location.reload();
+  }
+
+  // Auto-login si ya había sesión
+  if (sessionStorage.getItem('admin_ok') === '1') {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('adminSection').style.display = 'block';
+  }
+
+  /* --- CARGAR AVISOS --- */
+  async function loadAll() {
+    try {
+      const { data, error } = await sb.from('listings')
+        .select('*').order('created_at', { ascending: false });
+      if (error) throw error;
+      allListings = data || [];
+      updateStats();
+      renderAll(allListings);
+    } catch(e) {
+      document.getElementById('listContainer').innerHTML =
+        '<div class="empty-state"><i class="fas fa-triangle-exclamation"></i>Error al cargar avisos. Verificá la conexión con Supabase.</div>';
+    }
+  }
+
+  function updateStats() {
+    const now    = new Date();
+    const hoy    = now.toDateString();
+    const semana = new Date(now - 7 * 86400000);
+    document.getElementById('statTotal').textContent   = allListings.length;
+    document.getElementById('statHoy').textContent     = allListings.filter(l => new Date(l.created_at).toDateString() === hoy).length;
+    document.getElementById('statSemana').textContent  = allListings.filter(l => new Date(l.created_at) >= semana).length;
+  }
+
+  function renderAll(list) {
+    const c = document.getElementById('listContainer');
+    if (!list.length) {
+      c.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i>No hay avisos todavía.</div>';
+      return;
+    }
+    c.innerHTML = list.map(renderRow).join('');
+  }
+
+  function renderRow(l) {
+    const foto  = (l.fotos && l.fotos[0]) ? l.fotos[0] : 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=200&q=70';
+    const fecha = l.created_at ? new Date(l.created_at).toLocaleString('es-AR', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+    const tel   = (l.telefono || '').replace(/\D/g,'');
+    return `
+    <div class="listing-row" id="row-${l.id}">
+      <img src="${escH(foto)}" alt="foto" onerror="this.src='https://via.placeholder.com/80x60?text=Sin+foto'">
+      <div class="listing-info">
+        <h4>${escH(l.titulo)}</h4>
+        <p>
+          <span class="badge-cat">${escH(l.categoria)}</span>
+          <span class="badge-op ms-1">${escH(l.operacion)}</span>
+          <span class="ms-2 text-muted">${escH(l.zona)}</span>
+        </p>
+        <p><i class="fas fa-user me-1"></i><strong>${escH(l.nombre)}</strong>
+          &nbsp;·&nbsp; <i class="fab fa-whatsapp me-1" style="color:#25d366;"></i>
+          <a href="https://wa.me/${tel}" target="_blank">${escH(l.telefono)}</a>
+          &nbsp;·&nbsp; <i class="fas fa-clock me-1"></i>${fecha}
+        </p>
+        ${l.descripcion ? `<p style="color:#374151;font-size:.82rem;">${escH(l.descripcion.slice(0,120))}${l.descripcion.length>120?'…':''}</p>` : ''}
+      </div>
+      <button class="btn-delete" onclick="askDelete('${l.id}', '${escH(l.titulo).replace(/'/g,'')}')">
+        <i class="fas fa-trash me-1"></i>Eliminar
+      </button>
+    </div>`;
+  }
+
+  function escH(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* --- FILTRO --- */
+  function applyFilter() {
+    const q   = document.getElementById('searchInput').value.toLowerCase();
+    const cat = document.getElementById('catFilter').value;
+    const filtered = allListings.filter(l => {
+      const matchCat  = !cat || l.categoria === cat;
+      const matchText = !q   || [l.nombre, l.titulo, l.zona, l.descripcion, l.telefono]
+        .some(v => (v||'').toLowerCase().includes(q));
+      return matchCat && matchText;
+    });
+    renderAll(filtered);
+  }
+
+  /* --- ELIMINAR --- */
+  function askDelete(id, titulo) {
+    deleteTarget = id;
+    document.getElementById('confirmMsg').textContent = `¿Eliminás el aviso "${titulo}"? Esta acción no se puede deshacer.`;
+    document.getElementById('confirmOverlay').style.display = 'flex';
+  }
+
+  function cancelDelete() {
+    deleteTarget = null;
+    document.getElementById('confirmOverlay').style.display = 'none';
+  }
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    document.getElementById('confirmOverlay').style.display = 'none';
+    const id = deleteTarget;
+    deleteTarget = null;
+    try {
+      const { error } = await sb.from('listings').delete().eq('id', id);
+      if (error) throw error;
+      allListings = allListings.filter(l => l.id !== id);
+      const row = document.getElementById('row-' + id);
+      if (row) { row.style.opacity='0'; row.style.transition='opacity .3s'; setTimeout(()=>row.remove(),300); }
+      updateStats();
+    } catch(e) {
+      alert('Error al eliminar. Verificá los permisos en Supabase (necesitás la policy DELETE).');
+    }
+  }
+
+  /* --- INIT: si ya está logueado cargar datos --- */
+  if (sessionStorage.getItem('admin_ok') === '1') loadAll();
+</script>
+
+</body>
+</html>

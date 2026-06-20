@@ -2370,8 +2370,8 @@
      Reemplazá los dos valores de abajo con los
      de tu proyecto en supabase.com
   =========================== */
-  const SUPABASE_URL      = 'TU_SUPABASE_URL';       // ej: https://abcdef.supabase.co
-  const SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY';  // clave pública (anon/public)
+  const SUPABASE_URL      = 'https://hcdgwlvnpkduabgufnit.supabase.co';       // ej: https://abcdef.supabase.co
+  const SUPABASE_ANON_KEY = 'sb_publishable_O24KM-peZRdDo2SENY-uEg_g-Y_cJt5';  // clave pública (anon/public)
   const sb = (SUPABASE_URL !== 'TU_SUPABASE_URL' && window.supabase)
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
@@ -2557,7 +2557,7 @@
           categoria: formData.categoria, operacion: formData.operacion,
           titulo: formData.titulo, precio: formData.precio,
           moneda: formData.moneda, zona: formData.zona,
-          descripcion: formData.descripcion, fotos: fotoUrls, status: 'pendiente'
+          descripcion: formData.descripcion, fotos: fotoUrls, status: 'aprobado'
         }]);
         if (error) throw error;
       }
@@ -2719,7 +2719,7 @@
     }
     try {
       const { data, error } = await sb.from('listings')
-        .select('*').eq('status', 'aprobado')
+        .select('*')
         .order('created_at', { ascending: false });
       if (error) throw error;
       allListings = data || [];
