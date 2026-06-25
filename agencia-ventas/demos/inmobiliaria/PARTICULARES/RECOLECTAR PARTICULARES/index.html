@@ -1437,7 +1437,7 @@
 <div class="ann-bar">
   <div class="ann-items">
     <div class="ann-item"><i class="fas fa-check-circle"></i> 100% GRATUITO — sin costos ocultos</div>
-    <div class="ann-item d-none d-md-flex"><i class="fas fa-clock"></i> Tu aviso publicado en menos de 24hs</div>
+    <div class="ann-item d-none d-md-flex"><i class="fas fa-bolt"></i> Tu aviso publicado al instante</div>
     <div class="ann-item"><i class="fas fa-star"></i> Solo para particulares de San Juan</div>
   </div>
 </div>
@@ -1649,9 +1649,9 @@
       <div class="col-md-4 position-relative">
         <div class="step-card">
           <div class="step-number">2</div>
-          <h5>Revisamos y publicamos</h5>
-          <p>Nuestro equipo revisa tu aviso, lo mejora si hace falta (sin cambiar nada sin tu permiso) y lo publica en la plataforma.</p>
-          <span class="step-time"><i class="fas fa-check me-1"></i> Menos de 24hs</span>
+          <h5>Tu aviso aparece al instante</h5>
+          <p>Una vez que completás el formulario, tu aviso se publica automáticamente en el sitio y ya puede ser visto por los interesados.</p>
+          <span class="step-time"><i class="fas fa-bolt me-1"></i> Publicación inmediata</span>
         </div>
         <div class="step-connector d-none d-md-flex">→</div>
       </div>
@@ -1995,7 +1995,7 @@
         <div class="form-section-header">
           <span class="section-label">Es gratis</span>
           <h2>Publicá tu aviso ahora</h2>
-          <p>Completá el formulario y en menos de 24hs tu aviso está online, visible en Google y listo para recibir consultas.</p>
+          <p>Completá el formulario y tu aviso se publica inmediatamente, visible en Google y listo para recibir consultas.</p>
           <div class="mt-4 d-flex flex-column gap-3">
             <div class="d-flex gap-3 align-items-start">
               <div style="width:36px;height:36px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
@@ -2135,12 +2135,12 @@
                 <div class="char-counter"><span id="desc_count">0</span>/1000 caracteres</div>
               </div>
               <div class="col-12">
-                <label class="form-label">Fotos (hasta 5)</label>
-                <input type="file" id="pub_fotos" accept="image/*" multiple style="display:none;" onchange="previewPhotos(this)">
+                <label class="form-label">Fotos (hasta 3)</label>
+                <input type="file" id="pub_fotos" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" onchange="previewPhotos(this)">
                 <div class="photo-upload-area" onclick="document.getElementById('pub_fotos').click()">
                   <i class="fas fa-camera d-block"></i>
                   <p>Tocá para agregar fotos</p>
-                  <small>JPG, PNG — Máx. 5 fotos · 5MB cada una</small>
+                  <small>JPG, PNG, WEBP — Máx. 3 fotos · 5MB cada una</small>
                 </div>
                 <div class="photo-previews" id="photoPreviews"></div>
               </div>
@@ -2166,8 +2166,8 @@
           <!-- SUCCESS STATE (hidden until submitted) -->
           <div id="formSuccess" class="hidden form-success">
             <div class="success-icon"><i class="fas fa-check"></i></div>
-            <h4>¡Tu aviso fue enviado!</h4>
-            <p class="mb-4">Lo revisamos en las próximas <strong>24 horas</strong> y te escribimos por WhatsApp para confirmarte cuando esté publicado.</p>
+            <h4>¡Tu aviso fue publicado!</h4>
+            <p class="mb-4">Ya aparece en el sitio. Los interesados pueden verlo y contactarte por WhatsApp directamente.</p>
             <div class="p-3 rounded" style="background:var(--surface);border:1px solid var(--border);">
               <p class="mb-2" style="font-size:0.85rem;color:var(--text-muted);">¿Querés acelerar el proceso? Escribinos directamente:</p>
               <a id="waSuccessLink" href="https://wa.me/5492645304372" target="_blank"
@@ -2218,7 +2218,7 @@
           </h2>
           <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
             <div class="accordion-body">
-              No. Solamente llenás el formulario con tus datos básicos (nombre y WhatsApp) y los datos de lo que querés publicar. Sin crear cuenta, sin contraseña, sin verificación de email. En menos de 24 horas tu aviso está online y te avisamos por WhatsApp.
+              No. Solamente llenás el formulario con tus datos básicos (nombre y WhatsApp) y los datos de lo que querés publicar. Sin crear cuenta, sin contraseña, sin verificación de email. Tu aviso se publica inmediatamente y aparece en el sitio al instante.
             </div>
           </div>
         </div>
@@ -2425,8 +2425,27 @@
   });
 
   /* ===========================
-     CATEGORY QUICK-SELECT
+     CONTENT FILTER (palabras prohibidas)
   =========================== */
+  const BAD_WORDS = [
+    'sexo','porno','desnudo','desnuda','xxx','erotico','erotica','coger','puta','puto','trola','trolo','maricon','concha','pija','verga','chota','mierda','carajo','conchudo','forro','boludo','pelotudo','idiota','estupido','estupida','retardado','negro de mierda','negro','chino de mierda','mogolico','down','autista usado como insulto','putita','putito','zorra','perra','maldito','maldita','hijo de puta','hdp','la concha de tu madre','concha de tu madre','ctm','la puta que te pario','lpqtp','cagar','cagada','mear','meada','pedo','orto','ojete','culiado','culiada','chupapig','chupala','chupame','la concha','la pija','verga','pajero','pajera','paja','tetas','tetona','culo','culon','nalgas','nalgon','pene','vagina','clitoris','semen','esperma','masturbar','masturbacion','orgasmo','eyacular','follar','follada','follador','cachonda','cachondo','caliente','hot','sexy','sexual explicito','child','menor','pedofilia','violacion','violar','abuso sexual','pornografia infantil','cp','loli','snuff','necrofilia','zoofilia','bestialidad','escatologico','coprofilia','urofilia'
+  ];
+
+  function containsBadWords(text) {
+    if (!text) return false;
+    const lower = text.toLowerCase();
+    return BAD_WORDS.some(word => lower.includes(word.toLowerCase()));
+  }
+
+  function filterBadWords(text) {
+    if (!text) return text;
+    let filtered = text;
+    BAD_WORDS.forEach(word => {
+      const regex = new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      filtered = filtered.replace(regex, '***');
+    });
+    return filtered;
+  }
   function selectCategory(cat) {
     const el = document.getElementById('pub_categoria');
     if (el) {
@@ -2448,10 +2467,12 @@
     const titulo = document.getElementById('pub_titulo').value.trim();
 
     if (!nombre) return alert('Por favor ingresá tu nombre.');
+    if (containsBadWords(nombre)) return alert('Tu nombre contiene palabras no permitidas.');
     if (!telefono || telefono.length < 8) return alert('Por favor ingresá un WhatsApp válido.');
     if (!categoria) return alert('Por favor seleccioná una categoría.');
     if (!operacion) return alert('Por favor seleccioná el tipo de operación.');
     if (!titulo || titulo.length < 10) return alert('El título debe tener al menos 10 caracteres.');
+    if (containsBadWords(titulo)) return alert('El título contiene palabras no permitidas.');
 
     document.getElementById('step1').classList.add('hidden');
     document.getElementById('step2').classList.remove('hidden');
@@ -2485,7 +2506,19 @@
   let selectedFiles = [];
 
   function previewPhotos(input) {
-    const files = Array.from(input.files).slice(0, 5);
+    const allFiles = Array.from(input.files);
+    // Validar: solo imagenes, no videos
+    const invalid = allFiles.filter(f => !f.type.startsWith('image/'));
+    if (invalid.length > 0) {
+      alert('Solo se permiten archivos de imagen (JPG, PNG, WEBP). No se permiten videos.');
+      input.value = '';
+      return;
+    }
+    // Validar: maximo 3 fotos
+    if (allFiles.length > 3) {
+      alert('Solo se permiten hasta 3 fotos por aviso.');
+    }
+    const files = allFiles.slice(0, 3);
     selectedFiles = files;
     const container = document.getElementById('photoPreviews');
     container.innerHTML = '';
@@ -2518,16 +2551,26 @@
   =========================== */
   async function submitParticular() {
     const zona        = document.getElementById('pub_zona').value;
-    const descripcion = document.getElementById('pub_descripcion').value.trim();
+    let descripcion = document.getElementById('pub_descripcion').value.trim();
     const acepto      = document.getElementById('pub_acepto').checked;
+    const telefonoRaw = document.getElementById('pub_telefono').value.trim();
 
+    if (!telefonoRaw || telefonoRaw.length < 8) return alert('Por favor ingresá un número de WhatsApp válido. Es obligatorio para que los interesados puedan contactarte.');
     if (!zona)                                   return alert('Por favor seleccioná la zona.');
     if (!descripcion || descripcion.length < 20) return alert('La descripción debe tener al menos 20 caracteres.');
     if (!acepto)                                 return alert('Debés aceptar los términos para publicar.');
 
+    // Validar palabras obscenas en descripción
+    if (containsBadWords(descripcion)) {
+      alert('Tu descripción contiene palabras no permitidas. Por favor revisala y volvé a intentar.');
+      return;
+    }
+    // Filtrar palabras obscenas (por si acaso)
+    descripcion = filterBadWords(descripcion);
+
     const formData = {
       nombre:    document.getElementById('pub_nombre').value.trim(),
-      telefono:  '+54' + document.getElementById('pub_telefono').value.trim(),
+      telefono:  '+54' + telefonoRaw,
       categoria: document.getElementById('pub_categoria').value,
       operacion: document.getElementById('pub_operacion').value,
       titulo:    document.getElementById('pub_titulo').value.trim(),
@@ -2596,7 +2639,7 @@
       `💰 *Precio:* ${data.precio} ${data.moneda || ''}\n` +
       `📍 *Zona:* ${data.zona}\n` +
       `🖼 *Fotos subidas:* ${data.fotoCount || 0}\n\n` +
-      `_Ingresá a Supabase y aprobá el aviso para que aparezca en el sitio._`;
+      `_El aviso ya fue publicado automáticamente. Revisá el panel admin si necesitás eliminarlo._`;
     return encodeURIComponent(msg);
   }
 
