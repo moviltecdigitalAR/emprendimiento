@@ -2384,6 +2384,7 @@
       <div class="col-md-2">
         <p class="fw-700 mb-3" style="font-family:var(--ff-head);font-size:0.85rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">Plataforma</p>
         <a href="#publicar" class="footer-link">Publicar aviso</a>
+        <a href="publicar.html" class="footer-link">Por qué publicar acá</a>
         <a href="index.html" class="footer-link">Inmobiliaria</a>
         <a href="index.html#tasacion" class="footer-link">Tasación gratis</a>
         <a href="index.html#calculadora" class="footer-link">Calcular cuota</a>
@@ -2850,6 +2851,7 @@
       allListings = data || [];
       elLoading?.classList.add('hidden');
       renderListings(allListings);
+      focusDeepLinkedAd();
     } catch(err) {
       elLoading?.classList.add('hidden');
       elEmpty?.classList.remove('hidden');
@@ -2929,7 +2931,7 @@
     ` : '';
 
     return `
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-4" id="l-${escH(l.id)}">
         <div class="listing-card">
           <div class="listing-carousel" id="${carId}" data-idx="0" data-total="${fotos.length}">
             ${slides}${nav}
@@ -2969,6 +2971,27 @@
     car.dataset.idx = idx;
     car.querySelectorAll('.carousel-slide').forEach((s,i) => s.classList.toggle('active', i===idx));
     car.querySelectorAll('.car-dot').forEach((d,i)       => d.classList.toggle('active', i===idx));
+  }
+
+  /* ===========================
+     DEEP LINK  index.html?aviso=ID
+  =========================== */
+  function focusDeepLinkedAd() {
+    const id = new URLSearchParams(location.search).get('aviso');
+    if (!id) return;
+    const el = document.getElementById('l-' + id);
+    if (!el) return;
+    const card = el.querySelector('.listing-card');
+    if (card) {
+      card.style.outline       = '3px solid var(--brand-blue)';
+      card.style.outlineOffset = '3px';
+      card.style.transition    = 'outline-color .4s ease';
+    }
+    const badge = document.createElement('p');
+    badge.innerHTML = '<i class="fas fa-check-circle me-1"></i> Este es tu aviso';
+    badge.style.cssText = 'margin:10px 0 0;font-size:.82rem;font-weight:700;color:var(--brand-blue);text-align:center;';
+    el.querySelector('.listing-body')?.appendChild(badge);
+    setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'center' }), 250);
   }
 
   /* ===========================
