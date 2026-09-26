@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -168,7 +168,8 @@
 
     /* PEOPLE */
     .people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
-    .people-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .people-card{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+    .people-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-strong)}
     .people-img{height:320px;background:#e8e5df;overflow:hidden;position:relative}
     .people-img img{width:100%;height:100%;object-fit:cover;object-position:top center}
     .people-body{padding:22px}
@@ -176,34 +177,7 @@
     .people-body p{font-size:.88rem;color:var(--text-secondary);line-height:1.6}
     @media(max-width:920px){.people-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:600px){.people-grid{grid-template-columns:1fr}}
-
-    /* DEMOS */
-    .demos-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
-    .demo-card{width:260px;flex:1 1 260px;max-width:300px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:block;transition:transform .2s,box-shadow .2s;box-shadow:var(--shadow)}
-    .demo-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-strong)}
-    .demo-prev{height:150px;display:flex;align-items:center;justify-content:center;position:relative}
-    .demo-prev svg{stroke:#fff}
-    .demo-tag{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.18);backdrop-filter:blur(6px);color:#fff;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:50px;border:1px solid rgba(255,255,255,0.25)}
-    .dp1{background:linear-gradient(135deg,#7C2D12,#EA580C)}
-    .dp2{background:linear-gradient(135deg,#4C1D95,#7C3AED)}
-    .dp3{background:linear-gradient(135deg,#1e3a5f,#2563EB)}
-    .dp4{background:linear-gradient(135deg,#1f1f1f,#374151)}
-    .dp5{background:linear-gradient(135deg,#1e3a5f,#0ea5e9)}
-    .dp6{background:linear-gradient(135deg,#3d2805,#f59e0b)}
-    .dp7{background:linear-gradient(135deg,#1e293b,#0ea5e9)}
-    .dp8{background:linear-gradient(135deg,#2d1b05,#d97706)}
-    .dp9{background:linear-gradient(135deg,#240e3d,#d946ef)}
-    .dp10{background:linear-gradient(135deg,#e0f2fe,#0ea5e9)}
-    .demo-body{padding:18px 20px}
-    .demo-rubro{font-size:.7rem;color:var(--sage);font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-    .demo-body h3{font-size:1rem;font-weight:800;margin-bottom:6px}
-    .demo-body p{font-size:.84rem;color:var(--text-secondary);line-height:1.6;margin-bottom:12px}
-    .demo-feats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-    .df{background:var(--sage-light);color:var(--sage);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px}
-    .demo-foot{display:flex;align-items:center;justify-content:space-between}
-    .demo-ver{background:var(--text);color:#fff;padding:8px 18px;border-radius:50px;font-size:.8rem;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:background .2s}
-    .demo-ver:hover{background:#1a1815}
-    .demo-lbl{font-size:.72rem;color:var(--text-secondary)}
+    @media(min-width:921px){.people-grid .people-card:last-child{grid-column:2}}
 
     /* PAQUETES */
     .sec-packs{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -477,202 +451,78 @@
       </div>
     </div>
 
-    <h3 style="margin-top:72px;font-size:1.4rem;font-weight:800;color:var(--text)">Hecho para negocios como el tuyo</h3>
+    <h3 id="rubros" style="margin-top:72px;font-size:1.4rem;font-weight:800;color:var(--text)">Hecho para negocios como el tuyo</h3>
     <div class="people-grid">
-      <div class="people-card">
+      <a href="./demos/ropa/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/emprendedora.png" alt="Emprendedora de indumentaria en San Juan" /></div>
         <div class="people-body">
           <h4>Indumentaria</h4>
           <p>Atendé pedidos por WhatsApp con catálogo, talles y stock actualizado, sin perder ventas por no responder.</p>
         </div>
-      </div>
-      <div class="people-card">
+      </a>
+      <a href="./demos/peluqueria/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/barbero.png" alt="Barbero en San Juan" /></div>
         <div class="people-body">
           <h4>Peluquería y barbería</h4>
           <p>Reservá turnos y respondé consultas automáticamente mientras atendés a otros clientes.</p>
         </div>
-      </div>
-      <div class="people-card">
+      </a>
+      <a href="./demos/viandas-ventas/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/viandas.png" alt="Viandas caseras en San Juan" /></div>
         <div class="people-body">
           <h4>Viandas y gastronomía</h4>
           <p>Recibí pedidos con menú del día, armá el carrito y cobrá por MercadoPago sin intervención manual.</p>
         </div>
-      </div>
-      <div class="people-card">
+      </a>
+      <a href="./demos/gimnasio/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/gimnasio.png" alt="Dueños de gimnasio en San Juan" /></div>
         <div class="people-body">
           <h4>Gimnasio y fitness</h4>
           <p>Ofrecé planes, horarios y reservá clases automáticamente. El bot confirma pagos y turnos.</p>
         </div>
-      </div>
-      <div class="people-card">
+      </a>
+      <a href="./demos/inmobiliaria/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/inmobiliaria.png" alt="Agente inmobiliaria en San Juan" /></div>
         <div class="people-body">
           <h4>Inmobiliaria</h4>
           <p>Mostrá propiedades, filtrá consultas y agendá visitas sin estar pendiente del celular todo el día.</p>
         </div>
-      </div>
-      <div class="people-card">
+      </a>
+      <a href="./demos/estetica/index.html" target="_blank" class="people-card">
         <div class="people-img"><img src="images-warm/estetica.png" alt="Dueña de centro de estética en San Juan" /></div>
         <div class="people-body">
           <h4>Estética y belleza</h4>
           <p>Reservá turnos de uñas, cejas, pestañas y depilación. El bot confirma horarios automáticamente.</p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RUBROS -->
-<section id="rubros" class="sec" style="background:var(--bg)">
-  <div class="ctr tc">
-    <div class="stag">Rubros</div>
-    <h2 class="stitle">Pensado para tu rubro</h2>
-    <p class="ssub">No importa qué vendás. El sistema se adapta a tu negocio. Hacé clic y mirá la demo en vivo.</p>
-    <div class="demos-grid">
-
-      <a href="./demos/viandas-ventas/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp1">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M8 21h8a2 2 0 0 0 2-2v-6H6v6a2 2 0 0 0 2 2z"/><path d="M12 3v10"/><path d="M12 3a3 3 0 0 1 3 3v4H9V6a3 3 0 0 1 3-3z"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Gastronomía · Viandas</div>
-          <h3>Viandas & Comida casera</h3>
-          <p>Menú semanal con carrito de pedidos, bot de ventas y cobro automático.</p>
-          <div class="demo-feats"><span class="df">Bot ventas</span><span class="df">Carrito</span><span class="df">MercadoPago</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Restaurantes · Catering</span></div>
+      </a>
+      <a href="./demos/servicios-hogar/index.html" target="_blank" class="people-card">
+        <div class="people-img"><img src="images-warm/hogar.png" alt="Técnico de servicios del hogar en San Juan" /></div>
+        <div class="people-body">
+          <h4>Servicios del hogar</h4>
+          <p>Gas, electricidad y plomería. Presupuestos automáticos y avisos de urgencia 24hs por WhatsApp.</p>
         </div>
       </a>
-
-      <a href="./demos/peluqueria/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp2">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M6 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2"/><path d="M6 8h12"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Peluquería · Estética</div>
-          <h3>Peluquería & Studio</h3>
-          <p>Galería de trabajos, servicios con precios y reserva de turno online.</p>
-          <div class="demo-feats"><span class="df">Turnos</span><span class="df">Galería</span><span class="df">Precios</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Peluquerías · Barberías</span></div>
+      <a href="./demos/veterinaria/index.html" target="_blank" class="people-card">
+        <div class="people-img"><img src="images-warm/veterinaria.png" alt="Veterinaria en San Juan" /></div>
+        <div class="people-body">
+          <h4>Veterinaria</h4>
+          <p>Turnos online, vacunación y urgencias 24hs. El bot agenda y confirma cada consulta.</p>
         </div>
       </a>
-
-      <a href="./demos/servicios-hogar/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp3">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Servicios del Hogar</div>
-          <h3>Gas · Electricidad · Plomería</h3>
-          <p>Servicios con precios, presupuesto online y botón de urgencia 24hs.</p>
-          <div class="demo-feats"><span class="df">Presupuesto</span><span class="df">Urgencias</span><span class="df">WhatsApp</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Gas · Electricidad · Plomería</span></div>
+      <a href="./demos/taller/index.html" target="_blank" class="people-card">
+        <div class="people-img"><img src="images-warm/taller.png" alt="Mecánico en San Juan" /></div>
+        <div class="people-body">
+          <h4>Taller mecánico</h4>
+          <p>Presupuestos sin cargo, turnos para service y frenos, con garantía escrita en línea.</p>
         </div>
       </a>
-
-      <a href="./demos/ropa/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp4">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20.38 3.4a1.6 1.6 0 0 0-2.26 0l-1.7 1.7a1.6 1.6 0 0 1-2.26 0l-1.7-1.7a1.6 1.6 0 0 0-2.26 0l-1.7 1.7a1.6 1.6 0 0 1-2.26 0l-1.7-1.7a1.6 1.6 0 0 0-2.26 0L2 6.85V21h20V6.85z"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Venta de Ropa</div>
-          <h3>Tienda de Indumentaria</h3>
-          <p>Catálogo con talles, colores, ofertas y compra directa por WhatsApp.</p>
-          <div class="demo-feats"><span class="df">Catálogo</span><span class="df">Talles</span><span class="df">MercadoPago</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Ropa · Accesorios · Calzado</span></div>
+      <a href="./demos/odontologia/index.html" target="_blank" class="people-card">
+        <div class="people-img"><img src="images-warm/odontologia.png" alt="Dentista en San Juan" /></div>
+        <div class="people-body">
+          <h4>Odontología</h4>
+          <p>Especialidades, obras sociales y turnos online. Los pacientes agendan solos, sin llamadas.</p>
         </div>
       </a>
-
-      <a href="./demos/inmobiliaria/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp5">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Inmobiliaria · Alquileres</div>
-          <h3>Inmobiliaria</h3>
-          <p>Listado de propiedades, filtros, tasación sin cargo y consultas online.</p>
-          <div class="demo-feats"><span class="df">Propiedades</span><span class="df">Tasación</span><span class="df">WhatsApp</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Ventas · Alquileres</span></div>
-        </div>
-      </a>
-
-      <a href="./demos/gimnasio/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp6">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M6 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2"/><path d="M6 8h12"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Fitness · Gimnasio</div>
-          <h3>PowerFit Gym</h3>
-          <p>Planes de membresía, horarios de clases y reserva de turnos online.</p>
-          <div class="demo-feats"><span class="df">Planes</span><span class="df">Horarios</span><span class="df">Turnos</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Musculación · Funcional</span></div>
-        </div>
-      </a>
-
-      <a href="./demos/veterinaria/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp7">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M12 13v9"/><path d="M8 16h8"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Veterinaria · Mascotas</div>
-          <h3>Patitas Vet</h3>
-          <p>Servicios veterinarios, turnos online, urgencias 24hs y peluquería canina.</p>
-          <div class="demo-feats"><span class="df">Turnos</span><span class="df">Urgencias</span><span class="df">Vacunación</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Perros · Gatos · Mascotas</span></div>
-        </div>
-      </a>
-
-      <a href="./demos/taller/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp8">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Taller Mecánico</div>
-          <h3>Mecánica Express</h3>
-          <p>Presupuestos sin cargo, servicios, turnos y garantía escrita en línea.</p>
-          <div class="demo-feats"><span class="df">Presupuesto</span><span class="df">Service</span><span class="df">Frenos</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Mecánica · Electricidad</span></div>
-        </div>
-      </a>
-
-      <a href="./demos/estetica/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp9">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><circle cx="12" cy="10" r="2"/><path d="M12 14v4"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Estética · Nails · Belleza</div>
-          <h3>Bella Estética</h3>
-          <p>Uñas esculpidas, cejas, pestañas, depilación. Turnos y promos online.</p>
-          <div class="demo-feats"><span class="df">Uñas</span><span class="df">Cejas</span><span class="df">Pestañas</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Manicure · Lifting · Laminado</span></div>
-        </div>
-      </a>
-
-      <a href="./demos/odontologia/index.html" class="demo-card" target="_blank">
-        <div class="demo-prev dp10">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
-          <span class="demo-tag">Ver demo →</span>
-        </div>
-        <div class="demo-body">
-          <div class="demo-rubro">Odontología · Salud</div>
-          <h3>Sonrisa Perfecta</h3>
-          <p>Implantes, ortodoncia, estética dental. Obras sociales y turnos online.</p>
-          <div class="demo-feats"><span class="df">Implantes</span><span class="df">Ortodoncia</span><span class="df">Turnos</span></div>
-          <div class="demo-foot"><span class="demo-ver">Ver demo</span><span class="demo-lbl">Odontología · Estética</span></div>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
